@@ -41,6 +41,8 @@
 
 {% if not request.user.is_anonymous %} <div class="bg-white text-dark p-3 col-md-10 offset-md-1 mt-5 rounded"> {% endif %}
 
+{% include 'search.html' %}
+
 {% block content %}
   <div class="block-xs-middle pb-5">
     <div class="container">
