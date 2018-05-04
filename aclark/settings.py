@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'social_django',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+NOCAPTCHA = True
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
