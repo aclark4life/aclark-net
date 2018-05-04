@@ -390,3 +390,6 @@ pack: webpack  # Alias
 
 PROJECT=aclark
 APP=net
+
+d:
+	eb deploy
