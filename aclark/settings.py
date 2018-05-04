@@ -25,7 +25,7 @@ SECRET_KEY = 'q-go!+3h(u55f4@*rapkf3r-cl&wqy#^hse(v63_hx0-p&9%9$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aclarknet-env.bmzbghy2fz.us-east-1.elasticbeanstalk.com']
 
 
 # Application definition
