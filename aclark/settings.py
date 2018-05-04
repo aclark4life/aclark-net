@@ -131,3 +131,5 @@ import dj_database_url; DATABASES = { 'default': dj_database_url.config(default=
 # aclark
 GEOIP_PATH = BASE_DIR
 
+
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
