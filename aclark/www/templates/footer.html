@@ -20,7 +20,7 @@
         </ul>
         <ul class="list-unstyled list-spaced mt-5">
           <li class="mb-2"><h6 class="text-uppercase">Staff</h6></li>
-          <li class="text-muted">{% if not request.user.is_anonymous %}<a href="{% url 'logout' %}?next={% url 'home' %}"> Logout</a>{% else %}<a href="{% url 'dashboard' %}">Login</a>{% endif %}
+          <li class="text-muted">{% if not request.user.is_anonymous %}<a href="{% url 'dashboard' %}"> Time entry</a></li><li "text-muted"><a href="{% url 'logout' %}?next={% url 'home' %}"> Logout</a>{% else %}<a href="{% url 'dashboard' %}">Login</a>{% endif %}
           </li>
         </ul>
       </div>
