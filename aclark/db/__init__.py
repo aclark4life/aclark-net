@@ -1,1 +1,1 @@
-default_app_config = 'aclarknet.db.apps.DBConfig'
+default_app_config = 'aclark.db.apps.DBConfig'

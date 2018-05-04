@@ -3,7 +3,7 @@ from django.contrib.auth.signals import user_logged_in
 
 
 class DBConfig(AppConfig):
-    name = 'aclarknet.db'
+    name = 'aclark.db'
 
     def ready(self):
         from .signals import login_receiver

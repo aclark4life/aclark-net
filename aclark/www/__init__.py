@@ -1,1 +1,1 @@
-default_app_config = 'aclarknet.www.apps.WWWConfig'
+default_app_config = 'aclark.www.apps.WWWConfig'

@@ -1,4 +1,4 @@
-from aclarknet.db.models import Profile
+from aclark.db.models import Profile
 
 
 def create_profile(user, request=None):
