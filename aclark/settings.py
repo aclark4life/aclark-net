@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'taggit',
     'crispy_forms',
     'rest_framework',
+    'social_django',
 ]
 
 MIDDLEWARE = [
