@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'aclark.www',
     'taggit',
     'crispy_forms',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
