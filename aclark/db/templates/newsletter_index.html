@@ -1,0 +1,37 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-9">
+              <h1 style="border-bottom: none;">Newsletters</h1>
+            </div>
+            <div class="col-md-3">
+              <a class="btn btn-block btn-lg btn-success" href="{% url 'newsletter_edit' %}">Add Newsletter</a>
+            </div>
+          </div>
+{% with items=items.newsletters %}
+{% include 'pagination.html' %}
+{% endwith %}
+          <table data-toggle="table" data-classes="table table-no-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Created</th> 
+                <th>Subject</th> 
+                <th>View</th> 
+                <th>Edit</th> 
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in items.newsletters %}
+              <tr>
+                <td>{{ item.created }}</td>
+                <td>{{ item.subject|default:'' }}</td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'newsletter_view' item.pk %}"><i class="fa fa-external-link-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> View</a></td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'newsletter_edit' item.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i> Edit</a></td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+{% with items=items.newsletters %}
+{% include 'pagination.html' %}
+{% endwith %}
+{% endblock %}

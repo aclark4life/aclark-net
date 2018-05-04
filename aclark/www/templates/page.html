@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body>
+
+{% include 'stage.html' %}
+
+<div class="stage" id="stage">
+
+<div class="block block-inverse block-fill-height app-header"
+     style="background-image: url({% static 'startup-1.jpg' %});">
+
+  <div class="container py-4 fixed-top app-navbar">
+  <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
+{% include 'logo.html' %}
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-target="#stage"
+      data-toggle="stage"
+      data-distance="-250">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+{% include 'nav.html' %}
+
+  </nav>
+
+{% include 'messages.html' %}
+
+</div>
+
+  <img class="app-graph"  src="{% static 'startup-0.svg' %}">
+
+{% block content %}
+  <div class="block-xs-middle pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-lg-6">
+
+          <h1 class="block-titleData frequency">Successfully building web applications with Python&trade; since 2004.</h1>
+          <p class="lead mb-4 text-muted">Create professional web applications efficiently, effectively and economically.</p>
+          <a class="btn btn-primary btn-lg" href="{% url 'contact' %}">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+</div>
+
+{% include 'footer.html' %}
+
+</div>
+
+{% include 'foot.html' %}
+
+</body>
+</html>

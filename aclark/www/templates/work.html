@@ -1,0 +1,141 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body>
+
+{% include 'stage.html' %}
+
+<div class="stage" id="stage">
+
+<div class="block block-inverse block-fill-height app-header"
+     style="background-image: url({% static 'startup-1.jpg' %});">
+
+  <div class="container py-4 fixed-top app-navbar">
+  <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
+    <a class="navbar-brand mr-auto" href="{% url 'home' %}">
+      <strong style="background: #fff; padding: 12px; border-radius: 4px; color: #28669F;">ACLARK.NET, LLC</strong>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-target="#stage"
+      data-toggle="stage"
+      data-distance="-250">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+{% include 'nav.html' %}
+
+  </nav>
+</div>
+
+  <img class="app-graph"  src="{% static 'startup-0.svg' %}">
+
+  <div class="block-xs-middle pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-lg-6">
+          <h1 class="block-titleData frequency">Professional Python™ Web Development & Related Services</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block block-secondary app-iphone-block" id="projects"> 
+  <div class="container">
+    <div class="row app-align-center">
+
+      <div class="col-sm-5 d-none d-md-block">
+        <img class="app-iphone mb-5" src="{% static 'django-logo-positive.png' %}" style="width: 100%;">
+        <img class="app-iphone mb-5" src="{% static 'plone-logo-256.png' %}" style="width: 100%;">
+        <img class="app-iphone mb-5" src="{% static 'pyramid.png' %}" style="width: 100%;">
+        <img class="app-iphone mb-5" src="{% static 'Zope.png' %}" style="width: 100%;">
+      </div>
+
+      <div class="col-md-6 col-sm-12 ml-auto" id="projects">
+        <h6 class="text-muted text-uppercase">Technology</h6>
+        <h2>If you are using one of these Python-based web frameworks, we want to work with you.</h2>
+        <p class="lead mb-4">Or if not, we can offer compelling reasons to try.</p>
+        <div class="row d-none d-md-flex">
+          <div class="col-sm-6 mb-3">
+            <h5>Django</h5>
+            <p>Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of Web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source. <a href="https://djangoproject.com" class="text-primary" target="_blank">Learn more.</a></p>
+          </div>
+          <div class="col-sm-6">
+            <h5>Plone</h5>
+            <p>Plone is a ready-to-run content management system that is built on Python. Plone is easy, flexible, and gives you a system for web content that is ideal for projects, communities, websites and intranets. <a href="https://plone.com" class="text-primary" target="_blank">Learn more</a>.</p>
+          </div>
+        </div>
+        <div class="row d-none d-md-flex">
+          <div class="col-sm-6 mb-3">
+            <h5>Pyramid</h5>
+            <p>Pyramid makes it easy to write web applications. You can start small with this "hello world" minimal request/response web app. This may take you far, especially while learning. As your application grows, Pyramid offers many features that make writing complex software take less effort. <a href="https://trypyramid.com" class="text-primary" target="_blank">Learn more.</a></p>
+          </div>
+          <div class="col-sm-6">
+            <h5>Zope</h5>
+            <p>Zope is a community project concerned with a free and open-source, object-oriented web application server written in the Python programming language. Zope has been recognized as a Python killer app, an application that helped put Python in the spotlight. <a href="https://zope.readthedocs.io" class="text-primary" target="_blank">Learn more</a>.
+</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="block block-inverse block-secondary app-code-block">
+  <div class="container">
+    <div class="row app-align-center">
+      <div class="col-md-6 order-2 order-md-1">
+        <h6 class="text-muted text-uppercase">Open source</h6>
+        <h2>Image processing with Pillow.</h2>
+        <div class="col-sm-5 d-none d-md-block">
+          <img class="app-iphone" src="{% static 'pillow-logo.png' %}" style="width: 100%;">
+        </div>
+        <p class="lead mb-4 text-muted">Alex Clark created Pillow (a fork of the popular Python Imaging Library created by Fredrik Lundh). As a result, you can benefit from professional Python Imaging Library support.</p>
+        <a class="btn btn-secondary btn-lg btn-borderless" href="https://pillow.readthedocs.io">
+          Read our docs
+        </a>
+      </div>
+      <div class="col-md-5 ml-auto order-1 order-md-2">
+        <pre class="app-code">
+<span>1</span> >>> from PIL import Image
+<span>2</span> >>> im = Image.open("hopper.ppm")
+<span>3</span>
+<span>4</span> >>> from __future__ import print_function
+<span>5</span> >>> print(im.format, im.size, im.mode)
+<span>6</span> PPM (512, 512) RGB</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block block-inverse app-high-praise"
+     style="background-image: url({% static 'startup-3.jpg' %});" id="testimonials">
+    <div class="container">
+      <div class="row app-align-center py-3 justify-content-end">
+        <div class="col-sm-7 col-md-5 py-5">
+          <h6 class="text-muted text-uppercase mb-2">Testimonials</h6>
+          <h2 class="mb-4">{{ testimonial.description }}</h2>
+          <p class="mb-4 text-muted">{{ testimonial.name }}, {{ testimonial.title }}</p>
+          <a class="btn btn-primary btn-lg" href="{% url 'testimonials' %}">More testimonials</a>
+        </div>
+      </div>
+  </div>
+</div>
+
+{% include 'footer.html' %}
+
+</div>
+
+{% include 'foot.html' %}
+
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-10">
+              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'report_index' %}">Reports</a> &raquo; {{ item.name|default:'' }}</h1>
+            </div>
+            <div class="col-md-2 mb-3">
+              <!-- http://getbootstrap.com/docs/4.0/components/dropdowns/#split-button-dropdowns -->
+              <div class="btn-group float-right">
+                <a class="btn btn-lg btn-success" href="{% url 'report_edit' pk=item.pk %}"><i class="fa fa-edit"></i> Edit</a>
+                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+{% include 'actions.html' %}
+                </div>
+              </div>
+            </div>
+          </div>
+{% include 'delete_form.html' %}
+{% with cost=item.cost gross=item.gross net=item.net %}
+{% include 'table_totals.html' %}
+{% endwith %}
+{% with items=items.invoices %}
+{% include 'table_invoices.html' %}
+{% endwith %}
+{% endblock %}

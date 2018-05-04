@@ -1,0 +1,120 @@
+{% extends 'db/base.html' %}
+{% load l10n %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-10">
+              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'project_index' %}">Projects</a> &raquo; {{ item.name|default:'' }}</h1>
+            </div>
+            <div class="col-md-2 mb-3">
+              <!-- http://getbootstrap.com/docs/4.0/components/dropdowns/#split-button-dropdowns -->
+              <div class="btn-group float-right">
+                <a class="btn btn-lg btn-success" href="{% url 'project_edit' pk=item.pk %}"><i class="fa fa-edit"></i> Edit</a>
+                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <!-- http://getbootstrap.com/docs/4.0/components/dropdowns/#menu-headers -->
+                  <h6 class="dropdown-header">Add</h6>
+                  <a class="dropdown-item" href="{% url 'invoice_edit' %}?client={{ item.client.pk }}&project={{ item.pk }}"><i class="fa fa-plus"></i> Invoice</a>
+                  <a class="dropdown-item" href="{% url 'estimate_edit' %}?project={{ item.pk }}"><i class="fa fa-plus"></i> Estimate</a>
+                  <div class="dropdown-divider"></div>
+{% include 'actions.html' %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 py-1">
+              <table data-toggle="table" data-sort-name="hidden-color" data-classes="table table-no-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th data-field="active" data-sort-name="hidden-active" {% if active %}data-visible="false"{% endif %} data-sortable="true">Active</th>
+                    <th data-field="hidden-active" data-sortable="true" data-visible="false">Hidden Active</th>
+                    <th data-field="name" data-sort-name="hidden-name" data-sortable="true">Name</th>
+                    <th data-field="hidden-color" data-sortable="true" data-visible="false">Hidden Color</th>
+                    <th data-field="client" data-sort-name="hidden-client" data-sortable="true" data-visible="true">Client</th>
+                    <th data-field="hidden-client" data-sortable="true" data-visible="false">Hidden Client</th>
+                    <th data-sortable="true" data-visible="true">Task</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-{{ item.task.color }}"> 
+                    <td><form action="{% url 'project_edit' item.pk %}" method="post">{% csrf_token %}<input type="hidden" value="off" name="checkbox-active"> <input type="checkbox" value="on" name="checkbox-active" {% if item.active %} checked {% endif %} onChange="this.form.submit()"> </form></td>
+                    <td>{{ item.active }}</td>
+                    <td>{{ item.name|default:'' }}</td>
+                    <td>{{ item.task.color|default:'' }}</td>
+                    {% if item.client.pk %}<td><a href="{% url 'client_view' item.client.pk %}">{{ item.client }}</a></td>{% else %}<td>{{ item.client|default:'' }}</td>{% endif %}
+                    <td>{{ item.client|default:'' }}</td>
+                    {% if item.task %}<td><a href="{% url 'task_view' item.task.pk %}">{{ item.task.name }}</a></td>{% else %}<td>{{ task.name }}</td>{% endif %}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+{% include 'copy_form.html' %}
+{% include 'delete_form.html' %}
+          <!------------------------------------------------------------------------------------>
+          <div class="row">
+            <div class="col-md-12 py-1">
+              <h2>Invoices</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 py-1">
+{% with items=items.invoices view_url='invoice_view' edit_url='invoice_edit' %}
+{% include 'table_invoices.html' %}
+{% endwith %}
+            </div>
+          </div>
+          <!------------------------------------------------------------------------------------>
+          <div class="row">
+            <div class="col-md-12 my-5">
+              <h2>Totals</h2>
+            </div>
+          </div>
+{% include 'table_totals.html' %}
+          <!------------------------------------------------------------------------------------>
+          <div class="row">
+            <div class="col-md-12 py-1">
+              <h2>Times (Total: {{ total_hours.total }}{% if total_hours.users %}{% for user in total_hours.users.items %}, User &lt;{{ user.0 }}&gt;: {{ user.1 }}{% endfor %}{% endif %})</h2>
+            </div>
+          </div>
+{% include 'table_times.html' %}
+          <!------------------------------------------------------------------------------------>
+          <div class="row">
+            <div class="col-md-12 py-1">
+              <h2>Team</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+{% include 'table_users.html' %}
+            </div>
+          </div>
+          <!------------------------------------------------------------------------------------>
+          <div class="row">
+            <div class="col-md-12 py-1">
+              <h2>Estimates</h2>
+{% with items=items.invoices view_url='estimate_view' edit_url='estimate_edit' %}
+{% include 'table_invoices.html' %}
+{% endwith %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 py-1">
+            </div>
+          </div>
+          <!------------------------------------------------------------------------------------>
+          <div class="row">
+            <div class="col-md-12 py-1">
+              <h2>Notes</h2>
+            </div>
+          </div>
+          {% if item.notes %}
+          <div class="card note">
+            <div class="card-block p-3">
+              <p class="card-text">{{ item.notes|safe }}</p>
+            </div>
+          </div>
+          {% endif %}
+{% endblock %}

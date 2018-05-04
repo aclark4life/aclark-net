@@ -1,0 +1,109 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body>
+
+{% include 'stage.html' %}
+
+<div class="stage" id="stage">
+
+<div class="block block-inverse block-fill-height app-header"
+     style="background-image: url({% static 'startup-1.jpg' %});">
+
+  <div class="container py-4 fixed-top app-navbar">
+  <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
+{% include 'logo.html' %}
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-target="#stage"
+      data-toggle="stage"
+      data-distance="-250">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+{% include 'nav.html' %}
+
+  </nav>
+</div>
+
+  <img class="app-graph"  src="{% static 'startup-0.svg' %}">
+
+  <div class="block-xs-middle pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-lg-6">
+          <h1 class="block-titleData frequency">Our team offers extensive experience in the development, deployment and maintenance of modern web applications.</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block block-secondary app-iphone-block"> 
+  <div class="container">
+    <div class="row app-align-center">
+      <div class="col-sm-5 d-none d-md-block">
+        <div class="row"> 
+          <h6 class="text-muted text-uppercase">About</h6>
+          <p>
+          Alex Clark has been maintaining <a href="http://about.aclark.net" target="_blank">a list of his active projects</a> since 2013. 
+          </p>
+        </div>
+        <div class="row"> 
+          <h6 class="text-muted text-uppercase">Blog</h6>
+          <p>
+          Alex Clark has been blogging <a href="http://blog.aclark.net/2007/03/16/first-post/index.html" target="_blank">since 2007</a> and enjoys writing about a variety of technical and other topics.
+          </p>
+          <h2>Popular Articles</h2>
+          <ul class="list-unstyled list-spaced mb-5">
+            <li class="mb-2"><a href="http://blog.aclark.net/2013/02/23/trading-places-trading-scene-explained/index.html" target="_blank">Trading Places Trading Scene Explained</a></li>
+            <li class="mb-2"><a href="http://blog.aclark.net/2016/12/15/shout-out-to-shout-irc/index.html" target="_blank">A Shout Out to Shout IRC</a></li>
+            <li class="mb-2"><a href="http://blog.aclark.net/2015/02/10/please-do-my-homework/index.html" target="_blank">Please Do My Homework</a></li>
+          </ul>
+        </div>
+        <div class="row"> 
+          <h6 class="text-muted text-uppercase">Book</h6>
+          <p>Written by Alex Clark and based on Plone 3.3, this book will help you learn how to create, deploy and maintain all versions of Plone. The approach presented within this book was continued through Plone 5 as part of the Plock project.</p>
+          <h2>Plone 3.3 Site Administration</h2>
+          <ul class="list-unstyled list-spaced mb-5">
+            <li class="mb-2"><a href="https://www.packtpub.com/web-development/plone-33-site-administration">Buy a copy today</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12 ml-auto" id="team">
+
+        <h6 class="text-muted text-uppercase">Team</h6>
+
+          {% for profile in profiles %}
+          <div class="row" id="{{profile.get_username }}">
+            <div class="col-md-12 mb-5">
+              <img class="img-thumbnail" src="{{ profile.get_avatar_url }}" style="margin: 0 1em 1em 0">
+              <h2>{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
+              <p class="lead">{{ profile.bio|safe|default:'' }}</p>
+            </div>
+          </div>
+          {% endfor %}
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% include 'footer.html' %}
+
+</div>
+
+{% include 'foot.html' %}
+
+</body>
+</html>
+

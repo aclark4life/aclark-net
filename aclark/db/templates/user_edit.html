@@ -1,0 +1,17 @@
+{% extends 'db/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+              <div class="row">
+                <div class="col-md-12">
+                  <h1 style="border-bottom: none;">Users &raquo; <a class="text-dark" href="{% url 'user_view' pk=item.user.pk %}">{{ item.user.get_full_name|default:item.user }} ({{ item.user }})</a> &rsaquo; Edit</h1>
+                </div>
+              </div>
+              <form action="" method="post">{% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-lg btn-success" type="submit" value="Save User">
+                <a class="btn btn-lg btn-secondary" href="{{ request.META.HTTP_REFERER }}">Cancel</a>  <!-- http://stackoverflow.com/a/4406484 -->
+              </form>
+{% endblock %}
+{% block js %}
+{% include 'tinymce.html' %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-9">
+              <h1 style="border-bottom: none;">Tasks</h1>
+            </div>
+            <div class="col-md-3">
+              <a class="btn btn-block btn-lg btn-success" href="{% url 'task_edit' %}">Add Task</a>
+            </div>
+          </div>
+{% with items=items.tasks %}
+{% include 'pagination.html' %}
+{% endwith %}
+          <table data-toggle="table" data-classes="table table-no-bordered table-hover">
+            <thead>
+              <tr>
+                <th data-field="active" data-sort-name="hidden-active" data-sortable="true" {% if active %} data-visible="false" {% endif %} >Active</th>
+                <th data-field="hidden-active" data-sortable="true" data-visible="false">Hidden Active</th>
+                <th data-field="name" data-sort-name="hidden-name" data-sortable="true">Name</th>
+                <th data-field="hidden-name" data-sortable="true" data-visible="false">Hidden Name</th>
+                <th data-field="hidden-color" data-sortable="true" data-visible="false">Hidden Color</th>
+                <th data-field="rate" data-sortable="true">Rate</th>
+                <th data-field="unit" data-sortable="true">Unit</th>
+                <th>View</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in items.tasks %}
+              <tr class="table-{{ item.color }}">
+                <td><form action="{% url 'task_edit' item.pk %}" method="post">{% csrf_token %}<input type="hidden" value="off" name="checkbox-active"><input type="checkbox" value="on" name="checkbox-active" {% if item.active %} checked {% endif %} onChange="this.form.submit()"></form></td>
+                <td>{{ item.active }}</td>
+                <td><a href="{% url 'task_view' item.pk %}">{{ item.name|default:'' }}</a></td>
+                <td>{{ item.name|default:'' }}</td>
+                <td>{{ item.color|default:'' }}</td>
+                <td>{{ item.rate|default:'' }}</td>
+                <td>{{ item.unit|default:'' }}</td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'task_view' item.pk %}"><i class="fa fa-external-link-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> View</a></td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'task_edit' item.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i> Edit</a></td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+{% with items=items.tasks %}
+{% include 'pagination.html' %}
+{% endwith %}
+{% endblock %}

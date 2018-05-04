@@ -1,0 +1,115 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body>
+
+{% include 'stage.html' %}
+
+<div class="stage" id="stage">
+
+<div class="block block-inverse block-fill-height app-header"
+     style="background-image: url({% static 'startup-1.jpg' %});">
+
+  <div class="container py-4 fixed-top app-navbar">
+  <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
+{% include 'logo.html' %}
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-target="#stage"
+      data-toggle="stage"
+      data-distance="-250">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+{% include 'nav.html' %}
+
+  </nav>
+</div>
+
+  <img class="app-graph"  src="{% static 'startup-0.svg' %}">
+
+  <div class="block-xs-middle pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-lg-6">
+          <h1 class="block-titleData frequency">We offer a variety of professional technical services including software development, systems administration and more.</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block app-price-plans" id="services">
+  <div class="container text-center">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-10 col-md-8 col-lg-6">
+        <h2>Our Services</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 px-4 pb-2 mb-5" id="consulting">
+        <div class="px-2 mb-2">
+          <i class="fa fa-commenting fa-5x mb-1"></i>
+          <h3>Consulting</h3>
+          <p class="pb-2">We are technology subject matter experts whose expertise includes Python-based web frameworks and related technologies. We offer professional, expert-level evaluation of technical environments/infrastructure, and/or related issues and are able to make recommendations to assist with decision making processes. Our services are flexible and designed to meet each client's unique needs and special circumstances.</p>
+        </div>
+      </div>
+      <div class="col-md-4 px-4 pb-2 mb-5" id="development">
+        <div class="px-2">
+          <i class="fa fa-laptop fa-5x mb-1"></i>
+          <h3>Development</h3>
+          <p class="pb-2">We excel in the complete implementation of custom Python software: from design & development to deployment & quality assurance to upgrades and enhancements, we do it all. Since a well-conceived design is fundamental to the success of any project, we provide consulting services to assist our clients in selecting the right software; we analyze functional, technical, operational, financial and other relevant requirements before we begin. This methodology is applied to each and every development project we undertake in order to ensure an outcome of both value and reliability to our clients.  </p>
+        </div>
+      </div>
+      <div class="col-md-4 px-4 pb-2 mb-5" id="hosting">
+        <div class="px-2 mb-2">
+          <i class="fa fa-cloud-upload fa-5x mb-1"></i>
+          <h3>Hosting</h3>
+          <p class="pb-2">All hosting services are not created equal. There are many provider options available and the costs for those services vary greatly. We recognize that it can be a daunting task to try to determine which hosting provider solution is the right one for your business. We want to make the decision understandable and easy. We educate clients on the fact that modern web application hosting requires experienced professionals with subject matter expertise to ensure the best results. We partner with leading cloud providers to provide the best combination of reliable infrastructure and personal care for our clients.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 px-4 pb-1 mb-5" id="support">
+        <div class="px-2">
+          <i class="fa fa-phone fa-5x mb-1"></i>
+          <h3>Support</h3>
+          <p class="pb-2">We provide mission critical support for a variety of business applications and IT systems. Our support plans allow us to provide comprehensive consulting, technical advice, strategic project planning, and technical support to our clients before, after and during the implementation of a software application and/or add-on we have developed, or for an existing Python web application. Our “Best Of Breed” approach will assist our clients in both the design and the implementation of the infrastructure necessary to ensure a system's overall reliable performance. Our team’s experience, knowledge and expertise in effectively implementing Python software applications will position our clients for success.</p>
+        </div>
+      </div>
+      <div class="col-md-4 px-4 pb-2 mb-5" id="training">
+        <div class="px-2">
+          <i class="fa fa-book fa-5x mb-1"></i>
+          <h3>Training</h3>
+          <p class="pb-2">We believe training is of critical importance to the success of your project and offer quality training on a variety of technical subjects. Upon the implementation and subsequent installation of your newly developed and customized Python software, you may schedule training services. We are available and highly qualified to provide this service in order to insure that the system our clients rely upon is one that they can use to its full potential and benefit.</p>
+          <p class="pb-2">Our trainings are catered to fit your needs; we believe training is of critical importance to the success of your project and we have the resources to provide you with quality training on a variety of subjects. Whether you are attempting to transition from one software package to another, or you are starting up a new professional venture, training sets the pace for a successful future.</p>
+        </div>
+      </div>
+      <div class="col-md-4 px-4 pb-1 mb-5" id="tutoring">
+        <div class="px-2">
+          <i class="fa fa-graduation-cap fa-5x mb-1"></i>
+          <h3>Tutoring</h3>
+          <p class="pb-2">We offer personalized one-on-one support to assist individuals achieve their particular software and/or technology career goals. Tutoring/Mentoring sessions can be done in person and/or remote via on line conferencing software. Content, time, day(s), and the frequency of scheduled tutorial sessions are customized to the needs of the individual client. Your success is our success!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% include 'footer.html' %}
+
+</div>
+
+{% include 'foot.html' %}
+
+</body>
+</html>
+

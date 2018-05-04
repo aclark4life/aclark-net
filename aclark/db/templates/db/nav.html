@@ -1,0 +1,11 @@
+{% load staticfiles %}
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav">  <!-- http://stackoverflow.com/a/25044880/185820 -->
+{% include 'db/dropdown.html' %}
+        </ul>
+      </div>
+    </nav>

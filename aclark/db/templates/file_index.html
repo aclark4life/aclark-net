@@ -1,0 +1,31 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-9">
+              <h1 style="border-bottom: none;">Files</h1>
+            </div>
+            <div class="col-md-3">
+              <a class="btn btn-block btn-lg btn-success" href="{% url 'file_edit' %}">Add File</a>
+            </div>
+          </div>
+{% with items=items.files %}     
+{% include 'pagination.html' %}
+{% endwith %}
+            <table data-toggle="table" data-classes="table table-no-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th> 
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in items.files %}
+                <tr>
+                  <td><a href="{% url 'file_view' item.pk %}">{{ item.name }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+{% with items=items.files %}
+{% include 'pagination.html' %}
+{% endwith %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'page.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="block-xs-middle pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-lg-6 mt-5">
+          <h1 class="block-titleData frequency">We look forward to working with you.</h1>
+          <p class="lead mb-4 text-muted">Here is how to contact us</p>
+          <form action="" method="post">{% csrf_token %}{{ form|crispy }}
+            <button class="btn btn-lg btn-primary" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

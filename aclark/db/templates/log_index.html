@@ -1,0 +1,32 @@
+{% extends 'db/base.html' %}
+{% block content %}
+              <div class="row">
+                <div class="col-md-12">
+                  <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'log_index' %}">Logs</h1>
+                </div>
+              </div>
+{% with items=items.logs %}
+{% include 'pagination.html' %}
+{% endwith %}
+            <table data-toggle="table" data-classes="table table-no-bordered table-hover">
+              <thead>
+                <tr>
+                  <th data-sortable="true" data-sort-name="hidden-date">Created</th>
+                  <th data-sortable="true" data-field="hidden-date" data-visible="false">Hidden Date</th>
+                  <th data-sortable="true">Entry</th> 
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in items.logs %}
+                <tr>
+                  <td>{{ item.created|date:'Y-m-d' }}</td>
+                  <td>{{ item.created|date:'U' }}</td>
+                  <td>{{ item.entry }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+{% with items=items.logs %}
+{% include 'pagination.html' %}
+{% endwith %}
+{% endblock %}

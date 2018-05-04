@@ -1,0 +1,32 @@
+          <table data-toggle="table" data-classes="table table-no-bordered table-hover">
+            <thead>
+              <tr>
+                <th data-valign="top" data-field="active" data-sort-name="hidden-active" {% if active %}data-visible="false"{% endif %} data-sortable="true">Active</th>
+                <th data-valign="top" data-field="hidden-active" data-sortable="true" data-visible="false">Hidden Active</th>
+                <th data-valign="top" data-sortable="true" data-visible="false">Burn Rate</th>
+                <th data-valign="top" data-field="name" data-sortable="true">Name</th>
+                <th data-valign="top" data-field="hidden-color" data-sortable="true" data-visible="false">Hidden Color</th>
+                <th data-valign="top" data-valign="top" data-field="client" data-sort-name="hidden-client" data-sortable="true" data-visible="true">Client</th>
+                <th data-valign="top" data-field="hidden-client" data-sortable="true" data-visible="false">Hidden Client</th>
+                <th data-valign="top" data-sortable="true" data-visible="true">Task</th>
+                <th data-valign="top">View</th>
+                <th data-valign="top">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in items.projects %}
+              <tr class="table-{{ item.task.color }}"> 
+                <td><form action="{% url 'project_edit' item.pk %}" method="post">{% csrf_token %}<input type="hidden" value="off" name="checkbox-active"> <input type="checkbox" value="on" name="checkbox-active" {% if item.active %} checked {% endif %} onChange="this.form.submit()"> </form></td>
+                <td>{{ item.active }}</td>
+                <td>{{ item.daily_burn }}</td>
+                <td>{{ item.name|default:'' }}</td>
+                <td>{{ item.task.color|default:'' }}</td>
+                {% if item.client.pk %}<td><a href="{% url 'client_view' item.client.pk %}"></i> {{ item.client }}</a></td>{% else %}<td>{{ item.client|default:'' }}</td>{% endif %}
+                <td>{{ item.client|default:'' }}</td>
+                {% if item.task %}<td><a href="{% url 'task_view' item.task.pk %}"></i> {{ item.task.name|default:'Task' }}</a></td>{% else %}<td>{{ task.name }}</td>{% endif %}
+                <td><a class="text-{{ icon_color }}" href="{% url 'project_view' item.pk %}"><i class="fa fa-external-link-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'project_edit' item.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>

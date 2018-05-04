@@ -1,0 +1,73 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body>
+
+{% include 'stage.html' %}
+
+<div class="stage" id="stage">
+
+<div class="block block-inverse block-fill-height app-header"
+     style="background-image: url({% static 'startup-1.jpg' %});">
+
+  <div class="container py-4 fixed-top app-navbar">
+  <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
+{% include 'logo.html' %}
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-target="#stage"
+      data-toggle="stage"
+      data-distance="-250">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+{% include 'nav.html' %}
+
+  </nav>
+</div>
+
+  <img class="app-graph"  src="{% static 'startup-0.svg' %}">
+
+  <div class="block-xs-middle pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-lg-6">
+          <h1 class="block-titleData frequency">Our Testimonials</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block app-price-plans" id="services">
+  <div class="container text-center">
+    <div class="row">
+      {% for testimonial in testimonials %}
+      <div class="col-md-4 px-4 pb-2 mb-5" id="testimonials">
+        <div class="px-2 mb-2">
+          <i class="fa fa-commenting fa-5x mb-1"></i>
+          <p class="pb-2 lead"><i class="fa fa-quote-left"></i> <strong>{{ testimonial.description }} </strong> <i class="fa fa-quote-right"></i></p>
+          <p class="float-right">{{ testimonial.issue_date }}</p>
+          <p>&mdash;{{ testimonial.name }}, {{ testimonial.title }}, </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% include 'footer.html' %}
+
+</div>
+
+{% include 'foot.html' %}
+
+</body>
+</html>
+

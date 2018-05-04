@@ -1,0 +1,22 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-9">
+              <h1 style="border-bottom: none;">Contacts</h1> 
+            </div>
+            <div class="col-md-3">
+              <a class="btn btn-block btn-lg btn-success" href="{% url 'contact_edit' %}">Add Contact</a>
+            </div>
+          </div>
+
+{% with items=items.contacts %}     
+{% include 'pagination.html' %}
+{% endwith %}
+
+{% include 'table_contacts.html' %}
+
+{% with items=items.contacts %}     
+{% include 'pagination.html' %}
+{% endwith %}
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body>
+
+{% include 'stage.html' %}
+
+<div class="stage" id="stage">
+
+<div class="block block-inverse block-fill-height app-header"
+     style="background-image: url({% static 'startup-1.jpg' %});">
+
+  <div class="container py-4 fixed-top app-navbar">
+  <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
+{% include 'logo.html' %}
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-target="#stage"
+      data-toggle="stage"
+      data-distance="-250">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+{% include 'nav.html' %}
+
+  </nav>
+</div>
+
+  <img class="app-graph"  src="{% static 'startup-0.svg' %}">
+
+  <div class="block-xs-middle pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-lg-6">
+          <h1 class="block-titleData frequency">A partial list of our valued clients.</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block app-price-plans" id="clients">
+  <div class="container text-center">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-10 col-md-8 col-lg-6">
+        <h2>Our Clients</h2>
+      </div>
+    </div>
+    <div class="row">
+      {% for client in clients %}
+      <div class="col-md-4 px-4 pb-2 mb-5"> 
+        <div class="px-2">
+          <i class="fa fa-building fa-5x mb-1"></i>
+            <h3>{{ client.name }}</h3>
+            <p>{{ client.description|striptags }}</p>
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'footer.html' %}
+
+</div>
+
+{% include 'foot.html' %}
+
+</body>
+</html>
+

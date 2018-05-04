@@ -1,0 +1,18 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-9">
+              <h1 style="border-bottom: none;">Projects</h1>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-block btn-lg btn-success" href="{% url 'project_edit' %}" disabled>Add Project</button>
+            </div>
+          </div>
+{% with items=items.projects %}
+{% include 'pagination.html' %}
+{% endwith %}
+{% include 'table_projects.html' %}
+{% with items=items.projects %}
+{% include 'pagination.html' %}
+{% endwith %}
+{% endblock %}

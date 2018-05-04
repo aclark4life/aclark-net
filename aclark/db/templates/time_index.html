@@ -1,0 +1,18 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-9">
+              <h1 style="border-bottom: none;">Times</h1>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-block btn-lg btn-success" href="{% url 'time_edit' %}" disabled>Add Time</button>
+            </div>
+          </div>
+{% with items=items.times %}
+{% include 'pagination.html' %}
+{% endwith %}
+{% include 'table_times.html' %}
+{% with items=items.times %}
+{% include 'pagination.html' %}
+{% endwith %}
+{% endblock %}

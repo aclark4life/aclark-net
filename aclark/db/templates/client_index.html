@@ -1,0 +1,45 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-10">
+              <h1 style="border-bottom: none;">Clients</h1>
+            </div>
+            <div class="col-md-2">
+              <a class="btn btn-block btn-lg btn-success" href="{% url 'client_edit' %}">Add Client</a>
+            </div>
+          </div>
+{% with items=items.clients %}     
+{% include 'pagination.html' %}
+{% endwith %}
+          <table data-toggle="table" data-classes="table table-no-bordered table-hover">
+            <thead>
+              <tr>
+                <th data-field="counter" data-sortable="true">#</th>
+                <th data-sort-name="hidden-active" data-sortable="true" {% if active %} data-visible="false" {% endif %}>Active</th>
+                <th data-field="hidden-active" data-sortable="true" data-visible="false">Hidden Active</th>
+                <th data-sort-name="hidden-name" data-sortable="true">Name</th>
+                <th data-field="hidden-name" data-sortable="true" data-visible="false">Hidden Name</th>
+                <th data-sortable="true">Address</th>
+                <th>View</th>
+                <th>Edit</th> 
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in items.clients %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><form action="{% url 'client_edit' item.pk %}" method="post">{% csrf_token %}<input type="hidden" value="off" name="checkbox-active"><input type="checkbox" value="on" name="checkbox-active"{% if item.active %} checked {% endif %} onChange="this.form.submit()"></form></td>
+                <td>{{ item.active }}</td>
+                <td>{{ item.name|default:'' }}</td>
+                <td>{{ item.name|default:'' }}</td>
+                <td>{{ item.address }}</td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'client_view' item.pk %}"><i class="fa fa-external-link-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> View</a></td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'client_edit' item.pk %}"><i class="fa fa-edit fa-{{ icon_size }}"></i> Edit</a></td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+{% with items=items.clients %}     
+{% include 'pagination.html' %}
+{% endwith %}
+{% endblock %}

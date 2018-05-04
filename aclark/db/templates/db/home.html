@@ -1,0 +1,29 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          {% if request.user.is_authenticated %}
+          <div class="row">
+            <div class="col-md-10">
+              <h1 style="border-bottom: none;">Dashboard</h1>
+            </div>
+            <div class="col-md-2 mb-3"> 
+              <a class="btn btn-block btn-lg btn-success" href="{% url 'time_edit' %}"> Add Time</a>
+            </div>
+          </div>
+{% include 'dashboard.html' %}
+          {% else %}
+
+  <div class="block-xs-middle pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-lg-6">
+
+          <h1 class="block-titleData frequency">Staff</h1>
+          <p class="lead mb-4 text-muted">Please login to enter time</p>
+          <a class="btn btn-primary btn-lg" href="/db/login/google-oauth2/?next=/db/">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+          {% endif %}
+{% endblock %}

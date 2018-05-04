@@ -1,0 +1,13 @@
+{% extends 'db/base.html' %}
+{% block content %}
+              <div class="row">
+                <div class="col-md-4">
+                  <h1 style="border-bottom: none;">Settings</h1>
+                </div>
+                <div class="col-md-2 ml-auto">
+                  <a class="btn btn-lg btn-block btn-success" href="{% url 'settings_company_edit' %}">Edit <i class="fa fa-edit"></i></a>
+                </div>
+              </div>
+{% include 'settings_nav.html' %}
+{% include 'table_items.html' %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% load humanize %}
+                <table class="table">
+                  <thead>
+                    <th>Cost</th>
+                    <th>Gross</th>
+                    <th>Net</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong class="text-danger">{{ company_currency_symbol }}{{ cost|default:'0.00'|intcomma }}</strong></td>
+                      <td><strong class="text-info">{{ company_currency_symbol }}{{ gross|default:'0.00'|intcomma }}</strong></td>
+                      <td><strong class="text-success">{{ company_currency_symbol }}{{ net|default:'0.00'|intcomma }}</strong></td>
+                    </tr>
+                  </tbody>
+                </table>

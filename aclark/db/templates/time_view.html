@@ -1,0 +1,58 @@
+{% extends 'db/base.html' %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-10">
+              <h1 style="border-bottom: none;">{% if is_staff %}<a class="text-dark" href="{% url 'time_index' %}">Times</a> &raquo; {% endif %}Time Entry</h1>
+            </div>
+            <div class="col-md-2 mb-3">
+              <!-- http://getbootstrap.com/docs/4.0/components/dropdowns/#split-button-dropdowns -->
+              <div class="btn-group pull-right">
+                <a class="btn btn-lg btn-success" href="{% url 'time_edit' pk=item.pk %}"><i class="fa fa-edit"></i> Edit</a>
+                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="{% url 'time_edit' %}"><i class="fa fa-plus"></i> Add</a>
+                  <div class="dropdown-divider"></div>
+{% include 'actions.html' %}
+                </div>
+              </div>
+            </div>
+          </div>
+{% include 'copy_form.html' %}
+{% include 'delete_form.html' %}
+          <table class="table table-no-bordered table-hover"> 
+            <thead>
+              <tr>
+                {% if is_staff %}<th data-field="invoiced" data-sortable="true">Invoiced</th>{% endif %}
+                <th data-field="date" data-sortable="true">Date</th>
+                <th data-field="project" data-sortable="true">Project</th>
+                <th data-field="hours" data-sortable="true">Hours</th>
+                <th data-field="log" data-sortable="true">Log</th>
+                {% if is_staff %}
+                <th data-field="client" data-sortable="true">Client</th>
+                <th data-field="task" data-sortable="true">Task</th>
+                <th data-field="invoice" data-sortable="true">Invoice</th>
+                <th data-field="estimate" data-sortable="true">Estimate</th>
+                {% endif %}
+                <th data-field="user" data-sortable="true">User</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% if is_staff %}<td>{% if item.invoiced %}<i data-toggle="tooltip" data-placement="right" title="Invoice Paid" class="fa fa-check"></i>{% endif %}</td>{% endif %}
+                <td>{{ item.date|date:'Y-m-d'|default:'' }}</td>
+                <td>{{ item.project|default:'' }}</td>
+                <td>{{ item.hours|default:'' }}</td>
+                <td>{{ item.log|default:'' }}</td>
+                {% if is_staff %}
+                <td>{{ item.client|default:'' }}</td>
+                {% if item.task %}<td><a href="{% url 'task_view' item.task.pk %}">{{ item.task|default:'' }}</a></td>{% else %}<td></td>{% endif %}
+                {% if item.invoice %}<td><a href="{% url 'invoice_view' item.invoice.pk %}">{{ item.invoice.subject|default:item.invoice }}</a></td>{% else %}<td></td>{% endif %}
+                {% if item.estimate %}<td><a href="{% url 'estimate_view' item.estimate.pk %}">{{ item.estimate.pk|default:'' }}</a></td>{% else %}<td></td>{% endif %}
+                {% endif %}
+                <td>{{ item.user|default:'' }}</td>
+              </tr>
+            </tbody>
+          </table>
+{% endblock %}

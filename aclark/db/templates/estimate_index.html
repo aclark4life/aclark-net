@@ -1,0 +1,17 @@
+{% extends 'db/base.html' %}
+{% load l10n %}
+{% block content %}
+          <div class="row">
+            <div class="col-md-9">
+              <h1 style="border-bottom: none;">Estimates</h1>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-block btn-lg btn-success" href="{% url 'estimate_edit' %}" disabled>Add Estimate</button>
+            </div>
+          </div>
+{% with items=items.estimates %}     
+{% include 'pagination.html' %}
+{% include 'table_invoices.html' %}
+{% include 'pagination.html' %}
+{% endwith %}
+{% endblock %}

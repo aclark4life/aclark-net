@@ -1,0 +1,11 @@
+      {% if is_staff %}
+      <div class="row">
+        <div class="col-md-8 ml-auto mb-3">
+          <form class="form-inline my-2 my-lg-0" method="post">{% csrf_token %}
+            <input type="hidden" name="active-only" value="false">
+            <input class="form-control mr-sm-2" name="search" type="text"> 
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+          </form>
+        </div>
+      </div>
+      {% endif %}
