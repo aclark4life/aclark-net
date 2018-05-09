@@ -495,6 +495,9 @@ def note_index(request, pk=None):
         app_settings_model=SettingsApp,
         model=Note,
         order_by=('-active', '-updated', 'tags'),
+        filter_by={
+            'hidden': False,
+        },
         request=request,
         search_fields=('note', 'title'))
     return render(request, 'note_index.html', context)
