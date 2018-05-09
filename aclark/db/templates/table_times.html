@@ -2,7 +2,7 @@
             <thead>
               <tr>
                 <th data-field="counter" data-sortable="true">#</th>
-                {% if is_staff %}<th data-field="invoiced" data-sortable="true" data-visible="{{ columns_visible.time.invoiced }}">Invoiced</th>{% endif %}
+                <th data-field="invoiced" data-sortable="true">Invoiced</th>
                 <th data-field="date" data-sort-name="hidden-date" data-sortable="true">Date</th>
                 <th data-field="hidden-date" data-sortable="true" data-visible="false">Hidden Date</th>
                 <th data-field="hours" data-sortable="true">Hours</th>
@@ -24,7 +24,7 @@
             {% for item in items.times %}
               <tr>
                 <td>{{ forloop.counter }}</td>
-                {% if is_staff %}<td>{% if item.invoiced %}<i class="fa fa-check"></i>{% endif %}</td>{% endif %}
+                <td>{% if item.invoiced %}<i class="fa fa-check"></i>{% endif %}</td>
                 <td>{{ item.date|date:'Y-m-d'|default:'' }}</td>
                 <td>{{ item.date|date:'U' }}</td>
                 <td>{{ item.hours|default:'' }}</td>

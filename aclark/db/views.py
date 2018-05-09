@@ -313,7 +313,6 @@ def home(request):
         },
         filter_by={
             'estimate': None,
-            'invoiced': False,
             'user': request.user,
         },
         estimate_model=Estimate,
@@ -765,7 +764,6 @@ def time_index(request):
         app_settings_model=SettingsApp,
         columns_visible={
             'time': {
-                'invoiced': 'true',
                 'invoice': 'true',
                 'estimate': 'true',
                 'log': 'false',
