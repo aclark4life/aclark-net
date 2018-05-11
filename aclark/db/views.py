@@ -522,6 +522,9 @@ def project_view(request, pk=None):
                 'sent': 'true',
             },
         },
+        filter_by={
+            'task': None,
+        },
         order_by={'time': ('date', )},  # For time entries
         time_model=Time,
         pk=pk,
