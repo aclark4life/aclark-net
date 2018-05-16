@@ -44,20 +44,16 @@ def get_setting(request, app_settings_model, setting, page_size=None):
     if not request.user.is_authenticated:
         return
     app_settings = app_settings_model.get_solo()
-    # if setting == 'icon_size':
-    #     if has_profile(request.user):
-    #         user_pref = request.user.profile.icon_size
-    #     if user_pref:
-    #         return user_pref
-    #     else:
-    #         return app_settings.icon_size
-    # elif setting == 'icon_color':
-    #     if has_profile(request.user):
-    #         user_pref = request.user.profile.icon_color
-    #     if user_pref:
-    #         return user_pref
-    #     else:
-    #         return app_settings.icon_color
+    if setting == 'icon_size':
+        if has_profile(request.user):
+            user_pref = request.user.profile.icon_size
+        if user_pref:
+            return user_pref
+    elif setting == 'icon_color':
+        if has_profile(request.user):
+            user_pref = request.user.profile.icon_color
+        if user_pref:
+            return user_pref
     if setting == 'page_size':
         if has_profile(request.user):
             user_pref = request.user.profile.page_size
@@ -65,8 +61,6 @@ def get_setting(request, app_settings_model, setting, page_size=None):
             return user_pref
         elif page_size:  # View's page_size preference
             return page_size
-        else:
-            return app_settings.page_size
     elif setting == 'dashboard_choices':
         dashboard_choices = app_settings.dashboard_choices
         return dashboard_choices
