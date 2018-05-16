@@ -387,3 +387,7 @@ webpack-init:
 webpack:
 	./node_modules/.bin/webpack
 pack: webpack  # Alias
+
+# aclark-net
+PROJECT=aclark
+APP=net
