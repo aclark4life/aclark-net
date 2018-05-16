@@ -44,21 +44,21 @@ def get_setting(request, app_settings_model, setting, page_size=None):
     if not request.user.is_authenticated:
         return
     app_settings = app_settings_model.get_solo()
-    if setting == 'icon_size':
-        if has_profile(request.user):
-            user_pref = request.user.profile.icon_size
-        if user_pref:
-            return user_pref
-        else:
-            return app_settings.icon_size
-    elif setting == 'icon_color':
-        if has_profile(request.user):
-            user_pref = request.user.profile.icon_color
-        if user_pref:
-            return user_pref
-        else:
-            return app_settings.icon_color
-    elif setting == 'page_size':
+    # if setting == 'icon_size':
+    #     if has_profile(request.user):
+    #         user_pref = request.user.profile.icon_size
+    #     if user_pref:
+    #         return user_pref
+    #     else:
+    #         return app_settings.icon_size
+    # elif setting == 'icon_color':
+    #     if has_profile(request.user):
+    #         user_pref = request.user.profile.icon_color
+    #     if user_pref:
+    #         return user_pref
+    #     else:
+    #         return app_settings.icon_color
+    if setting == 'page_size':
         if has_profile(request.user):
             user_pref = request.user.profile.page_size
         if user_pref:
