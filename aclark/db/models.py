@@ -70,6 +70,15 @@ class BaseModel(models.Model):
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
     hidden = models.BooleanField(default=False)
+    icon_name = models.CharField(
+        "Font Awesome Icon",
+        max_length=25,
+        blank=True,
+        null=True)
+    icon_size = models.CharField(
+        max_length=255, blank=True, null=True, choices=ICON_CHOICES)
+    icon_color = models.CharField(
+        max_length=255, blank=True, null=True, choices=COLOR_CHOICES)
 
     class Meta:
         abstract = True
@@ -80,7 +89,6 @@ class Client(BaseModel):
     """
     published = models.BooleanField(default=False)
     name = models.CharField(max_length=300, blank=True, null=True)
-    icon = models.CharField(max_length=25, blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     url = models.URLField("Website", blank=True, null=True)
@@ -420,10 +428,6 @@ class Profile(BaseModel):
         on_delete=models.CASCADE,
         blank=True,
         null=True)
-    icon_size = models.CharField(
-        max_length=255, blank=True, null=True, choices=ICON_CHOICES)
-    icon_color = models.CharField(
-        max_length=255, blank=True, null=True, choices=COLOR_CHOICES)
     page_size = models.PositiveIntegerField(blank=True, null=True)
     preferred_username = models.CharField(
         'Preferred Username', max_length=150, blank=True, null=True)
@@ -599,11 +603,6 @@ class Service(BaseModel):
     # company = models.ForeignKey(CompanySettings, blank=True, null=True)
     name = models.CharField(max_length=300, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    icon = models.CharField(
-        "Font Awesome Icon (without 'fa-')",
-        max_length=25,
-        blank=True,
-        null=True)
 
     def __str__(self):
         if self.name:
@@ -615,10 +614,6 @@ class Service(BaseModel):
 class SettingsApp(SingletonModel):
     """
     """
-    icon_size = models.CharField(
-        max_length=255, blank=True, null=True, choices=ICON_CHOICES)
-    icon_color = models.CharField(
-        max_length=255, blank=True, null=True, choices=COLOR_CHOICES)
     page_size = models.PositiveIntegerField(blank=True, default=10, null=True)
     auto_hide = models.BooleanField(default=True)
     exclude_hidden = models.BooleanField(default=True)
