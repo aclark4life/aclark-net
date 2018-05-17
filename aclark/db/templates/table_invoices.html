@@ -27,7 +27,7 @@
                       <td>{{ item.issue_date|date:'U'|default:'' }}</td>
                       <td>{% if item.amount %}{{ company_currency_symbol }}{% endif %}{{ item.amount|default:''|intcomma }}</td>
                       <td>{{ item.amount|unlocalize|default:'' }}</td>
-                      <td><a class="text-{{ icon_color }}" href="{% url view_url item.pk %}">{{ item.invoice }}</a> <a class="text-{{ icon_color }}" href="{% url edit_url item.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i></a> <a class="text-{{ icon_color }}" href="{% url 'time_edit' %}?invoice={{ item.pk }}"><i class="fa fa-clock fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td> <!-- https://stackoverflow.com/a/18541484/185820 -->
+                      <td><a class="text-{{ icon_color }}" href="{% url view_url item.pk %}">{{ item }}</a> <a class="text-{{ icon_color }}" href="{% url edit_url item.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i></a> <a class="text-{{ icon_color }}" href="{% url 'time_edit' %}?invoice={{ item.pk }}"><i class="fa fa-clock fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td> <!-- https://stackoverflow.com/a/18541484/185820 -->
                     </tr>
                   {% endfor %}
                   </tbody>
