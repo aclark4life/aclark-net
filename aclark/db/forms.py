@@ -29,9 +29,7 @@ class AdminProfileForm(forms.ModelForm):
                   'dashboard_items', 'icon_color', 'icon_size', 'notify',
                   'page_size', 'published', 'avatar_url')
         widgets = {
-            'bio': forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            'bio': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
     dashboard_items = forms.MultipleChoiceField(
@@ -58,9 +56,7 @@ class AdminTimeForm(forms.ModelForm):
             'invoiced',
         )
         widgets = {
-            'hours': forms.widgets.NumberInput(attrs={
-                'class': 'col-2'
-            }),
+            'hours': forms.widgets.NumberInput(attrs={'class': 'col-2'}),
         }
 
     date = forms.DateField(
@@ -91,9 +87,7 @@ class ContractForm(forms.ModelForm):
         model = Contract
         fields = '__all__'
         widgets = {
-            'body': forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            'body': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
 
@@ -211,18 +205,14 @@ class NewsletterForm(forms.ModelForm):
         model = Newsletter
         fields = ('template_choices', 'contacts', 'subject', 'text')
         widgets = {
-            'text': forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            'text': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
     contacts = forms.ModelMultipleChoiceField(
         queryset=Contact.objects.filter(subscribed=True).exclude(
             email=None).order_by('first_name'),
         label='Recipients',
-        widget=forms.SelectMultiple(attrs={
-            'size': '50'
-        }),
+        widget=forms.SelectMultiple(attrs={'size': '50'}),
         required=False)
 
 
@@ -232,25 +222,19 @@ class NoteForm(forms.ModelForm):
         fields = ('active', 'hidden', 'title', 'tags', 'note', 'due_date',
                   'contacts')
         widgets = {
-            'note': forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            'note': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
         required=False,
-        widget=forms.SelectMultiple(attrs={
-            'size': '5'
-        }))
+        widget=forms.SelectMultiple(attrs={'size': '5'}))
 
     contacts = forms.ModelMultipleChoiceField(
         queryset=Contact.objects.filter(active=True).exclude(
             email=None).order_by('first_name'),
         required=False,
-        widget=forms.SelectMultiple(attrs={
-            'size': '5'
-        }))
+        widget=forms.SelectMultiple(attrs={'size': '5'}))
 
 
 class ProfileForm(forms.ModelForm):
@@ -259,9 +243,7 @@ class ProfileForm(forms.ModelForm):
         fields = ('rate', 'bio', 'address', 'preferred_payment_method',
                   'icon_size', 'dashboard_items')
         widgets = {
-            'bio': forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            'bio': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
     dashboard_items = forms.MultipleChoiceField(
@@ -279,9 +261,7 @@ class ProjectForm(forms.ModelForm):
         fields = ('active', 'hidden', 'name', 'start_date', 'end_date',
                   'notes', 'client', 'task', 'team')
         widgets = {
-            'notes': forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            'notes': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
     start_date = forms.DateField(
@@ -306,9 +286,7 @@ class ProposalForm(forms.ModelForm):
         model = Proposal
         fields = '__all__'
         widgets = {
-            'body': forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            'body': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
 
@@ -334,9 +312,7 @@ class ServiceForm(forms.ModelForm):
         model = Service
         fields = '__all__'
         widgets = {
-            'description': forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            'description': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
 
@@ -351,9 +327,7 @@ class SettingsCompanyForm(forms.ModelForm):
         model = SettingsCompany
         fields = '__all__'
         widgets = {
-            'notes': forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            'notes': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
 
@@ -363,57 +337,31 @@ class SettingsContractForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'parties':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'scope_of_work':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'payment_terms':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'timing_of_payment':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'contributor_assignment_agreement':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'authority_to_act':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'termination':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'governing_laws':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'period_of_agreement':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'confidentiality':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'taxes':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'limited_warranty':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
             'complete_agreement':
-            forms.widgets.TextInput(attrs={
-                'class': 'tinymce'
-            }),
+            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
 
@@ -428,9 +376,7 @@ class TimeForm(forms.ModelForm):
         model = Time
         fields = ('date', 'project', 'hours', 'log')
         widgets = {
-            'hours': forms.widgets.NumberInput(attrs={
-                'class': 'col-2'
-            }),
+            'hours': forms.widgets.NumberInput(attrs={'class': 'col-2'}),
         }
 
     date = forms.DateField(

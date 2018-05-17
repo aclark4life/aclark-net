@@ -457,8 +457,9 @@ def note_view(request, pk=None):
     if not request.user.is_staff and not note.user:  # No user
         messages.add_message(request, messages.WARNING, message)
         return HttpResponseRedirect(reverse('home'))
-    elif (not request.user.is_staff and not note.user.username ==
-          request.user.username):  # Time entry user does not match user
+    elif (not request.user.is_staff
+          and not note.user.username == request.user.username
+          ):  # Time entry user does not match user
         messages.add_message(request, messages.WARNING, message)
         return HttpResponseRedirect(reverse('home'))
     else:
@@ -525,7 +526,10 @@ def project_view(request, pk=None):
         filter_by={
             'task': None,
         },
-        order_by={'time': ('date', )},  # For time entries
+        order_by={
+            'time': ('date', ),
+            'invoice': ('-issue_date', )
+        },
         time_model=Time,
         pk=pk,
         request=request)
@@ -716,8 +720,9 @@ def time_view(request, pk=None):
     if not request.user.is_staff and not time_entry.user:  # No user
         messages.add_message(request, messages.WARNING, message)
         return HttpResponseRedirect(reverse('home'))
-    elif (not request.user.is_staff and not time_entry.user.username ==
-          request.user.username):  # Time entry user does not match user
+    elif (not request.user.is_staff
+          and not time_entry.user.username == request.user.username
+          ):  # Time entry user does not match user
         messages.add_message(request, messages.WARNING, message)
         return HttpResponseRedirect(reverse('home'))
     else:
@@ -737,8 +742,9 @@ def time_edit(request, pk=None):
         if not request.user.is_staff and not time_entry.user:  # No user
             messages.add_message(request, messages.WARNING, message)
             return HttpResponseRedirect(reverse('home'))
-        elif (not request.user.is_staff and not time_entry.user.username ==
-              request.user.username):  # Time entry user does not match user
+        elif (not request.user.is_staff
+              and not time_entry.user.username == request.user.username
+              ):  # Time entry user does not match user
             messages.add_message(request, messages.WARNING, message)
             return HttpResponseRedirect(reverse('home'))
     if request.user.is_staff:
@@ -760,8 +766,8 @@ def time_edit(request, pk=None):
 
 @staff_member_required
 def time_index(request):
-    search_fields = ('client__name', 'date', 'log', 'pk', 'project__name', 'hours',
-                     'invoice__pk', 'user__username', 'task__name')
+    search_fields = ('client__name', 'date', 'log', 'pk', 'project__name',
+                     'hours', 'invoice__pk', 'user__username', 'task__name')
     context = get_index_items(
         model=Time,
         app_settings_model=SettingsApp,

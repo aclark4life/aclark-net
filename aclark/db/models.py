@@ -71,10 +71,7 @@ class BaseModel(models.Model):
     active = models.BooleanField(default=True)
     hidden = models.BooleanField(default=False)
     icon_name = models.CharField(
-        "Font Awesome Icon",
-        max_length=25,
-        blank=True,
-        null=True)
+        "Font Awesome Icon", max_length=25, blank=True, null=True)
     icon_size = models.CharField(
         max_length=255, blank=True, null=True, choices=ICON_CHOICES)
     icon_color = models.CharField(
@@ -171,9 +168,7 @@ class Contract(BaseModel):
         blank=True,
         null=True,
         on_delete=models.CASCADE,
-        limit_choices_to={
-            'accepted_date': None
-        })
+        limit_choices_to={'accepted_date': None})
     task = models.ForeignKey(
         'Task',
         blank=True,
@@ -243,9 +238,7 @@ class Estimate(BaseModel):
         blank=True,
         null=True,
         on_delete=models.CASCADE,
-        limit_choices_to={
-            'profile__active': True
-        })
+        limit_choices_to={'profile__active': True})
 
     def __str__(self):
         return 'estimate-%s' % self.pk
@@ -400,9 +393,7 @@ class Note(BaseModel):
         blank=True,
         null=True,
         on_delete=models.CASCADE,
-        limit_choices_to={
-            'profile__active': True
-        })
+        limit_choices_to={'profile__active': True})
 
     def __str__(self):
         if self.title:
@@ -500,9 +491,7 @@ class Project(BaseModel):
     team = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         blank=True,
-        limit_choices_to={
-            'profile__active': True
-        })
+        limit_choices_to={'profile__active': True})
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     code = models.IntegerField("Project Code", blank=True, null=True)
@@ -558,9 +547,7 @@ class Proposal(BaseModel):
         blank=True,
         null=True,
         on_delete=models.CASCADE,
-        limit_choices_to={
-            'accepted_date': None
-        })
+        limit_choices_to={'accepted_date': None})
     task = models.ForeignKey(
         'Task',
         blank=True,
@@ -755,9 +742,7 @@ class Time(BaseModel):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        limit_choices_to={
-            'profile__active': True
-        })
+        limit_choices_to={'profile__active': True})
     estimate = models.ForeignKey(
         Estimate, blank=True, null=True, on_delete=models.SET_NULL)
     invoice = models.ForeignKey(
@@ -765,9 +750,7 @@ class Time(BaseModel):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        limit_choices_to={
-            'last_payment_date': None
-        })
+        limit_choices_to={'last_payment_date': None})
     date = models.DateField(default=timezone.now)
     hours = models.DecimalField(
         "Hours",
