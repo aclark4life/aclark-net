@@ -6,7 +6,10 @@ from django.core.paginator import PageNotAnInteger
 def paginate(items, page, page_size):
     """
     """
-    paginator = Paginator(items, page_size, orphans=5)
+    if page_size is not None:
+        paginator = Paginator(items, page_size, orphans=5)
+    else:
+        paginator = Paginator(items, 10, orphans=5)
     try:
         items = paginator.page(page)
     except PageNotAnInteger:
