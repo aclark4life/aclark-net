@@ -21,7 +21,7 @@
                 <td>{{ item.email|default:'' }}</td>
                 <td>{% if item.client %}<a href="{% url 'client_view' item.client.pk %}">{{ item.client }}</a>{% else %} {{ item.client|default:'' }}{% endif %}</td>
                 <td><a class="text-{{ icon_color }}" href="{% url 'contact_view' item.pk %}"><i class="fa fa-external-link-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
-                <td><a class="text-{{ icon_color }}" href="{% url 'contact_edit' item.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'contact_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
               </tr>
             {% endfor %}
             </tbody>

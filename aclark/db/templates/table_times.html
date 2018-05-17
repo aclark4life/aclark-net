@@ -14,7 +14,7 @@
                 {% if is_staff %}<th data-field="invoice" data-sortable="true" data-visible="{{ columns_visible.time.invoice }}">Invoice</th>{% endif %}
                 {% if is_staff %}<th data-field="estimate" data-sortable="true" data-visible="false">Estimate</th>{% endif %}
                 {% if is_staff %}<th data-field="user" data-sortable="true" data-visible="true">User</th>{% endif %}
-                <th>Entry Id</th>
+                <th>Id</th>
               </tr>
             </thead>
             <tbody>
@@ -27,13 +27,13 @@
                 <td>{{ item.hours|default:'' }}</td>
                 <td>{{ item.log|linebreaks }}</td>
                 {% if is_staff %}<td>{{ item.client|default:'' }}</td>{% endif %}
-                {% if item.project %}<td><a href="{% url 'project_view' item.project.pk %}">{{ item.project|default:'' }}</a></td>{% else %}<td></td>{% endif %}
+                {% if item.project and is_staff %}<td><a href="{% url 'project_view' item.project.pk %}">{{ item.project|default:'' }}</a></td>{% else %}<td>{{ item.project|default:'' }}</td>{% endif %}
                 <td>{{ item.project|default:'' }}</td>
                 {% if is_staff %}<td>{{ item.task|default:'' }}</td>{% endif %}
                 {% if is_staff %}{% if item.invoice %}<td><a href="{% url 'invoice_view' item.invoice.pk %}">{{ item.invoice.pk }}</a></td>{% else %}<td></td>{% endif %}{% endif %}
                 {% if is_staff %}{% if item.estimate %}<td><a href="{% url 'estimate_view' item.estimate.pk %}">{{ item.estimate.pk }}</a></td>{% else %}<td>{{ item.estimate|default:'' }}</td>{% endif %}{% endif %}
                 {% if is_staff %}{% if item.user %}<td><a class="text-dark" href="{% url 'user_view' item.user.pk %}">{{ item.user|default:'' }}</a></td>{% else %}<td>{{ item.user|default:'' }}</td>{% endif %}{% endif %}
-                <td><a class="text-{{ icon_color }}" href="{% url 'time_view' item.pk %}">{{ item }}</a> <a class="text-{{ icon_color }}" href="{% url 'time_edit' item.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'time_view' item.pk %}">{{ item }}</a> <a class="text-{{ icon_color }}" href="{% url 'time_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
               </tr>
               {% endfor %}
             </tbody>
