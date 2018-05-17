@@ -18,7 +18,7 @@
                 <td>{{ item.task.color|default:'' }}</td>
                 {% if item.client.pk %}<td><a href="{% url 'client_view' item.client.pk %}"></i> {{ item.client|default:'Client' }}</a> <a class="text-{{ icon_color }}" href="{% url 'client_edit' item.client.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>{{ item.client|default:'Client' }}</td>{% endif %}
                 <td>{{ item.client|default:'' }}</td>
-                {% if item.task %}<td><a href="{% url 'task_view' item.task.pk %}"></i> {{ item.task.name|default:'Task' }}</a></td>{% else %}<td>{{ task.name }}</td>{% endif %}
+                {% if item.task %}<td><a href="{% url 'task_view' item.task.pk %}"></i> {{ item.task.name|default:'Task' }}</a> <a class="text-{{ icon_color }}" href="{% url 'task_edit' item.task.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>{{ task.name|default:'Task' }}</td>{% endif %}
                 <td><a class="text-{{ icon_color }}" href="{% url 'project_view' item.pk %}">{{ item.name|default:'Project' }}</a> <a class="text-{{ icon_color }}" href="{% url 'project_edit' item.pk %}"><i class="fa fa-edit fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
               </tr>
             {% endfor %}
