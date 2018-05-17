@@ -391,4 +391,5 @@ pack: webpack  # Alias
 # aclark-net
 PROJECT=aclark
 APP=db
-d: eb deploy
+d:
+	eb deploy
