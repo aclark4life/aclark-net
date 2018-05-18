@@ -4,30 +4,28 @@
                   <thead>
                     <tr>
                       <th data-align="center" data-toggle="tooltip" data-placement="right" title="Invoice sent" data-field="invoiced" data-sortable="true" data-visible="{{ columns_visible.invoices.sent }}">Sent</th>
-                      <th data-sort-name="subject" data-sortable="true" data-visible="true">Subject</th>
+                      <th data-sort-name="hidden-issue-date" data-sortable="true">Issue Date</th>
+                      <th data-field="hidden-issue-date" data-sortable="true" data-visible="false">Hidden Issue Date</th>
                       <th data-sort-name="hidden-client" data-sortable="true">Client</th>
                       <th data-field="hidden-client" data-sortable="true" data-visible="false">Hidden Client</th>
                       <th data-field="project" data-sortable="true">Project</th>
-                      <th data-sort-name="hidden-issue-date" data-sortable="true">Issue Date</th>
-                      <th data-field="hidden-issue-date" data-sortable="true" data-visible="false">Hidden Issue Date</th>
                       <th data-field="amount" data-sort-name="hidden-amount" data-sortable="true">Amount</th>
                       <th data-field="hidden-amount" data-sortable="true" data-visible="false">Hidden Amount</th>
-                      <th>Id</th>
+                      <th data-sort-name="subject" data-sortable="true" data-visible="true">Subject</th>
                     </tr>
                   </thead>
                   <tbody>
                   {% for item in items %}
                     <tr>
                       <td>{% if item.last_payment_date or item.accepted_date %}<i data-toggle="tooltip" data-placement="right" title="Invoice sent" class="fa fa-check"></i>{% endif %}</td>
-                      <td>{{ item.subject|default:'' }}</td>
-                      {% if item.client %}<td><a href="{% url 'client_view' item.client.pk %}">{{ item.client.name|default:'' }}</a></td>{% else %}<td></td> {% endif %}
-                      <td>{{ item.client|default:'' }}</td>
-                      {% if item.project %}<td><a href="{% url 'project_view' item.project.pk %}">{{ item.project.name|default:'' }}</a></td>{% else %}<td></td>{% endif %}
                       <td>{{ item.issue_date|date:'Y-m-d'|default:'' }}</td>
                       <td>{{ item.issue_date|date:'U'|default:'' }}</td>
-                      <td>{% if item.amount %}{{ company_currency_symbol }}{% endif %}{{ item.amount|default:''|intcomma }}</td>
+                      {% if item.client %}<td><a href="{% url 'client_view' item.client.pk %}">{{ item.client.name|default:'Client' }}</a> <a class="text-{{ icon_color }}" href="{% url 'client_edit' item.client.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>Client</td> {% endif %}
+                      <td>{{ item.client|default:'Client' }}</td>
+                      {% if item.project %}<td><a href="{% url 'project_view' item.project.pk %}">{{ item.project.name|default:'' }}</a> <a class="text-{{ icon_color }}" href="{% url 'project_edit' item.project.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>Project</td>{% endif %}
+                      <td>{% if item.amount %}{{ company_currency_symbol }}{% endif %}{{ item.amount|default:'0.00'|intcomma }}</td>
                       <td>{{ item.amount|unlocalize|default:'' }}</td>
-                      <td><a class="text-{{ icon_color }}" href="{% url view_url item.pk %}">invoice-{{ item.pk }}</a> <a class="text-{{ icon_color }}" href="{% url edit_url item.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a> <a class="text-{{ icon_color }}" href="{% url 'time_edit' %}?invoice={{ item.pk }}"><i data-toggle="tooltip" title="Add time" class="fa fa-plus fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td> <!-- https://stackoverflow.com/a/18541484/185820 -->
+                      <td><a class="text-{{ icon_color }}" href="{% url view_url item.pk %}">{{ item }}</a> <a class="text-{{ icon_color }}" href="{% url edit_url item.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a> <a class="text-{{ icon_color }}" href="{% url 'time_edit' %}?invoice={{ item.pk }}"><i data-toggle="tooltip" title="Add time" class="fa fa-plus fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td> <!-- https://stackoverflow.com/a/18541484/185820 -->
                     </tr>
                   {% endfor %}
                   </tbody>
