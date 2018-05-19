@@ -25,12 +25,12 @@
                 <td>{{ item.date|date:'U' }}</td>
                 <td>{{ item.log|linebreaks }}</td>
                 {% if is_staff %}<td>{{ item.client|default:'' }}</td>{% endif %}
-                {% if item.project and is_staff %}<td><a href="{% url 'project_view' item.project.pk %}">{{ item.project|default:'' }}</a></td>{% else %}<td>{{ item.project|default:'' }}</td>{% endif %}
+                {% if item.project and is_staff %}<td><a href="{% url 'project_view' item.project.pk %}">{{ item.project.name|default:'' }}</a> <a class="text-{{ icon_color }}" href="{% url 'project_edit' item.project.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>Project</td>{% endif %}
                 <td>{{ item.project|default:'' }}</td>
                 {% if item.task %}<td><a href="{% url 'task_view' item.task.pk %}"></i> {{ item.task.name|default:'Task' }}</a> <a class="text-{{ icon_color }}" href="{% url 'task_edit' item.task.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>{{ task.name|default:'' }}</td>{% endif %}
                 {% if is_staff %}{% if item.invoice %}<td><a href="{% url 'invoice_view' item.invoice.pk %}">{{ item.invoice.pk }}</a></td>{% else %}<td></td>{% endif %}{% endif %}
                 {% if is_staff %}{% if item.estimate %}<td><a href="{% url 'estimate_view' item.estimate.pk %}">{{ item.estimate.pk }}</a></td>{% else %}<td>{{ item.estimate|default:'' }}</td>{% endif %}{% endif %}
-                {% if is_staff %}{% if item.user %}<td><a href="{% url 'user_view' item.user.pk %}">{{ item.user|default:'' }}</a></td>{% else %}<td>{{ item.user|default:'' }}</td>{% endif %}{% endif %}
+                {% if is_staff %}{% if item.user %}<td><a href="{% url 'user_view' item.user.pk %}">{{ item.user|default:'' }}</a> <a class="text-{{ icon_color }}" href="{% url 'user_edit' item.user.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>{{ item.user|default:'' }}</td>{% endif %}{% endif %}
                 <td><a class="text-{{ icon_color }}" href="{% url 'time_view' item.pk %}">{{ item.hours }}</a> <a class="text-{{ icon_color }}" href="{% url 'time_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
               </tr>
               {% endfor %}
