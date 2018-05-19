@@ -1,11 +1,11 @@
-          <table data-toggle="table" data-classes="table table-no-bordered table-hover" data-striped="true">
+          <table data-toggle="table" data-classes="table table-no-bordered table-hover">
             <thead>
               <tr>
                 <th data-field="counter" data-sortable="true">#</th>
                 <th data-field="invoiced" data-sortable="true">Sent</th>
                 <th data-field="date" data-sort-name="hidden-date" data-sortable="true">Date</th>
                 <th data-field="hidden-date" data-sortable="true" data-visible="false">Hidden Date</th>
-                <th data-field="notes" data-sortable="true" data-visible="{{ columns_visible.time.log }}">Log</th>
+                <th data-field="log" data-sortable="true" data-visible="{{ columns_visible.time.log }}">Log</th>
                 {% if is_staff %}<th data-field="client" data-sortable="true" data-visible="false">Client</th>{% endif %}
                 <th data-field="project" data-sort-name="hidden-project" data-sortable="true" data-visible="true">Project</th>
                 <th data-field="hidden-project" data-sortable="true" data-visible="false">Hidden Project</th>
@@ -13,7 +13,7 @@
                 {% if is_staff %}<th data-field="invoice" data-sortable="true" data-visible="{{ columns_visible.time.invoice }}">Invoice</th>{% endif %}
                 {% if is_staff %}<th data-field="estimate" data-sortable="true" data-visible="false">Estimate</th>{% endif %}
                 {% if is_staff %}<th data-field="user" data-sortable="true" data-visible="true">User</th>{% endif %}
-                <th data-field="hours" data-sortable="true">Hours</th>
+                <th>Hours</th>
               </tr>
             </thead>
             <tbody>
@@ -25,12 +25,12 @@
                 <td>{{ item.date|date:'U' }}</td>
                 <td>{{ item.log|linebreaks }}</td>
                 {% if is_staff %}<td>{{ item.client|default:'' }}</td>{% endif %}
-                {% if item.project and is_staff %}<td><a href="{% url 'project_view' item.project.pk %}">{{ item.project.name|default:'' }}</a> <a class="text-{{ icon_color }}" href="{% url 'project_edit' item.project.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>Project</td>{% endif %}
+                {% if item.project and is_staff %}<td><a href="{% url 'project_view' item.project.pk %}">{{ item.project|default:'' }}</a></td>{% else %}<td>{{ item.project|default:'' }}</td>{% endif %}
                 <td>{{ item.project|default:'' }}</td>
-                {% if item.task %}<td><a href="{% url 'task_view' item.task.pk %}"></i> {{ item.task.name|default:'Task' }}</a> <a class="text-{{ icon_color }}" href="{% url 'task_edit' item.task.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>{{ task.name|default:'' }}</td>{% endif %}
+                {% if is_staff %}<td>{{ item.task|default:'' }}</td>{% endif %}
                 {% if is_staff %}{% if item.invoice %}<td><a href="{% url 'invoice_view' item.invoice.pk %}">{{ item.invoice.pk }}</a></td>{% else %}<td></td>{% endif %}{% endif %}
                 {% if is_staff %}{% if item.estimate %}<td><a href="{% url 'estimate_view' item.estimate.pk %}">{{ item.estimate.pk }}</a></td>{% else %}<td>{{ item.estimate|default:'' }}</td>{% endif %}{% endif %}
-                {% if is_staff %}{% if item.user %}<td><a href="{% url 'user_view' item.user.pk %}">{{ item.user|default:'' }}</a> <a class="text-{{ icon_color }}" href="{% url 'user_edit' item.user.pk %}"><i data-toggle="tooltip" title="Edit" class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>{% else %}<td>{{ item.user|default:'' }}</td>{% endif %}{% endif %}
+                {% if is_staff %}{% if item.user %}<td><a class="text-dark" href="{% url 'user_view' item.user.pk %}">{{ item.user|default:'' }}</a></td>{% else %}<td>{{ item.user|default:'' }}</td>{% endif %}{% endif %}
                 <td><a class="text-{{ icon_color }}" href="{% url 'time_view' item.pk %}">{{ item.hours }}</a> <a class="text-{{ icon_color }}" href="{% url 'time_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
               </tr>
               {% endfor %}
