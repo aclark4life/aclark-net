@@ -3,11 +3,15 @@
           <div class="row">
             <div class="col-md-10">
               <h1>Profile</h1>
-              <h4 style="border-bottom: none;">{% if is_staff %}<a class="text-dark" href="{% url 'user_index' %}">Users</a>{% else %}Users{% endif %} &raquo; {{ item.get_full_name|default:item.username }}</h4>
+              <h4 style="border-bottom: none;">{% if is_staff %}<a class="text-dark" href="{% url 'user_index' %}">Users</a>{% else %}Users{% endif %} <i class="fa fa-arrow-right"></i> {{ item.get_full_name|default:item.username }}</h4>
             </div>                
             <div class="col-md-2">
               <a class="btn btn-lg btn-block btn-success" href="{% url 'user_edit' pk=item.pk %}">Edit</i></a>
             </div>
           </div>
+          <div class="row">
+            <div class="col-12 pb-3 pt-3">
 {% include 'table_items.html' %}
+            </div>
+          </div>
 {% endblock %}
