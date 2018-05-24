@@ -1,6 +1,0 @@
-              <h2 class="mt-3"><a class="text-dark" href="{% url 'invoice_index' %}"> Invoices</a></h2>
-              <h5>Totals</h5>
-{% include 'table_totals.html' %}
-{% with items=items.invoices view_url='invoice_view' edit_url='invoice_edit' %}
-{% include 'table_invoices.html' %}
-{% endwith %}

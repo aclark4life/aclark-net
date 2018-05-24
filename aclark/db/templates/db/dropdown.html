@@ -17,6 +17,6 @@
               {% if is_staff %}<a class="dropdown-item" href="{% url 'task_index' %}"><i class="fa fa-tasks"></i> Tasks</a>{% endif %}
               {% if is_staff %}<a class="dropdown-item" href="{% url 'time_index' %}"><i class="fa fa-clock"></i> Times</a>{% endif %}
               {% if is_staff %}<a class="dropdown-item" href="{% url 'user_index' %}"><i class="fa fa-users"></i> Users</a>{% endif %}
-              {% if not request.user.is_anonymous  %}{% if is_staff %}<div class="dropdown-divider"></div>{% endif %}<a class="dropdown-item" href="{% url 'logout' %}?next={% url 'home' %}"><i class="far fa-sign-out"></i> Logout</a>{% endif %}
+              {% if not request.user.is_anonymous  %}{% if is_staff %}<div class="dropdown-divider"></div>{% endif %}<a class="dropdown-item" href="{% url 'logout' %}?next={% url 'home' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>{% endif %}
             </div>
           </li>

@@ -24,13 +24,7 @@ COLOR_CHOICES = (
 )
 
 DASHBOARD_ITEMS = (
-    ('estimates', 'Estimates'),
-    ('invoices', 'Invoices'),
-    ('notes', 'Notes'),
-    ('plot', 'Plot'),
-    ('projects', 'Projects'),
     ('times', 'Times'),
-    ('totals', 'Totals'),
 )
 
 EDITOR_CHOICES = (
