@@ -19,7 +19,20 @@
 
           <h1 class="block-titleData frequency">Staff</h1>
           <p class="lead mb-4 text-muted">Please login to enter time</p>
-          <a class="btn btn-primary btn-lg" href="/db/login/google-oauth2/?next=/db/">Login</a>
+
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <a class="btn btn-primary btn-lg" href="/db/login/google-oauth2/?next=/db/">Login with Google</a>
+
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="{% url 'login'  %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a class="dropdown-item" href="{% url 'password_reset' %}"><i class="fas fa-sign-in-alt"></i> Reset password</a>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
