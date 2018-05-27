@@ -80,6 +80,12 @@
             </div>
           </div>
 {% include 'table_times.html' %}
+          <span class="badge badge-primary">{{ total_hours.total }}</span>
+          {% if total_hours.users %}
+            {% for user in total_hours.users.items %}
+              <span class="badge badge-primary">{{ user.0 }}: {{ user.1 }}</span>
+            {% endfor %}
+          {% endif %}
           <!------------------------------------------------------------------------------------>
           <div class="row">
             <div class="col-md-12 py-1">
