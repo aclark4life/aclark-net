@@ -85,25 +85,30 @@
               <h4>Totals</h4> 
             </div>
           </div>
-          <table>
-          {% if total_hours.total %}
-            <tr>
-              <td></td>
-              <td>
-                <span class="badge badge-primary">{{ total_hours.total }}</span>
-              </td>
-            </tr>
-          {% endif %}
-          {% if total_hours.users %}
-            {% for user in total_hours.users.items %}
-            <tr>
-              <td>{{ user.0 }}</td>
-              <td><span class="badge badge-primary">{{ user.1 }}</span></td>
-              </td>
-            </tr>
-            {% endfor %}
-          {% endif %}
-          </table>
+          <div class="row">
+            <div class="col-md-12 py-1 offset-6">
+              <table>
+              {% if total_hours.total %}
+                <tr>
+                  <td></td>
+                  <td>
+                    <h1><span class="badge badge-primary">{{ total_hours.total }}</span></h1>
+                  </td>
+                </tr>
+              {% endif %}
+              {% if total_hours.users %}
+                {% for user in total_hours.users.items %}
+                <tr>
+                  <td>{{ user.0 }}</td>
+                  <td>
+                    <h1><span class="badge badge-primary">{{ user.1 }}</span></h1>
+                  </td>
+                </tr>
+                {% endfor %}
+              {% endif %}
+              </table>
+            </div>
+          </div>
           <!------------------------------------------------------------------------------------>
           <div class="row">
             <div class="col-md-12 py-1">
