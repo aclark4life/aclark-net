@@ -80,12 +80,30 @@
             </div>
           </div>
 {% include 'table_times.html' %}
-          <span class="badge badge-primary">{{ total_hours.total }}</span>
+          <div class="row">
+            <div class="col-md-12 py-1">
+              <h4>Totals</h4> 
+            </div>
+          </div>
+          <table>
+          {% if total_hours.total %}
+            <tr>
+              <td></td>
+              <td>
+                <span class="badge badge-primary">{{ total_hours.total }}</span>
+              </td>
+            </tr>
+          {% endif %}
           {% if total_hours.users %}
             {% for user in total_hours.users.items %}
-              <span class="badge badge-primary">{{ user.0 }}: {{ user.1 }}</span>
+            <tr>
+              <td>{{ user.0 }}</td>
+              <td><span class="badge badge-primary">{{ user.1 }}</span></td>
+              </td>
+            </tr>
             {% endfor %}
           {% endif %}
+          </table>
           <!------------------------------------------------------------------------------------>
           <div class="row">
             <div class="col-md-12 py-1">
