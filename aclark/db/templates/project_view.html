@@ -81,8 +81,8 @@
           </div>
 {% include 'table_times.html' %}
           <div class="row">
-            <div class="col-4 offset-8">
-              <table data-toggle="table" data-classes="table table-no-bordered table-hover">
+            <div class="col-3 offset-9">
+              <table data-toggle="table" data-classes="table table-no-bordered table-hover mt-1">
                 <thead>
                   <tr>
                     <th>User</th>
@@ -100,7 +100,7 @@
               {% if total_hours.total %}
                 <tr>
                   <td></td>
-                  <td>{{ total_hours.total }}</td>
+                  <td><strong>{{ total_hours.total }}</strong></td>
                 </tr>
               {% endif %}
               </table>
