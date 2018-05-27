@@ -81,13 +81,8 @@
           </div>
 {% include 'table_times.html' %}
           <div class="row">
-            <div class="col-2 offset-10">
-              <h4>Totals</h4> 
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-2 offset-10">
-              <table>
+            <div class="col-4 offset-8">
+              <table data-toggle="table" data-classes="table table-no-bordered table-hover">
                 <thead>
                   <tr>
                     <th>User</th>
@@ -97,7 +92,7 @@
               {% if total_hours.users %}
                 {% for user in total_hours.users.items %}
                 <tr>
-                  <td>{{ user.0 }}</td>
+                  <td><strong>{{ user.0 }}</strong></td>
                   <td>{{ user.1 }}</td>
                 </tr>
                 {% endfor %}
