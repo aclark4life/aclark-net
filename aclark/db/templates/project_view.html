@@ -81,30 +81,33 @@
           </div>
 {% include 'table_times.html' %}
           <div class="row">
-            <div class="col-md-12 py-1">
+            <div class="col-md-3 py-1 offset-9">
               <h4>Totals</h4> 
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12 py-1 offset-6">
+            <div class="col-md-3 py-1 offset-9">
               <table>
-              {% if total_hours.total %}
-                <tr>
-                  <td></td>
-                  <td>
-                    <h1><span class="badge badge-primary">{{ total_hours.total }}</span></h1>
-                  </td>
-                </tr>
-              {% endif %}
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
               {% if total_hours.users %}
                 {% for user in total_hours.users.items %}
                 <tr>
                   <td>{{ user.0 }}</td>
-                  <td>
-                    <h1><span class="badge badge-primary">{{ user.1 }}</span></h1>
-                  </td>
+                  <td>{{ user.1 }}</td>
                 </tr>
                 {% endfor %}
+              {% endif %}
+              {% if total_hours.total %}
+                <tr>
+                  <td>
+                    {{ total_hours.total }}
+                  </td>
+                </tr>
               {% endif %}
               </table>
             </div>
