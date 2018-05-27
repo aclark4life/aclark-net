@@ -401,6 +401,7 @@ def login(request):
         if user is not None:
             # https://stackoverflow.com/a/39316967/185820
             auth_login(request, user)
+            messages.add_message(request, messages.INFO, 'Login succeeded!')
             return HttpResponseRedirect(reverse('home'))
         else:
             messages.add_message(request, messages.WARNING, 'Login failed.')
