@@ -23,9 +23,7 @@ COLOR_CHOICES = (
     ('white', 'White'),
 )
 
-DASHBOARD_ITEMS = (
-    ('times', 'Times'),
-)
+DASHBOARD_ITEMS = (('times', 'Times'), )
 
 EDITOR_CHOICES = (
     ('ckeditor', 'CKEditor'),
