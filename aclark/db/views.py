@@ -784,8 +784,7 @@ def time_index(request):
             'user__isnull': False,
         },
         order_by=(
-            'invoiced',
-            '-updated',
+            '-date',
         ),
         request=request,
         search_fields=search_fields)
