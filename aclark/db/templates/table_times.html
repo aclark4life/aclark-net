@@ -39,8 +39,8 @@
           <div class="row">
             <div class="col-2 offset-10 mt-3">
               <h4>Totals</h4>
-              {% if total_hours.users %}
-                {% for user in total_hours.users.items %}
+              {% if users %}
+                {% for user in users.items %}
                   <strong>{{ user.0 }}</strong>: {{ user.1 }}
                 {% endfor %}
               {% endif %}
