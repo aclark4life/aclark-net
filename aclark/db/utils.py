@@ -436,7 +436,7 @@ def get_page_items(**kwargs):
             context['item'] = project
             context['items'] = items
             context['net'] = float(project.amount) - float(project.cost)
-            context['total_hours'] = total_hours
+            context['total_hours'] = total_hours.total
         elif model_name == 'proposal':
             proposal = get_object_or_404(model, pk=pk)
             context['doc_type'] = model_name
