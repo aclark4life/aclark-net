@@ -36,3 +36,10 @@
               {% endfor %}
             </tbody>
           </table>
+          <div class="row">
+            <div class="col-2 offset-10 mt-3">
+              {% if total_hours %}
+                <strong>Total</strong>: {{ total_hours }}
+              {% endif %}
+            </div>
+          </div>
