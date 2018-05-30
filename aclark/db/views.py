@@ -528,7 +528,7 @@ def project_view(request, pk=None):
             'task': None,
         },
         order_by={
-            'time': ('date', ),
+            'time': ('-date', ),
             'invoice': ('-issue_date', )
         },
         time_model=Time,
