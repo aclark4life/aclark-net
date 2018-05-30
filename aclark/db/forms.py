@@ -25,7 +25,7 @@ from django.utils import timezone
 class AdminProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('rate', 'preferred_payment_method', 'bio', 'address',
+        fields = ('rate', 'payment_method', 'bio', 'address',
                   'dashboard_items', 'icon_color', 'icon_size', 'notify',
                   'page_size', 'published', 'avatar_url')
         widgets = {
@@ -240,7 +240,7 @@ class NoteForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('rate', 'bio', 'address', 'preferred_payment_method',
+        fields = ('rate', 'bio', 'address', 'payment_method',
                   'icon_size', 'dashboard_items')
         widgets = {
             'bio': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
