@@ -783,9 +783,7 @@ def time_index(request):
             'estimate': None,
             'user__isnull': False,
         },
-        order_by=(
-            '-date',
-        ),
+        order_by=('-date', ),
         request=request,
         search_fields=search_fields)
     return render(request, 'time_index.html', context)
@@ -802,7 +800,6 @@ def user_view(request, pk=None):
             'project': ('-updated', ),
         }
         context = get_page_items(
-            app_settings_model=SettingsApp,
             contact_model=Contact,
             model=User,
             order_by=order_by,

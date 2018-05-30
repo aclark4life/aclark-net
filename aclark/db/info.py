@@ -37,13 +37,13 @@ def get_recipients(obj):
         return [('Alex', 'aclark@aclark.net')]
 
 
-def get_setting(request, app_settings_model, setting, page_size=None):
+def get_setting(request, setting, settings_model=None, page_size=None):
     """
-    Allow user to override global setting
+    Return appropriate setting from user profile model or singleton settings 
+    model based on args
     """
     if not request.user.is_authenticated:
         return
-    app_settings = app_settings_model.get_solo()
     if setting == 'icon_size':
         if has_profile(request.user):
             user_pref = request.user.profile.icon_size
@@ -54,17 +54,18 @@ def get_setting(request, app_settings_model, setting, page_size=None):
             user_pref = request.user.profile.icon_color
         if user_pref:
             return user_pref
-    if setting == 'page_size':
+    elif setting == 'page_size':
         if has_profile(request.user):
             user_pref = request.user.profile.page_size
         if user_pref:
             return user_pref
-        elif page_size:  # View's page_size preference
-            return page_size
     elif setting == 'dashboard_choices':
-        dashboard_choices = app_settings.dashboard_choices
-        return dashboard_choices
+        if has_profile(request.user):
+            user_pref = request.user.profile.dashboard_choices
+        if user_pref:
+            return user_pref
     elif setting == 'exclude_hidden':
+        app_settings = settings_model.get_solo()
         return app_settings.exclude_hidden
 
 

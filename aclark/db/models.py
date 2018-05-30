@@ -593,7 +593,6 @@ class Service(BaseModel):
 class SettingsApp(SingletonModel):
     """
     """
-    page_size = models.PositiveIntegerField(blank=True, default=10, null=True)
     auto_hide = models.BooleanField(default=True)
     exclude_hidden = models.BooleanField(default=True)
     tags = models.CharField(max_length=255, blank=True, null=True)

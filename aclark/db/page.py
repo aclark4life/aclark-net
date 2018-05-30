@@ -3,9 +3,11 @@ from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 
 
-def paginate(items, page, page_size):
+def paginate(items, page=None, page_size=None):
     """
     """
+    if page is None:
+        page = 1
     if page_size is not None:
         paginator = Paginator(items, page_size, orphans=5)
     else:

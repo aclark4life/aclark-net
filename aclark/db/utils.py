@@ -274,9 +274,8 @@ def get_index_items(**kwargs):
     elif model_name == 'time':
         context['total_hours'] = get_total_hours(items)['total']
     if paginated:  # Paginate if paginated
-        page_size = get_setting(
-            request, app_settings_model, 'page_size', page_size=page_size)
-        items = paginate(items, page, page_size)
+        page_size = get_setting(request, 'page_size')
+        items = paginate(items, page=page, page_size=page_size)
     context['edit_url'] = edit_url
     context['view_url'] = view_url
     context['icon_size'] = get_setting(request, app_settings_model,
@@ -309,6 +308,7 @@ def get_page_items(**kwargs):
     time_model = kwargs.get('time_model')
     user_model = kwargs.get('user_model')
     filter_by = kwargs.get('filter_by')
+    page_size = kwargs.get('page_size')
     context = {}
     items = None
     if company_model:
@@ -331,20 +331,26 @@ def get_page_items(**kwargs):
         context['edit_url'] = '%s_edit' % model_name
         context['view_url'] = '%s_view' % model_name
         if model_name == 'Settings App':
+            exclude_fields = ('id', )
             app_settings = app_settings_model.get_solo()
-            context['items'] = get_fields([
-                app_settings,
-            ])  # table_items.html
+            context['items'] = get_fields(
+                [
+                    app_settings,
+                ], exclude_fields=exclude_fields)  # table_items.html
         elif model_name == 'Settings Company':
+            exclude_fields = ('id', )
             company_settings = model.get_solo()
-            context['items'] = get_fields([
-                company_settings,
-            ])  # table_items.html
+            context['items'] = get_fields(
+                [
+                    company_settings,
+                ], exclude_fields=exclude_fields)  # table_items.html
         elif model_name == 'Settings Contract':
+            exclude_fields = ('id', )
             contract_settings = model.get_solo()
-            context['items'] = get_fields([
-                contract_settings,
-            ])  # table_items.html
+            context['items'] = get_fields(
+                [
+                    contract_settings,
+                ], exclude_fields=exclude_fields)  # table_items.html
         elif model_name == 'client':
             client = get_object_or_404(model, pk=pk)
             contacts = contact_model.objects.filter(client=client)
@@ -462,7 +468,7 @@ def get_page_items(**kwargs):
         elif model_name == 'user':
             exclude_fields = ('id', 'created', 'updated', 'hidden', 'active',
                               'app_admin', 'is_contact', 'notify', 'published',
-                              'editor', 'icon_size', 'icon_color', 'page_size',
+                              'editor', 'icon_size', 'icon_color',
                               'preferred_username', 'unit', 'avatar_url')
             user = get_object_or_404(model, pk=pk)
             projects = project_model.objects.filter(
@@ -532,6 +538,8 @@ def get_page_items(**kwargs):
                     context['net'] = gross - total_cost
                 context['total_hours'] = total_hours
     if request:
+        page = get_query_string(request, 'page')
+        paginated = get_query_string(request, 'paginated')
         context['is_staff'] = request.user.is_staff  # Perms
         context['icon_color'] = get_setting(request, app_settings_model,
                                             'icon_color')  # Prefs
@@ -540,6 +548,10 @@ def get_page_items(**kwargs):
         pdf = get_query_string(request, 'pdf')  # Export pdf
         context['pdf'] = pdf
         context['request'] = request  # Include request
+        # if paginated:  # Paginate if paginated
+        #     page_size = get_setting(
+        #         request, 'page_size')
+        #     items = paginate(items, page=page, page_size=page_size)
     return context
 
 
