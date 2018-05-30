@@ -36,20 +36,29 @@
               {% endfor %}
             </tbody>
           </table>
-          <div class="row">
-            <div class="col-2 offset-10 mt-3">
-              <h4>Totals</h4>
+          <table data-toggle="table" data-classes="table table-no-bordered table-hover">
+            <tbody>
               {% if users %}
                 {% for user in users.items %}
-                  <strong>{{ user.0 }}</strong>: {{ user.1 }}
+              <tr>
+                <td> 
+                  <strong>{{ user.0 }}</strong>
+                </td>
+                <td> 
+                  {{ user.1 }}
+                </td>
+              </tr>
                 {% endfor %}
               {% endif %}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-2 offset-10 mt-3">
               {% if total_hours %}
-                <strong>Total</strong>: {{ total_hours }}
+              <tr>
+                <td>
+                  <strong>Total</strong>
+                </td>
+                <td>
+                  {{ total_hours }}
+                </td>
+              </tr>
               {% endif %}
-            </div>
-          </div>
+            </tbody>
+          </table>
