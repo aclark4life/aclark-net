@@ -515,10 +515,17 @@ def get_page_items(**kwargs):
                 items = set_items('note', items=notes, _items=items)
                 items = set_items('project', items=projects, _items=items)
                 items = set_items('time', items=times, _items=items)
-                ip_address = request.META.get('HTTP_X_REAL_IP')
-                context['geo_ip_data'] = get_geo_ip_data(request)
-                context['ip_address'] = ip_address
                 context['items'] = items
+                # Paginate items
+                page_num = get_query_string(request, 'page')
+                paginated = get_query_string(request, 'paginated')
+                if paginated:  # Paginate if paginated
+                    page_size = get_setting(request, 'page_size')
+                    if 'times' in items:
+                        items['times'] = paginate(
+                            items['times'],
+                            page_num=page_num,
+                            page_size=page_size)
                 # Totals
                 gross = get_total_amount(invoices)
                 total_cost = get_total_cost(projects)
@@ -528,9 +535,11 @@ def get_page_items(**kwargs):
                 context['cost'] = total_cost
                 context['gross'] = gross
                 context['total_hours'] = total_hours
-    if request:
-        page_num = get_query_string(request, 'page')
-        paginated = get_query_string(request, 'paginated')
+                # Location
+                ip_address = request.META.get('HTTP_X_REAL_IP')
+                context['geo_ip_data'] = get_geo_ip_data(request)
+                context['ip_address'] = ip_address
+    if request:  # Applies to all page items
         context['is_staff'] = request.user.is_staff  # Perms
         context['icon_color'] = get_setting(request, app_settings_model,
                                             'icon_color')  # Prefs
@@ -539,11 +548,6 @@ def get_page_items(**kwargs):
         pdf = get_query_string(request, 'pdf')  # Export pdf
         context['pdf'] = pdf
         context['request'] = request  # Include request
-        if paginated:  # Paginate if paginated
-            page_size = get_setting(request, 'page_size')
-            if 'times' in items:
-                items['times'] = paginate(
-                    items['times'], page_num=page_num, page_size=page_size)
     return context
 
 
