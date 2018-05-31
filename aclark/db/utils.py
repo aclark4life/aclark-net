@@ -309,7 +309,7 @@ def get_page_items(**kwargs):
     filter_by = kwargs.get('filter_by')
     page_size = kwargs.get('page_size')
     context = {}
-    items = None
+    items = {}
     if company_model:
         company = company_model.get_solo()
         company_name = company.name
@@ -540,8 +540,9 @@ def get_page_items(**kwargs):
         context['request'] = request  # Include request
         if paginated:  # Paginate if paginated
             page_size = get_setting(request, 'page_size')
-            items['times'] = paginate(
-                items['times'], page_num=page_num, page_size=page_size)
+            if 'times' in items:
+                items['times'] = paginate(
+                    items['times'], page_num=page_num, page_size=page_size)
     return context
 
 
