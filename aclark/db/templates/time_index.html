@@ -2,7 +2,7 @@
 {% block content %}
           <div class="row">
             <div class="col-md-9">
-              <h1 style="border-bottom: none;">Times</h1>
+              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'time_index' %}">Times</a></h1>
             </div>
             <div class="col-md-3">
               <button class="btn btn-block btn-lg btn-success" href="{% url 'time_edit' %}" disabled>Add Time</button>
