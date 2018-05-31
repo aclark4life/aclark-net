@@ -39,7 +39,7 @@ def get_recipients(obj):
 
 def get_setting(request, setting, settings_model=None, page_size=None):
     """
-    Return appropriate setting from user profile model or singleton settings 
+    Return appropriate setting from user profile model or singleton settings
     model based on args
     """
     if not request.user.is_authenticated:

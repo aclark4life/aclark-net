@@ -239,7 +239,7 @@ def get_index_items(**kwargs):
         context['company_name'] = company_name
         context['company_address'] = company_address
         context['company_currency_symbol'] = company_currency_symbol
-    page = get_query_string(request, 'page')
+    page_num = get_query_string(request, 'page')
     paginated = get_query_string(request, 'paginated')
     search = get_query_string(request, 'search')
     if request:
@@ -275,14 +275,14 @@ def get_index_items(**kwargs):
         context['total_hours'] = get_total_hours(items)['total']
     if paginated:  # Paginate if paginated
         page_size = get_setting(request, 'page_size')
-        items = paginate(items, page=page, page_size=page_size)
+        items = paginate(items, page_num=page_num, page_size=page_size)
     context['edit_url'] = edit_url
     context['view_url'] = view_url
     context['icon_size'] = get_setting(request, app_settings_model,
                                        'icon_size')
     context['icon_color'] = get_setting(request, app_settings_model,
                                         'icon_color')
-    context['page'] = page
+    context['page'] = page_num
     context['paginated'] = paginated
     items = set_items(model_name, items=items)
     context['items'] = items
@@ -301,7 +301,6 @@ def get_page_items(**kwargs):
     note_model = kwargs.get('note_model')
     obj = kwargs.get('obj')
     project_model = kwargs.get('project_model')
-    report_model = kwargs.get('report_model')
     request = kwargs.get('request')
     order_by = kwargs.get('order_by')
     pk = kwargs.get('pk')
@@ -516,22 +515,12 @@ def get_page_items(**kwargs):
                 items = set_items('note', items=notes, _items=items)
                 items = set_items('project', items=projects, _items=items)
                 items = set_items('time', items=times, _items=items)
-                # Plot
-                reports = report_model.objects.filter(active=True)
-                reports = reports.order_by(*order_by['report'])
-                # Totals
-                gross = get_total_amount(invoices)
                 ip_address = request.META.get('HTTP_X_REAL_IP')
-                context['gross'] = gross
-                context['invoices'] = invoices
                 context['geo_ip_data'] = get_geo_ip_data(request)
                 context['ip_address'] = ip_address
                 context['items'] = items
-                context['notes'] = notes
-                context['note_info'] = get_note_info(note_model)
-                context['reports'] = reports
-                context['projects'] = projects
-                context['times'] = times
+                # Totals
+                gross = get_total_amount(invoices)
                 total_hours = get_total_hours(times)['total']
                 total_cost = get_total_cost(projects)
                 context['cost'] = total_cost
@@ -539,7 +528,7 @@ def get_page_items(**kwargs):
                     context['net'] = gross - total_cost
                 context['total_hours'] = total_hours
     if request:
-        page = get_query_string(request, 'page')
+        page_num = get_query_string(request, 'page')
         paginated = get_query_string(request, 'paginated')
         context['is_staff'] = request.user.is_staff  # Perms
         context['icon_color'] = get_setting(request, app_settings_model,
@@ -549,10 +538,10 @@ def get_page_items(**kwargs):
         pdf = get_query_string(request, 'pdf')  # Export pdf
         context['pdf'] = pdf
         context['request'] = request  # Include request
-        # if paginated:  # Paginate if paginated
-        #     page_size = get_setting(
-        #         request, 'page_size')
-        #     items = paginate(items, page=page, page_size=page_size)
+        if paginated:  # Paginate if paginated
+            page_size = get_setting(request, 'page_size')
+            items['times'] = paginate(
+                items['times'], page_num=page_num, page_size=page_size)
     return context
 
 

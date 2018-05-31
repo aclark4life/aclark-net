@@ -3,17 +3,18 @@ from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 
 
-def paginate(items, page=None, page_size=None):
+def paginate(items, orphans=None, page_num=None, page_size=None):
     """
+    Paginate items
     """
-    if page is None:
-        page = 1
-    if page_size is not None:
-        paginator = Paginator(items, page_size, orphans=5)
-    else:
-        paginator = Paginator(items, 10, orphans=5)
+    # Get a paginator
     try:
-        items = paginator.page(page)
+        paginator = Paginator(items, page_size, orphans=orphans)
+    except TypeError:
+        paginator = Paginator(items, page_size, orphans=0)
+    # Get paginated items
+    try:
+        items = paginator.page(page_num)
     except PageNotAnInteger:
         items = paginator.page(1)
     except EmptyPage:
