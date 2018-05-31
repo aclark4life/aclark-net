@@ -521,11 +521,12 @@ def get_page_items(**kwargs):
                 context['items'] = items
                 # Totals
                 gross = get_total_amount(invoices)
-                total_hours = get_total_hours(times)['total']
                 total_cost = get_total_cost(projects)
-                context['cost'] = total_cost
+                total_hours = get_total_hours(times)['total']
                 if gross and total_cost:
                     context['net'] = gross - total_cost
+                context['cost'] = total_cost
+                context['gross'] = gross
                 context['total_hours'] = total_hours
     if request:
         page_num = get_query_string(request, 'page')
