@@ -11,7 +11,7 @@ def paginate(items, orphans=None, page_num=None, page_size=None):
     try:
         paginator = Paginator(items, page_size, orphans=orphans)
     except TypeError:
-        paginator = Paginator(items, page_size, orphans=0)
+        paginator = Paginator(items, 10, orphans=0)
     # Get paginated items
     try:
         items = paginator.page(page_num)
