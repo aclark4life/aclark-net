@@ -9,6 +9,7 @@
               <a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank"><i class="fa fa-cog"></i> Admin</a>
               <a class="dropdown-item" href="/api" target="_blank"><i class="fa fa-code"></i> API</a>
               <a class="dropdown-item" href="{% url 'user_index' %}"><i class="fa fa-users"></i> Users</a>
+              <a class="dropdown-item" href="{% url 'note_index' %}"><i class="fa fa-clipboard-check"></i> Notes</a>
               <div class="dropdown-divider"></div>
               {% endif %}
               {% if is_staff %}<a class="dropdown-item" href="{% url 'time_index' %}"><i class="fa fa-clock"></i> Times</a>{% endif %}
@@ -19,7 +20,6 @@
               {% if is_staff %}<a class="dropdown-item" href="{% url 'contact_index' %}"><i class="fa fa-address-card"></i> Contacts</a>{% endif %}
               {% if is_staff %}<a class="dropdown-item" href="{% url 'estimate_index' %}"><i class="fa fa-file-pdf"></i> Estimates</a>{% endif %}
               {% if is_staff %}<a class="dropdown-item" href="{% url 'task_index' %}"><i class="fa fa-tasks"></i> Tasks</a>{% endif %}
-              {% if is_staff %}<a class="dropdown-item" href="{% url 'note_index' %}"><i class="fa fa-clipboard-check"></i> Notes</a>{% endif %}
               {% if not request.user.is_anonymous  %}<div class="dropdown-divider"></div><a class="dropdown-item" href="{% url 'logout' %}?next={% url 'home' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>{% endif %}
             </div>
           </li>
