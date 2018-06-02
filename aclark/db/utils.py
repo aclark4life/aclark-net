@@ -119,10 +119,10 @@ def edit(request, **kwargs):
         company = company_model.get_solo()
         company_name = company.name
         company_address = company.address
-        company_currency_symbol = company.currency_symbol
+        currency_symbol = company.currency_symbol
         context['company_name'] = company_name
         context['company_address'] = company_address
-        context['company_currency_symbol'] = company_currency_symbol
+        context['currency_symbol'] = currency_symbol
     elif contact_model:
         model_name = contact_model._meta.verbose_name
     elif note_model:
@@ -235,10 +235,10 @@ def get_index_items(**kwargs):
         company = company_model.get_solo()
         company_name = company.name
         company_address = company.address
-        company_currency_symbol = company.currency_symbol
+        currency_symbol = company.currency_symbol
         context['company_name'] = company_name
         context['company_address'] = company_address
-        context['company_currency_symbol'] = company_currency_symbol
+        context['currency_symbol'] = currency_symbol
     page_num = get_query_string(request, 'page')
     paginated = get_query_string(request, 'paginated')
     search = get_query_string(request, 'search')
@@ -314,10 +314,10 @@ def get_page_items(**kwargs):
         company = company_model.get_solo()
         company_name = company.name
         company_address = company.address
-        company_currency_symbol = company.currency_symbol
+        currency_symbol = company.currency_symbol
         context['company_name'] = company_name
         context['company_address'] = company_address
-        context['company_currency_symbol'] = company_currency_symbol
+        context['currency_symbol'] = currency_symbol
     if columns_visible:
         context['columns_visible'] = columns_visible
     if model or obj:
