@@ -524,9 +524,6 @@ def project_view(request, pk=None):
                 'sent': 'true',
             },
         },
-        filter_by={'project': {
-            'task': None,
-        }},
         order_by={
             'time': ('-date', ),
             'invoice': ('-issue_date', )
