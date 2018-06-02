@@ -531,7 +531,7 @@ def get_page_items(**kwargs):
                 # Totals
                 gross = get_total_amount(invoices)
                 total_cost = get_total_cost(projects)
-                total_hours = get_total_hours(times)['total']
+                total_hours = get_total_hours(times.filter(invoiced=False))['total']
                 if gross and total_cost:
                     context['net'] = gross - total_cost
                 context['cost'] = total_cost

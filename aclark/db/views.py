@@ -314,7 +314,6 @@ def home(request):
         filter_by={  # Time fields only
             'estimate': None,
             'user': request.user,
-            'invoiced': False,
         },
         estimate_model=Estimate,
         invoice_model=Invoice,
@@ -527,7 +526,6 @@ def project_view(request, pk=None):
         },
         filter_by={
             'task': None,
-            'time__invoiced': False,
         },
         order_by={
             'time': ('-date', ),
