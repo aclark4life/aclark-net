@@ -5,7 +5,7 @@ from .info import get_recipients
 
 def mail_compose(obj, **kwargs):
     """
-    Compose message based on type
+    Compose message based on object type.
     """
     hostname = kwargs.get('hostname')
     mail_from = kwargs.get('mail_from')
@@ -28,9 +28,8 @@ def mail_compose(obj, **kwargs):
 
 def mail_proc(obj, **kwargs):
     """
+    Iterate over recipients, compose message, send message to each recipient.
     """
-    # Iterate over recipients, compose and send mail to
-    # each.
     request = kwargs.get('request')
     hostname = request.META.get('HTTP_HOST')
     mail_from = django_settings.EMAIL_FROM
@@ -46,6 +45,9 @@ def mail_proc(obj, **kwargs):
 
 
 def mail_send(**kwargs):
+    """
+    Call send_mail finally.
+    """
     mail_from = kwargs.get('mail_from')
     mail_to = kwargs.get('mail_to')
     message = kwargs.get('message')

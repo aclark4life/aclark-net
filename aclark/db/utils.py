@@ -98,7 +98,7 @@ def edit(request, **kwargs):
                 if not obj.user:  # for new user
                     obj.user = new_user
                     obj.save()
-            set_relationship(
+            set_refs(
                 obj,
                 request,
                 client_model=client_model,
@@ -500,9 +500,9 @@ def set_items(model_name, items=None, _items={}):
     return _items
 
 
-def set_relationship(obj, request, **kwargs):
+def set_refs(obj, request, **kwargs):
     """
-    Sets relationships after create or edit
+    Set object field references after create or edit
     """
     client_model = kwargs.get('client_model')
     company_model = kwargs.get('company_model')
