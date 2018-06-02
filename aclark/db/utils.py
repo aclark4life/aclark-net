@@ -350,7 +350,8 @@ def get_page_items(**kwargs):
             items = set_items('user', items=users, _items=items)
             times = set_total(times.filter(invoiced=False), project=project)
             total_hours = get_total(field='hours', times=times, team=users)
-            total_amount = get_total(field='amount', invoices=invoices)
+            total_amount = get_total(
+                field='amount', invoices=invoices)['amount']
             context['cost'] = float(project.cost)
             context['gross'] = float(project.amount)
             context['item'] = project
@@ -433,8 +434,9 @@ def get_page_items(**kwargs):
                             page_num=page_num,
                             page_size=page_size)
                 # Totals
-                total_amount = get_total(field='amount', invoices=invoices)
-                total_cost = get_total(field='cost', projects=projects)
+                total_amount = get_total(
+                    field='amount', invoices=invoices)['amount']
+                total_cost = get_total(field='cost', projects=projects)['cost']
                 total_hours = get_total(
                     field='hours',
                     times=times.filter(invoiced=False),
