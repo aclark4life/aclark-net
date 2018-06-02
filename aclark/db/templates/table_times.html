@@ -38,8 +38,8 @@
             </tbody>
           </table>
           <div class="row">
-            <div class="col-2 offset-10 mt-3">
-              <h4>Totals</h4>
+            <div class="col-3 offset-9 mt-3">
+              <h4>Total</h4>
               {% if users %}
               <h5>User</h5>
               <ul style="list-style: none">
@@ -53,7 +53,7 @@
           <div class="row">
             <div class="col-2 offset-10 mt-3">
               {% if total_hours %}
-                <strong>Total</strong>: {{ total_hours|intcomma }}
+                <strong>Invoice</strong>: {{ total_hours|intcomma }}
               {% endif %}
             </div>
           </div>
