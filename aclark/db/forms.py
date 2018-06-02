@@ -293,7 +293,11 @@ class ProposalForm(forms.ModelForm):
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = '__all__'
+        exclude = (
+            'icon_name',
+            'icon_size',
+            'icon_color',
+        )
 
     invoices = forms.ModelMultipleChoiceField(
         required=False, queryset=Invoice.objects.all().order_by('-issue_date'))
