@@ -30,7 +30,9 @@ def get_total(field=None, invoices=None, projects=None, times=None, team=None):
                     hours['users'][user] = hours_user
         return hours
     else:
-        return {}
+        hours = {}
+        hours['total'] = 0.0
+        return hours
 
 
 def set_total(times, estimate=None, invoice=None, project=None):
