@@ -7,32 +7,30 @@ def get_total(field=None, invoices=None, projects=None, times=None, team=None):
     """
     Get amount, cost, hours based on object and field requested.
     """
+    total = {}
     if field == 'amount' and invoices:
         amount = invoices.aggregate(amount=Sum(F('amount')))['amount']
-        return amount
+        total['amount'] = amount
     elif field == 'cost' and projects:
         cost = projects.aggregate(cost=Sum(F('cost')))['cost']
-        return cost
+        total['cost'] = cost
     elif field == 'hours' and times:
-        hours = {}
-        hours['total'] = 0.0
+        total['hours'] = 0.0
         total_hours = times.aggregate(hours=Sum(F('hours')))['hours']
         if total_hours:
-            hours['total'] = total_hours
+            total['hours'] = total_hours
         if team:
-            hours['users'] = {}
+            total['users'] = {}
             for user in team:
-                hours['users'][user] = 0.0
+                total['users'][user] = 0.0
                 times_user = times.filter(user=user)
                 hours_user = times_user.aggregate(
                     hours=Sum(F('hours')))['hours']
                 if hours_user:
-                    hours['users'][user] = hours_user
-        return hours
+                    total['users'][user] = hours_user
     else:
-        hours = {}
-        hours['total'] = 0.0
-        return hours
+        total['hours'] = 0.0
+    return total
 
 
 def set_total(times, estimate=None, invoice=None, project=None):

@@ -186,7 +186,7 @@ def get_index_items(**kwargs):
     if model_name == 'note':  # Per model extras
         context['note_info'] = get_note_info(model)
     elif model_name == 'time':
-        context['total_hours'] = get_total(field='hours', times=items)['total']
+        context['total_hours'] = get_total(field='hours', times=items)['hours']
     if paginated:  # Paginate if paginated
         page_size = get_setting(request, 'page_size')
         items = paginate(items, page_num=page_num, page_size=page_size)
@@ -299,7 +299,7 @@ def get_page_items(**kwargs):
             if order_by:
                 times = times.order_by(*order_by['time'])
             times = set_total(times, estimate=estimate)
-            total_hours = get_total(field='hours', times=times)['total']
+            total_hours = get_total(field='hours', times=times)['hours']
             context['doc_type'] = doc_type
             context['entries'] = times
             context['item'] = estimate
@@ -314,7 +314,7 @@ def get_page_items(**kwargs):
             times = times.order_by(*order_by['time'])
             times = set_total(times, invoice=invoice)
             last_payment_date = invoice.last_payment_date
-            total_hours = get_total(field='hours', times=times)['total']
+            total_hours = get_total(field='hours', times=times)['hours']
             context['doc_type'] = model_name
             context['entries'] = times
             context['item'] = invoice
@@ -356,7 +356,7 @@ def get_page_items(**kwargs):
             context['item'] = project
             context['items'] = items
             context['net'] = float(project.amount) - float(project.cost)
-            context['total_hours'] = total_hours['total']
+            context['total_hours'] = total_hours['hours']
             context['total_amount'] = total_amount
             if 'users' in total_hours:
                 context['users'] = total_hours['users']
@@ -433,16 +433,17 @@ def get_page_items(**kwargs):
                             page_num=page_num,
                             page_size=page_size)
                 # Totals
-                gross = get_total(field='amount', invoices=invoices)
+                total_amount = get_total(field='amount', invoices=invoices)
                 total_cost = get_total(field='cost', projects=projects)
                 total_hours = get_total(
                     field='hours',
                     times=times.filter(invoiced=False),
-                    team=(request.user, ))['total']
-                if gross and total_cost:
-                    context['net'] = gross - total_cost
+                    team=(request.user, ))['hours']
+                if total_amount and total_cost:
+                    context[
+                        'net'] = total_amount['amount'] - total_cost['cost']
                 context['cost'] = total_cost
-                context['gross'] = gross
+                context['gross'] = total_amount
                 context['total_hours'] = total_hours
                 # Location
                 ip_address = request.META.get('HTTP_X_REAL_IP')
