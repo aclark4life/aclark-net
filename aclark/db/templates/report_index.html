@@ -21,8 +21,6 @@
                     <th data-field="hidden-active" data-sortable="true" data-visible="false">Hidden Active</th>
                     <th data-field="name" data-sort-name="hidden-name" data-sortable="true">Name</th>
                     <th data-field="hidden-name" data-sortable="true" data-visible="false">Hidden Name</th>
-                    <th data-field="date" data-sort-name="hidden-date" data-sortable="true">Date</th>
-                    <th data-field="hidden-date" data-sortable="true" data-visible="false">Hidden Date</th>
 
                     <th data-field="cost" data-sort-name="hidden-cost" data-sortable="true">Cost</th>
                     <th data-field="hidden-cost" data-sortable="true" data-visible="false">Hidden Cost</th>
@@ -33,8 +31,8 @@
                     <th data-field="net" data-sort-name="hidden-net" data-sortable="true">Net</th>
                     <th data-field="hidden-net" data-sortable="true" data-visible="false">Hidden Net</th>
 
-                    <th>View</th>
-                    <th>Edit</th>
+                    <th data-field="date" data-sort-name="hidden-date" data-sortable="true">Date</th>
+                    <th data-field="hidden-date" data-sortable="true" data-visible="false">Hidden Date</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,16 +42,14 @@
                     <td>{{ item.active }}</td>
                     <td><a href="{% url 'report_view' item.pk %}">{{ item.name|default:'' }}</a></td>
                     <td>{{ item.name|default:'' }}</td>
-                    <td>{{ item.date|date:'Y-m-d'|default:'' }}</td>
-                    <td>{{ item.date|date:'U'|default:'' }}</td>
                     <td>{{ item.cost }}</td>
                     <td>{{ item.cost|unlocalize }}</td>
                     <td>{{ item.gross }}</td>
                     <td>{{ item.gross|unlocalize }}</td>
                     <td>{{ item.net }}</td>
                     <td>{{ item.net|unlocalize }}</td>
-                    <td><a class="text-{{ icon_color }}" href="{% url 'report_view' item.pk %}"><i class="fa fa-external-link-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> View</a></td>
-                    <td><a class="text-{{ icon_color }}" href="{% url 'report_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> Edit</a></td>
+                    <td><a class="text-{{ icon_color }}" href="{% url 'report_view' item.pk %}">{{ item.date|date:'Y-m-d'|default:'' }}</a> <a class="text-{{ icon_color }}" href="{% url 'report_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
+                    <td>{{ item.date|date:'U'|default:'' }}</td>
                   </tr>
                 {% endfor %}
                 </tbody>

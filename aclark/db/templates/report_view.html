@@ -21,7 +21,7 @@
 {% with cost=item.cost gross=item.gross net=item.net %}
 {% include 'table_totals.html' %}
 {% endwith %}
-{% with items=items.invoices %}
+{% with items=items.invoices view_url='invoice_view' %}
 {% include 'table_invoices.html' %}
 {% endwith %}
 {% endblock %}

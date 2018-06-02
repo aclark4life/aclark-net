@@ -29,6 +29,7 @@ def get_total(field=None, invoices=None, projects=None, times=None, team=None):
                 if hours_user:
                     total['users'][user] = hours_user
     else:
+        total['cost'] = 0
         total['hours'] = 0
         total['amount'] = 0
     return total

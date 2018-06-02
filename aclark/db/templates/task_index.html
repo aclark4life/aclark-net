@@ -21,8 +21,6 @@
                 <th data-field="hidden-color" data-sortable="true" data-visible="false">Hidden Color</th>
                 <th data-field="rate" data-sortable="true">Rate</th>
                 <th data-field="unit" data-sortable="true">Unit</th>
-                <th>View</th>
-                <th>Edit</th>
               </tr>
             </thead>
             <tbody>
@@ -34,9 +32,7 @@
                 <td>{{ item.name|default:'' }}</td>
                 <td>{{ item.color|default:'' }}</td>
                 <td>{{ item.rate|default:'' }}</td>
-                <td>{{ item.unit|default:'' }}</td>
-                <td><a class="text-{{ icon_color }}" href="{% url 'task_view' item.pk %}"><i class="fa fa-external-link-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> View</a></td>
-                <td><a class="text-{{ icon_color }}" href="{% url 'task_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> Edit</a></td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'task_view' item.pk %}">{{ item.unit|default:'' }}</a> <a class="text-{{ icon_color }}" href="{% url 'task_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
               </tr>
             {% endfor %}
             </tbody>
