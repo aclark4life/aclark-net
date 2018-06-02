@@ -438,9 +438,7 @@ def get_page_items(**kwargs):
                     field='amount', invoices=invoices)['amount']
                 total_cost = get_total(field='cost', projects=projects)['cost']
                 total_hours = get_total(
-                    field='hours',
-                    times=times.filter(invoiced=False),
-                    team=(request.user, ))['hours']
+                    field='hours', times=times.filter(invoiced=False))['hours']
                 if total_amount and total_cost:
                     context['net'] = total_amount - total_cost
                 context['cost'] = total_cost
