@@ -506,7 +506,7 @@ def get_page_items(**kwargs):
                 projects = project_model.objects.filter(
                     active=True, hidden=False)
                 projects = projects.order_by(*order_by['project'])
-                if filter_by:
+                if filter_by:  # Time objects only
                     times = time_model.objects.filter(**filter_by)
                 else:
                     times = time_model.objects.all()
