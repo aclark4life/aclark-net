@@ -15,22 +15,22 @@ def get_total(field=None, invoices=None, projects=None, times=None, team=None):
         cost = projects.aggregate(cost=Sum(F('cost')))['cost']
         total['cost'] = cost
     elif field == 'hours' and times:
-        total['hours'] = 0.0
+        total['hours'] = 0
         total_hours = times.aggregate(hours=Sum(F('hours')))['hours']
         if total_hours:
             total['hours'] = total_hours
         if team:
             total['users'] = {}
             for user in team:
-                total['users'][user] = 0.0
+                total['users'][user] = 0
                 times_user = times.filter(user=user)
                 hours_user = times_user.aggregate(
                     hours=Sum(F('hours')))['hours']
                 if hours_user:
                     total['users'][user] = hours_user
     else:
-        total['hours'] = 0.0
-        total['amount'] = 0.0
+        total['hours'] = 0
+        total['amount'] = 0
     return total
 
 
