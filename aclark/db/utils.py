@@ -442,8 +442,7 @@ def get_page_items(**kwargs):
                     times=times.filter(invoiced=False),
                     team=(request.user, ))['hours']
                 if total_amount and total_cost:
-                    context[
-                        'net'] = total_amount['amount'] - total_cost['cost']
+                    context['net'] = total_amount - total_cost
                 context['cost'] = total_cost
                 context['gross'] = total_amount
                 context['total_hours'] = total_hours
