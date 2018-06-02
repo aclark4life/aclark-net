@@ -428,7 +428,7 @@ def get_page_items(**kwargs):
             if order_by:
                 times = times.order_by(*order_by['time'])
                 invoices = invoices.order_by(*order_by['invoice'])
-            times = set_total_amount(times, project=project)
+            times = set_total_amount(times.filter(invoiced=False), project=project)
             users = user_model.objects.filter(project=project)
             items = set_items('contact', items=contacts)
             items = set_items('estimate', items=estimates, _items=items)
