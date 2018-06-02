@@ -1,5 +1,6 @@
 {% extends 'db/base.html' %}
 {% load l10n %}
+{% load humanize %}
 {% block content %}
           <div class="row">
             <div class="col-md-10">
@@ -64,7 +65,11 @@
 {% with items=items.invoices view_url='invoice_view' edit_url='invoice_edit' %}
 {% include 'table_invoices.html' %}
 {% endwith %}
-            {{ total_amount }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 offset-11">
+            {{ total_amount|intcomma }}
             </div>
           </div>
           <!------------------------------------------------------------------------------------>
