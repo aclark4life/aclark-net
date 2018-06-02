@@ -15,6 +15,7 @@ from .info import get_note_info
 from .info import get_recipients
 from .info import get_setting
 from .obj import get_template_and_url
+from .obj import get_times_for_obj
 from .obj import obj_copy
 from .obj import obj_redir
 from .obj import obj_remove
@@ -396,7 +397,7 @@ def get_page_items(**kwargs):
             context['item'] = file_obj
         elif model_name == 'invoice':
             invoice = get_object_or_404(model, pk=pk)
-            times = time_model.objects.filter(estimate=None, invoice=invoice)
+            times = get_times_for_obj(invoice, time_model)
             times = times.order_by(*order_by['time'])
             times = set_total_amount(times, invoice=invoice)
             last_payment_date = invoice.last_payment_date
@@ -423,8 +424,7 @@ def get_page_items(**kwargs):
             estimates = estimate_model.objects.filter(
                 project=project, is_to=False, is_sow=False)
             invoices = invoice_model.objects.filter(project=project)
-            times = time_model.objects.filter(
-                invoiced=False, estimate=None, project=obj, task__isnull=False)
+            times = get_times_for_obj(project, time_model)
             if order_by:
                 times = times.order_by(*order_by['time'])
                 invoices = invoices.order_by(*order_by['invoice'])
