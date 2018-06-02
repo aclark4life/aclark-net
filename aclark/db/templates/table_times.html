@@ -14,7 +14,7 @@
                 {% if is_staff %}<th data-field="invoice" data-sortable="true" data-visible="{{ columns_visible.time.invoice }}">Invoice</th>{% endif %}
                 {% if is_staff %}<th data-field="estimate" data-sortable="true" data-visible="false">Estimate</th>{% endif %}
                 {% if is_staff %}<th data-field="user" data-sortable="true" data-visible="true">User</th>{% endif %}
-                <th>Hours</th>
+                <th data-field="hours" data-sortable="true">Hours</th>
               </tr>
             </thead>
             <tbody>
