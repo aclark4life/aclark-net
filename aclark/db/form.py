@@ -44,8 +44,8 @@ def get_form(**kwargs):
                 # with gross
                 invoices = invoice_model.objects.filter(last_payment_date=None)
                 projects = project_model.objects.filter(invoice__in=invoices)
-                gross = get_total(field='amount', invoices=invoices)
-                cost = get_total(field='cost', projects=projects)
+                gross = get_total(field='amount', invoices=invoices)['amount']
+                cost = get_total(field='cost', projects=projects)['cost']
                 net = gross - cost
                 obj = model(cost=cost, gross=gross, net=net)
                 form = form_model(instance=obj, initial={'invoices': invoices})
