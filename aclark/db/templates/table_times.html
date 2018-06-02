@@ -1,5 +1,5 @@
 {% load humanize %}
-          <table data-toggle="table" data-classes="table table-no-bordered table-hover">
+          <table data-toggle="table" data-classes="table table-no-bordered table-hover table-striped">
             <thead>
               <tr>
                 <th data-field="counter" data-sortable="true">#</th>
@@ -41,10 +41,13 @@
             <div class="col-2 offset-10 mt-3">
               <h4>Totals</h4>
               {% if users %}
+              <h5>User</h5>
+              <ul style="list-style: none">
                 {% for user in users.items %}
-                  <strong>{{ user.0 }}</strong>: {{ user.1 }}
+                  <li><strong><i class="fa fa-arrow-right"></i> {{ user.0 }}</strong>: {{ user.1 }}</li>
                 {% endfor %}
               {% endif %}
+              </ul>
             </div>
           </div>
           <div class="row">

@@ -68,8 +68,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 offset-11">
-            {{ currency_symbol }}{{ total_amount|intcomma }}
+            <div class="col-2 offset-10 mt-3">
+              <h4>Totals</h4>
+              <strong>Amount:</strong> {{ currency_symbol }}{{ total_amount|intcomma }}
             </div>
           </div>
           <!------------------------------------------------------------------------------------>
@@ -117,8 +118,8 @@
             </div>
           </div>
           {% if item.notes %}
-          <div class="card note">
-            <div class="card-block p-3">
+          <div class="card">
+            <div class="card-body">
               <p class="card-text">{{ item.notes|safe }}</p>
             </div>
           </div>
