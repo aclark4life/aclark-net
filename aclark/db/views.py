@@ -311,10 +311,10 @@ def home(request):
                 'sent': 'false',
             },
         },
-        filter_by={  # Time fields only
+        filter_by={'time': {
             'estimate': None,
             'user': request.user,
-        },
+        }},
         estimate_model=Estimate,
         invoice_model=Invoice,
         note_model=Note,
@@ -496,9 +496,9 @@ def note_index(request, pk=None):
         app_settings_model=SettingsApp,
         model=Note,
         order_by=('-active', '-updated', 'tags'),
-        filter_by={
+        filter_by={'note': {
             'hidden': False,
-        },
+        }},
         request=request,
         search_fields=('note', 'title'))
     return render(request, 'note_index.html', context)
@@ -524,9 +524,9 @@ def project_view(request, pk=None):
                 'sent': 'true',
             },
         },
-        filter_by={
+        filter_by={'project': {
             'task': None,
-        },
+        }},
         order_by={
             'time': ('-date', ),
             'invoice': ('-issue_date', )
@@ -780,8 +780,10 @@ def time_index(request):
             },
         },
         filter_by={
-            'estimate': None,
-            'user__isnull': False,
+            'time': {
+                'estimate': None,
+                'user__isnull': False,
+            },
         },
         order_by=('-date', ),
         request=request,

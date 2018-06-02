@@ -261,7 +261,7 @@ def get_index_items(**kwargs):
                 request=request)
     # Return filtered or all index items
     if filter_by:
-        items = model.objects.filter(**filter_by)
+        items = model.objects.filter(**filter_by[model_name])
     else:
         items = model.objects.all()
     if order_by is not None:  # Order items
@@ -506,8 +506,8 @@ def get_page_items(**kwargs):
                 projects = project_model.objects.filter(
                     active=True, hidden=False)
                 projects = projects.order_by(*order_by['project'])
-                if filter_by:  # Time objects only
-                    times = time_model.objects.filter(**filter_by)
+                if filter_by:
+                    times = time_model.objects.filter(**filter_by['time'])
                 else:
                     times = time_model.objects.all()
                 times = times.order_by(*order_by['time'])
@@ -531,7 +531,8 @@ def get_page_items(**kwargs):
                 # Totals
                 gross = get_total_amount(invoices)
                 total_cost = get_total_cost(projects)
-                total_hours = get_total_hours(times.filter(invoiced=False))['total']
+                total_hours = get_total_hours(
+                    times.filter(invoiced=False))['total']
                 if gross and total_cost:
                     context['net'] = gross - total_cost
                 context['cost'] = total_cost
