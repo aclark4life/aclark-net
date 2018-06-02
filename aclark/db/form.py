@@ -1,8 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from .query import get_query_string
-from .total import get_total_amount
-from .total import get_total_cost
+from .total import get_total
 
 
 def get_form(**kwargs):
@@ -45,8 +44,8 @@ def get_form(**kwargs):
                 # with gross
                 invoices = invoice_model.objects.filter(last_payment_date=None)
                 projects = project_model.objects.filter(invoice__in=invoices)
-                gross = get_total_amount(invoices)
-                cost = get_total_cost(projects)
+                gross = get_total(field='amount', invoices=invoices)
+                cost = get_total(field='cost', projects=projects)
                 net = gross - cost
                 obj = model(cost=cost, gross=gross, net=net)
                 form = form_model(instance=obj, initial={'invoices': invoices})
