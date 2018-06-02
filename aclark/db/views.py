@@ -315,12 +315,9 @@ def home(request):
             'estimate': None,
             'user': request.user,
         }},
-        estimate_model=Estimate,
         invoice_model=Invoice,
-        note_model=Note,
         order_by={
             'invoice': ('-issue_date', ),
-            'estimate': ('-issue_date', ),
             'note': ('-active', '-updated', 'tags'),
             'project': ('-updated', ),
             'report': ('date', ),

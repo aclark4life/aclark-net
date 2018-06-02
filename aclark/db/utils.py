@@ -297,7 +297,6 @@ def get_page_items(**kwargs):
     estimate_model = kwargs.get('estimate_model')
     invoice_model = kwargs.get('invoice_model')
     model = kwargs.get('model')
-    note_model = kwargs.get('note_model')
     obj = kwargs.get('obj')
     project_model = kwargs.get('project_model')
     request = kwargs.get('request')
@@ -494,16 +493,8 @@ def get_page_items(**kwargs):
         if request:
             if request.user.is_authenticated:
                 # Items
-                estimates = estimate_model.objects.filter(
-                    accepted_date=None,
-                    hidden=False,
-                    is_to=False,
-                    is_sow=False)
-                estimates = estimates.order_by(*order_by['estimate'])
                 invoices = invoice_model.objects.filter(last_payment_date=None)
                 invoices = invoices.order_by(*order_by['invoice'])
-                notes = note_model.objects.filter(active=True, hidden=False)
-                notes = notes.order_by(*order_by['note'])
                 projects = project_model.objects.filter(
                     active=True, hidden=False)
                 projects = projects.order_by(*order_by['project'])
@@ -513,9 +504,7 @@ def get_page_items(**kwargs):
                     times = time_model.objects.all()
                 times = times.order_by(*order_by['time'])
                 times = set_total_amount(times)
-                items = set_items('estimate', items=estimates)
                 items = set_items('invoice', items=invoices)
-                items = set_items('note', items=notes, _items=items)
                 items = set_items('project', items=projects, _items=items)
                 items = set_items('time', items=times, _items=items)
                 context['items'] = items
