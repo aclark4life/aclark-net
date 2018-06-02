@@ -436,12 +436,14 @@ def get_page_items(**kwargs):
             items = set_items('time', items=times, _items=items)
             items = set_items('user', items=users, _items=items)
             total_hours = get_total_hours(times, team=users)
+            total_amount = get_total_amount(invoices)
             context['cost'] = float(project.cost)
             context['gross'] = float(project.amount)
             context['item'] = project
             context['items'] = items
             context['net'] = float(project.amount) - float(project.cost)
             context['total_hours'] = total_hours['total']
+            context['total_amount'] = total_amount
             if 'users' in total_hours:
                 context['users'] = total_hours['users']
         elif model_name == 'proposal':

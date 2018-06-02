@@ -64,6 +64,7 @@
 {% with items=items.invoices view_url='invoice_view' edit_url='invoice_edit' %}
 {% include 'table_invoices.html' %}
 {% endwith %}
+            {{ total_amount }}
             </div>
           </div>
           <!------------------------------------------------------------------------------------>
