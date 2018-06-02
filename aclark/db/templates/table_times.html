@@ -39,7 +39,7 @@
           </table>
           <div class="row">
             <div class="col-3 offset-9 mt-3">
-              <h4>Hours</h4>
+              {% if users or total_hours %}<h4>Hours</h4>{% endif %}
               {% if users %}
               <h5>User</h5>
               <ul style="list-style: none">
