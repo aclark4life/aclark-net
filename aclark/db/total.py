@@ -56,10 +56,11 @@ def set_total(times, estimate=None, invoice=None, project=None):
         team = project.team.all()
         if team:
             hours = get_total(field='hours', times=times, team=team)
-            for user in hours['users']:
-                rate = user.profile.rate
-                if rate:
-                    cost += rate * Decimal(hours['users'][user])
+            if 'users' in hours:
+                for user in hours['users']:
+                    rate = user.profile.rate
+                    if rate:
+                        cost += rate * Decimal(hours['users'][user])
         project.amount = '%.2f' % invoice_amount
         project.cost = '%.2f' % cost
         project.save()
