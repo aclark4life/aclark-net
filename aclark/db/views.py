@@ -318,9 +318,7 @@ def home(request):
         invoice_model=Invoice,
         order_by={
             'invoice': ('-issue_date', ),
-            'note': ('-active', '-updated', 'tags'),
             'project': ('-updated', ),
-            'report': ('date', ),
             'time': ('-date', ),
         },
         project_model=Project,
