@@ -12,14 +12,9 @@ from .geo import get_geo_ip_data
 from .info import get_note_info
 from .info import get_setting
 from .mail import mail_proc
-from .obj import get_template_and_url
-from .obj import obj_copy
-from .obj import obj_redir
-from .obj import obj_remove
-from .obj import obj_sent
+from .obj import obj_process
 from .page import paginate
 from .query import get_query_string
-from .query import set_check_boxes
 from .total import get_total
 from .total import set_total
 
@@ -65,7 +60,6 @@ def edit(request, **kwargs):
             project_model=project_model,
             request=request)
     if request.method == 'POST':
-        ref = request.META.get('HTTP_REFERER')
         if pk is None:
             if model_name == 'user':  # One-off to create user
                 username = fake.text()[:150]
@@ -75,20 +69,25 @@ def edit(request, **kwargs):
             copy = get_query_string(request, 'copy')  # Copy or delete
             delete = get_query_string(request, 'delete')
             if copy:
-                return obj_copy(obj)
+                return obj_process(obj, task='copy')
             if delete:
-                return obj_remove(obj)
+                return obj_process(obj, task='remove')
             query_checkbox = get_query_string(request,
                                               'checkbox')  # Check boxes
             if query_checkbox['condition']:
-                return set_check_boxes(obj, query_checkbox, ref,
-                                       app_settings_model)
-            sent = get_query_string(request, 'sent')
-            if sent:
-                return obj_sent(obj, ref)
-            not_sent = get_query_string(request, 'not_sent')
-            if not_sent:
-                return obj_sent(obj, ref, invoiced=False)
+                return obj_process(
+                    obj,
+                    query_checkbox=query_checkbox,
+                    app_settings_model=app_settings_model,
+                    request=request,
+                    task='check')
+            invoiced = get_query_string(request, 'invoiced')
+            if invoiced:
+                return obj_process(
+                    obj, request=request, invoiced=True, task='invoiced')
+            else:
+                return obj_process(
+                    obj, request=request, invoiced=False, task='invoiced')
             form = form_model(request.POST, instance=obj)
         if form.is_valid():
             obj = form.save()
@@ -105,7 +104,7 @@ def edit(request, **kwargs):
                 invoice_model=invoice_model,
                 model=model,
                 project_model=project_model)
-            return obj_redir(obj, pk=pk)
+            return obj_process(obj, pk=pk, task='redir')
     context['form'] = form
     context['is_staff'] = request.user.is_staff
     context['item'] = obj
@@ -122,8 +121,8 @@ def edit(request, **kwargs):
         model_name = contact_model._meta.verbose_name
     elif note_model:
         model_name = note_model._meta.verbose_name
-    template_name = get_template_and_url(
-        model_name=model_name, page_type='edit')
+    template_name = obj_process(
+        model_name=model_name, page_type='edit', task='url')
     return render(request, template_name, context)
 
 
@@ -452,8 +451,8 @@ def get_page_items(**kwargs):
                         total_hours_by_proj[project_id]['name'] = project_name
                         total_hours_by_proj[project_id]['hours'] = get_total(
                             field='hours',
-                            times=times.filter(project=project_id,
-                                               invoiced=False))['hours']
+                            times=times.filter(
+                                project=project_id, invoiced=False))['hours']
 
                 if total_amount and total_cost:
                     context['net'] = total_amount - total_cost

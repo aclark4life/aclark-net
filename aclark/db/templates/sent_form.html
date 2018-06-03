@@ -1,4 +1,4 @@
-          <div class="modal fade bd-sent-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal fade bd-invoiced-true-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
               <div class="modal-content">
                 <div class="modal-header">
@@ -8,19 +8,19 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    You are about to mark this invoice sent!
+                    You are about to mark this invoiced!
                 </div>
                 <div class="modal-footer">
                   <form action="{% url edit_url item.pk %}" method="post">
                     {% csrf_token %}
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-success" name="sent" type="submit" value="sent" onChange="this.form.submit()">Mark sent</button>
+                    <button class="btn btn-success" name="invoiced" type="submit" value="true" onChange="this.form.submit()">Invoiced</button>
                   </form>
                 </div>
               </div>
             </div>
           </div>
-          <div class="modal fade bd-not-sent-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal fade bd-invoiced-false-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
               <div class="modal-content">
                 <div class="modal-header">
@@ -30,13 +30,13 @@
                   <h4 class="modal-title">Are you sure?</h4>
                 </div>
                 <div class="modal-body">
-                    You are about to mark this invoice not sent!
+                    You are about to mark this not invoiced!
                 </div>
                 <div class="modal-footer">
                   <form action="{% url edit_url item.pk %}" method="post">
                     {% csrf_token %}
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-success" name="not_sent" type="submit" value="not_sent" onChange="this.form.submit()">Mark not sent</button>
+                    <button class="btn btn-success" name="invoiced" type="submit" value="false" onChange="this.form.submit()">Not invoiced</button>
                   </form>
                 </div>
               </div>

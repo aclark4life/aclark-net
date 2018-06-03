@@ -76,9 +76,11 @@ def get_query_string(request, key):
         return request.POST.get('copy')
     elif key == 'delete':
         return request.POST.get('delete')
-    elif key == 'sent':
-        return request.POST.get('sent')
-    elif key == 'not_sent':
-        return request.POST.get('not_sent')
+    elif key == 'invoiced':
+        invoiced = request.POST.get('invoiced')
+        if invoiced == u'false':
+            return False
+        else:
+            return True
     else:
         return request.GET.get(key)

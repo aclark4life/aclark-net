@@ -16,7 +16,13 @@
 
   <div class="container py-4 fixed-top app-navbar">
   <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
-{% include 'logo.html' %}
+
+{% block logo %}
+    <a class="navbar-brand mr-auto" href="{% url 'home' %}">
+      <img src="{% static 'aclarknet-logo.png' %}">
+    </a>
+{% endblock %}
+
     <button
       class="navbar-toggler"
       type="button"
@@ -28,13 +34,19 @@
 
 {% include 'nav.html' %}
 
+{% block nav %}
+{% endblock %}
+
   </nav>
 
 {% include 'messages.html' %}
 
 </div>
 
+{% block db_start %}
   <img class="app-graph"  src="{% static 'startup-0.svg' %}">
+{% endblock %}
+
 
 {% block content %}
   <div class="block-xs-middle pb-5">
@@ -51,6 +63,9 @@
   </div>
 {% endblock %}
 </div>
+
+{% block db_stop %}
+{% endblock %}
 
 {% include 'footer.html' %}
 

@@ -1,39 +1,7 @@
+{% extends 'page.html' %}
 {% load static %}
 
-
-<!DOCTYPE html>
-<html lang="en">
-
-{% include 'head.html' %}
-
-<body>
-
-{% include 'stage.html' %}
-
-<div class="stage" id="stage">
-
-<div class="block block-inverse block-fill-height app-header"
-     style="background-image: url({% static 'startup-1.jpg' %});">
-
-  <div class="container py-4 fixed-top app-navbar">
-  <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
-{% include 'logo.html' %}
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-target="#stage"
-      data-toggle="stage"
-      data-distance="-250">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-{% include 'nav.html' %}
-
-  </nav>
-</div>
-
-  <img class="app-graph"  src="{% static 'startup-0.svg' %}">
-
+{% block content %}
   <div class="block-xs-middle pb-5">
     <div class="container">
       <div class="row">
@@ -98,12 +66,4 @@
   </div>
 </div>
 
-{% include 'footer.html' %}
-
-</div>
-
-{% include 'foot.html' %}
-
-</body>
-</html>
-
+{% endblock %}

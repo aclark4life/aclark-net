@@ -1,45 +1,19 @@
+{% extends 'page.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-{% include 'head.html' %}
-
-<body>
-
-{% include 'stage.html' %}
-
-<div class="stage" id="stage">
-
-<div class="block block-inverse block-fill-height app-header" 
-     style="background-image: url({% static 'startup-1.jpg' %});">
-
-  <div class="container py-4 fixed-top app-navbar">
-  <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
-
+{% block logo %}
     <a class="navbar-brand mr-auto" href="{% url 'dashboard' %}">
       <img src="{% static 'aclarknet-logo.png' %}">
     </a>
+{% endblock %}
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-target="#stage"
-      data-toggle="stage"
-      data-distance="-250">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-{% include 'nav.html' %}
+{% block nav %}
 {% include 'db/nav.html' %}
+{% endblock %}
 
-  </nav>
-
-{% include 'messages.html' %}
-
-</div>
-
-{% if not request.user.is_anonymous %} <div class="bg-white text-dark p-3 col-md-10 offset-md-1 mt-5 rounded"> {% endif %}
+{% block db_start %}
+{% if not request.user.is_anonymous %} <div class="bg-white text-dark p-3 col-md-10 offset-md-1 mt-5 rounded mt-5"> {% endif %}
+{% endblock %}
 
 {% include 'search.html' %}
 
@@ -56,16 +30,10 @@
       </div>
     </div>
   </div>
+
+
 {% endblock %}
-</div>
 
+{% block db_stop %}
 {% if not request.user.is_anonymous %}</div> {% endif %}
-
-{% include 'footer.html' %}
-
-</div>
-
-{% include 'foot.html' %}
-
-</body>
-</html>
+{% endblock %}
