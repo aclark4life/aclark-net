@@ -1,6 +1,6 @@
 {% load l10n %}
                   <div class="mx-auto" style="width: 640px; height: 480px">
-                    <img class="rounded" src="{% url 'plot' %}?plot=1&costs={% for item in reports %}{{ item.cost|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}&grosses={% for item in reports %}{{ item.gross|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}&nets={% for item in reports %}{{ item.net|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}" data-toggle="modal" data-target="#myModal">
+                    <img class="rounded" src="{% url 'plot' %}?demo=1&costs={% for item in reports %}{{ item.cost|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}&grosses={% for item in reports %}{{ item.gross|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}&nets={% for item in reports %}{{ item.net|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}" data-toggle="modal" data-target="#myModal">
                   </div>
                   <!-- Modal -->
                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
