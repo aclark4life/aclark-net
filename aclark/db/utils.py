@@ -81,13 +81,13 @@ def edit(request, **kwargs):
                     app_settings_model=app_settings_model,
                     request=request,
                     task='check')
-            # invoiced = get_query_string(request, 'invoiced')
-            # if invoiced:
-            #     return obj_process(
-            #         obj, request=request, invoiced=True, task='invoiced')
-            # else:
-            #     return obj_process(
-            #         obj, request=request, invoiced=False, task='invoiced')
+            query_invoiced = get_query_string(request, 'invoiced')
+            if query_invoiced['condition']:
+                return obj_process(
+                    obj,
+                    request=request,
+                    query_invoiced=query_invoiced,
+                    task='invoiced')
             form = form_model(request.POST, instance=obj)
         if form.is_valid():
             obj = form.save()
@@ -121,8 +121,8 @@ def edit(request, **kwargs):
         model_name = contact_model._meta.verbose_name
     elif note_model:
         model_name = note_model._meta.verbose_name
-    template_name = obj_process(obj,
-        model_name=model_name, page_type='edit', task='url')
+    template_name = obj_process(
+        obj, model_name=model_name, page_type='edit', task='url')
     return render(request, template_name, context)
 
 

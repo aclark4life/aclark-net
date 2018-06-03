@@ -29,13 +29,13 @@ URL_NAMES = {
 
 def obj_process(obj,
                 app_settings_model=None,
-                invoiced=None,
                 pk=None,
                 request=None,
                 task=None,
                 model_name=None,
                 page_type=None,
-                query_checkbox=None):
+                query_checkbox=None,
+                query_invoiced=None):
     """
     Process object based on task, typically performing some task followed by
     the appropriate redir.
@@ -67,13 +67,13 @@ def obj_process(obj,
         kwargs = {}
         kwargs['pk'] = dup.pk
         model_name = obj._meta.verbose_name
-        url_name = obj_process(obj,
-            model_name=model_name, page_type='copy', task='url')
+        url_name = obj_process(
+            obj, model_name=model_name, page_type='copy', task='url')
         return HttpResponseRedirect(reverse(url_name, kwargs=kwargs))
     elif task == 'redir':
         model_name = obj._meta.verbose_name
-        template_name, url_name = obj_process(obj,
-            model_name=model_name, page_type='view', task='url')
+        template_name, url_name = obj_process(
+            obj, model_name=model_name, page_type='view', task='url')
         kwargs = {}
         if pk:  # Exists
             kwargs['pk'] = pk
@@ -92,28 +92,28 @@ def obj_process(obj,
     elif task == 'remove':
         model_name = obj._meta.verbose_name
         if model_name == 'time':  # Only admin can see index
-            url_name = obj_process(obj,
-                model_name=model_name, page_type='dashboard', task='url')
+            url_name = obj_process(
+                obj, model_name=model_name, page_type='dashboard', task='url')
         else:  # Admin can see index
-            url_name = obj_process(obj,
-                model_name=model_name, page_type='index', task='url')
+            url_name = obj_process(
+                obj, model_name=model_name, page_type='index', task='url')
         if model_name == 'profile':
             obj.user.delete()
         else:
             obj.delete()
         return HttpResponseRedirect(reverse(url_name))
     elif task == 'invoiced':
-        now = timezone.now()
         for time in obj.time_set.all():
-            if invoiced:
+            if query_invoiced['state'] == 'true':
                 time.invoiced = True
-            else:
+            elif query_invoiced['state'] == 'false':
                 time.invoiced = False
             time.save()
-        if invoiced:
+        if query_invoiced['state'] == 'true':
+            now = timezone.now()
             obj.last_payment_date = now
             messages.add_message(request, messages.INFO, 'Invoiced!')
-        else:
+        elif query_invoiced['state'] == 'false':
             messages.add_message(request, messages.INFO, 'Not invoiced!')
             obj.last_payment_date = None
         obj.save()

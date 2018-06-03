@@ -77,10 +77,12 @@ def get_query_string(request, key):
     elif key == 'delete':
         return request.POST.get('delete')
     elif key == 'invoiced':
-        invoiced = request.POST.get('invoiced')
-        if invoiced == u'false':
-            return False
-        else:
-            return True
+        query_invoiced = {}
+        query_invoiced_state = request.POST.get('invoiced')
+        query_invoiced['state'] = query_invoiced_state
+        condition = (  # if either of these exist
+            query_invoiced_state == 'true' or query_invoiced_state == 'false')
+        query_invoiced['condition'] = condition
+        return query_invoiced
     else:
         return request.GET.get(key)
