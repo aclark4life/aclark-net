@@ -13,7 +13,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                            <img style="width: 100%" class="rounded" src="{% url 'plot' %}?plot=1&costs={% for item in reports %}{{ item.cost|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}&grosses={% for item in reports %}{{ item.gross|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}&nets={% for item in reports %}{{ item.net|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}">
+                            <img style="width: 100%" class="rounded" src="{% url 'plot' %}?demo=1&costs={% for item in reports %}{{ item.cost|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}&grosses={% for item in reports %}{{ item.gross|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}&nets={% for item in reports %}{{ item.net|unlocalize }},{{ item.date|unlocalize }}{% if not forloop.last %}+{% endif %}{% endfor %}">
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
