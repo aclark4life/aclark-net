@@ -121,7 +121,7 @@ def edit(request, **kwargs):
         model_name = contact_model._meta.verbose_name
     elif note_model:
         model_name = note_model._meta.verbose_name
-    template_name = obj_process(
+    template_name = obj_process(obj,
         model_name=model_name, page_type='edit', task='url')
     return render(request, template_name, context)
 
