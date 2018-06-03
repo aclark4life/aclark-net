@@ -447,12 +447,13 @@ def get_page_items(**kwargs):
                     project_name = 'project-%s' % project_id
                     if project['name']:
                         project_name = project['name']
-                    total_hours_by_proj[project_id] = {}
-                    total_hours_by_proj[project_id]['name'] = project_name
-                    total_hours_by_proj[project_id]['hours'] = get_total(
-                        field='hours',
-                        times=times.filter(project=project_id,
-                                           invoiced=False))['hours']
+                    if project['active']:
+                        total_hours_by_proj[project_id] = {}
+                        total_hours_by_proj[project_id]['name'] = project_name
+                        total_hours_by_proj[project_id]['hours'] = get_total(
+                            field='hours',
+                            times=times.filter(project=project_id,
+                                               invoiced=False))['hours']
 
                 if total_amount and total_cost:
                     context['net'] = total_amount - total_cost
