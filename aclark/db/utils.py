@@ -81,13 +81,13 @@ def edit(request, **kwargs):
                     app_settings_model=app_settings_model,
                     request=request,
                     task='check')
-            invoiced = get_query_string(request, 'invoiced')
-            if invoiced:
-                return obj_process(
-                    obj, request=request, invoiced=True, task='invoiced')
-            else:
-                return obj_process(
-                    obj, request=request, invoiced=False, task='invoiced')
+            # invoiced = get_query_string(request, 'invoiced')
+            # if invoiced:
+            #     return obj_process(
+            #         obj, request=request, invoiced=True, task='invoiced')
+            # else:
+            #     return obj_process(
+            #         obj, request=request, invoiced=False, task='invoiced')
             form = form_model(request.POST, instance=obj)
         if form.is_valid():
             obj = form.save()
