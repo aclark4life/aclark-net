@@ -437,13 +437,29 @@ def get_page_items(**kwargs):
                 total_amount = get_total(
                     field='amount', invoices=invoices)['amount']
                 total_cost = get_total(field='cost', projects=projects)['cost']
+
+                # XXX Move to get_total
                 total_hours = get_total(
                     field='hours', times=times.filter(invoiced=False))['hours']
+                total_hours_by_proj = {}
+                for project in request.user.project_set.values():
+                    project_id = project['id']
+                    project_name = 'project-%s' % project_id
+                    if project['name']:
+                        project_name = project['name']
+                    total_hours_by_proj[project_id] = {}
+                    total_hours_by_proj[project_id]['name'] = project_name
+                    total_hours_by_proj[project_id]['hours'] = get_total(
+                        field='hours',
+                        times=times.filter(project=project_id,
+                                           invoiced=False))['hours']
+
                 if total_amount and total_cost:
                     context['net'] = total_amount - total_cost
                 context['cost'] = total_cost
                 context['gross'] = total_amount
                 context['total_hours'] = total_hours
+                context['total_hours_by_proj'] = total_hours_by_proj
                 # Location
                 ip_address = request.META.get('HTTP_X_REAL_IP')
                 context['geo_ip_data'] = get_geo_ip_data(request)

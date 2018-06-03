@@ -48,8 +48,13 @@
                 {% endfor %}
               {% endif %}
               </ul>
-              {% if total_hours %}
-              <strong>Total</strong>: {{ total_hours|intcomma }}
+              {% if total_hours_by_proj %}
+              <ul style="list-style: none">
+                {% for project in total_hours_by_proj.values %}
+                  <li><strong><i class="fa fa-arrow-right"></i> {{ project.name }}</strong>: {{ project.hours }}</li>
+                {% endfor %}
+              </ul>
+              <strong>Total:</strong> {{ total_hours }}
               {% endif %}
             </div>
           </div>
