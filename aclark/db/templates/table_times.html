@@ -49,6 +49,7 @@
               {% endif %}
               </ul>
               {% if total_hours_by_proj %}
+              <h5>Project</h5>
               <ul style="list-style: none">
                 {% for project in total_hours_by_proj.values %}
                   <li><strong><i class="fa fa-arrow-right"></i> {{ project.name }}</strong>: {{ project.hours }}</li>
