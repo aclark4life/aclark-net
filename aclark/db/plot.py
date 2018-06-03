@@ -11,9 +11,26 @@ from .query import get_query_string
 def get_plot(request):  # http://stackoverflow.com/a/5515994/185820
     """
     """
-    costs = get_query_string(request, 'costs')
-    grosses = get_query_string(request, 'grosses')
-    nets = get_query_string(request, 'nets')
+    # costs = get_query_string(request, 'costs')
+    # grosses = get_query_string(request, 'grosses')
+    # nets = get_query_string(request, 'nets')
+
+    costs = [
+        [3000, '2018-01-01'],
+        [4000, '2018-02-01'],
+        [3000, '2018-03-01'],
+    ]
+    grosses = [
+        [10000, '2018-01-01'],
+        [30000, '2018-02-01'],
+        [20000, '2018-03-01'],
+    ]
+    nets = [
+        [25000, '2018-01-01'],
+        [26000, '2018-02-01'],
+        [27000, '2018-03-01'],
+    ]
+
     # Cost
     x1 = [  # http://matplotlib.org/examples/api/date_demo.html
         date2num(timezone.datetime.strptime(i[1], '%Y-%m-%d')) for i in costs
