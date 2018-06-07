@@ -160,3 +160,5 @@ RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
 RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
 
 EMAIL_BACKEND = 'django_ses.SESBackend'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
