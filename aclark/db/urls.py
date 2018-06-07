@@ -23,8 +23,8 @@ urlpatterns = [
         name='contract_edit'),
     url(r'^contract/add$', views.contract_edit, name='contract_edit'),
     url(r'^contract$', views.contract_index, name='contract_index'),
-    #    # Error (forced)
-    #    url(r'^error$', views.error, name='error'),
+    # Error (forced)
+    url(r'^500$', views.error, name='error'),
     # Estimate
     url(r'^estimate/(?P<pk>\d+)$', views.estimate_view, name='estimate_view'),
     url(r'^estimate/(?P<pk>\d+)/edit$',
