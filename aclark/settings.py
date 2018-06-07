@@ -162,3 +162,7 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
 EMAIL_BACKEND = 'django_ses.SESBackend'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+ADMINS = [
+    ('Alex Clark', 'aclark@aclark.net'),
+]
