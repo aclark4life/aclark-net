@@ -265,9 +265,9 @@ def get_page_items(**kwargs):
         elif model_name == 'client':
             client = get_object_or_404(model, pk=pk)
             contacts = contact_model.objects.filter(client=client)
-            invoices = invoice_model.objects.filter(active=True, client=client)
+            invoices = invoice_model.objects.filter(client=client)
             notes = client.note.all()
-            projects = project_model.objects.filter(active=True, client=client)
+            projects = project_model.objects.filter(client=client)
             if order_by:
                 invoices = invoices.order_by(*order_by['invoice'])
                 projects = projects.order_by(*order_by['project'])
