@@ -27,6 +27,12 @@
 {% include 'delete_form.html' %}
           <div class="row">
             <div class="col-md-12 my-1">
+              <h2 class="my-1">Contacts</h2>
+{% include 'table_contacts.html' %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 my-1">
               <h2 class="my-1">Address</h2>
               <address>{{ item.address }}</address>
             </div>
@@ -49,12 +55,6 @@
             <div class="col-md-12 my-1">
               <h2 class="my-1">Notes</h2>
 {% include 'table_notes.html' %}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 my-1">
-              <h2 class="my-1">Contacts</h2>
-{% include 'table_contacts.html' %}
             </div>
           </div>
 {% endblock %}
