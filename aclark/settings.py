@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'social_django',
     'captcha',
+    'django_ses',
 ]
 
 MIDDLEWARE = [
