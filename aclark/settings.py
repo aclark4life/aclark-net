@@ -164,6 +164,6 @@ EMAIL_BACKEND = 'django_ses.SESBackend'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-ADMINS = [
+MANAGERS = [
     ('Alex Clark', 'aclark@aclark.net'),
 ]
