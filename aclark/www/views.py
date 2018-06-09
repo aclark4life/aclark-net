@@ -54,8 +54,8 @@ def contact(request):
             message = form.cleaned_data['message']
             sender = form.cleaned_data['email']
             message = '\n'.join([message, sender])
-            recipients = [settings.EMAIL_FROM]
-            subject = settings.EMAIL_SUBJECT % now().strftime(
+            recipients = ['aclark@aclark.net']
+            subject = 'Contact Form ' % now().strftime(
                 '%m/%d/%Y %H:%M:%S')
             send_mail(subject, message, settings.EMAIL_FROM, recipients)
             messages.add_message(request, messages.SUCCESS, msg)
