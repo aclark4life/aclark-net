@@ -57,7 +57,7 @@ def contact(request):
             recipients = ['aclark@aclark.net']
             subject = 'Contact %s' % now().strftime(
                 '%m/%d/%Y %H:%M:%S')
-            send_mail(subject, message, settings.EMAIL_FROM, recipients)
+            send_mail(subject, message, 'aclark@aclark.net', recipients)
             messages.add_message(request, messages.SUCCESS, msg)
             return HttpResponseRedirect(reverse('home'))
     else:
