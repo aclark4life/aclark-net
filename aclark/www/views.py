@@ -18,6 +18,8 @@ SERVICE_URL = '%s/api/services/?format=json' % BASE_URL
 TESTIMONIAL_URL = '%s/api/testimonials/?format=json' % BASE_URL
 PROFILE_URL = '%s/api/profiles/?format=json' % BASE_URL
 
+EMAIL_FROM = 'aclark@aclark.net'
+
 
 def about(request):
     context = {}
@@ -53,11 +55,11 @@ def contact(request):
         if form.is_valid():
             message = form.cleaned_data['message']
             sender = form.cleaned_data['email']
-            message = '\n'.join([message, sender])
-            recipients = ['aclark@aclark.net']
+            message = '\n\n'.join([message, sender])
+            recipients = [EMAIL_FROM]
             subject = 'Contact %s' % now().strftime(
                 '%m/%d/%Y %H:%M:%S')
-            send_mail(subject, message, 'aclark@aclark.net', recipients)
+            send_mail(subject, message, EMAIL_FROM, recipients)
             messages.add_message(request, messages.SUCCESS, msg)
             return HttpResponseRedirect(reverse('home'))
     else:
