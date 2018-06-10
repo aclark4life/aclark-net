@@ -1,13 +1,10 @@
 {% extends 'db/base.html' %}
 {% block content %}
           <div class="row">
-            <div class="col-md-2">
-              <h1 style="border-bottom: none;">{{ doc_type|title }}</h1>
+            <div class="col-md-11">
+              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'contract_index' %}">Contracts</a> <i class="fa fa-arrow-right"></i> {% if item.title %}{{ item.title }}{% else %}Contract{% endif %}</h1>
             </div>
-            <div class="col-md-3 mx-auto">
-{% include 'info.html' %}
-            </div>
-            <div class="col-md-2 mb-3">
+            <div class="col-md-1">
               <!-- http://getbootstrap.com/docs/4.0/components/dropdowns/#split-button-dropdowns -->
               <div class="btn-group">
                 <a class="btn btn-block btn-lg btn-success" href="{% url 'contract_edit' pk=item.pk %}">Edit</a>
