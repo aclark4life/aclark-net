@@ -9,6 +9,7 @@ def get_form(**kwargs):
     Return appropriate form based on new or edit
     """
     client_model = kwargs.get('client_model')
+    contract_settings_model = kwargs.get('contract_settings_model')
     form_model = kwargs.get('form_model')
     invoice_model = kwargs.get('invoice_model')
     model = kwargs.get('model')
@@ -78,6 +79,9 @@ def get_form(**kwargs):
                     choices.append(choice)
                 form = form_model()
                 form.fields['project'].widget.choices = choices
+            elif model_name == 'contract':
+                contract_settings = contract_settings_model.get_solo()
+                form = form_model()
             else:
                 form = form_model()
         else:

@@ -45,6 +45,7 @@ def edit(request, **kwargs):
     if pk is None:  # New
         form = get_form(
             client_model=client_model,
+            contract_settings_model=contract_settings_model,
             form_model=form_model,
             invoice_model=invoice_model,
             model=model,
