@@ -473,7 +473,9 @@ def get_page_items(**kwargs):
                                             'icon_color')  # Prefs
         context['icon_size'] = get_setting(request, app_settings_model,
                                            'icon_size')
+        doc = get_query_string(request, 'doc')  # Export doc
         pdf = get_query_string(request, 'pdf')  # Export pdf
+        context['doc'] = doc
         context['pdf'] = pdf
         context['request'] = request  # Include request
     return context

@@ -50,6 +50,7 @@ from .models import SettingsContract
 from .models import Testimonial
 from .models import Task
 from .models import Time
+from .export import render_doc
 from .export import render_pdf
 from .info import has_profile
 from .plot import get_plot
@@ -190,7 +191,13 @@ def contract_view(request, pk=None):
         pk=pk,
         time_model=Time,
         request=request)
-    return render(request, 'contract_view.html', context)
+    if context['doc']:
+        company_name = get_company_name(SettingsCompany)
+        filename = '%s_%s_%s.pdf' % (company_name, 'contract'.upper(), pk)
+        return render_doc(
+            context, filename=filename, template='table_contract.html')
+    else:
+        return render(request, 'contract_view.html', context)
 
 
 @staff_member_required
