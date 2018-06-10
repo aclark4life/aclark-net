@@ -16,19 +16,13 @@
               <tr>
                 <th>Client</th> 
                 <th>Created</th> 
-                <th>Statement of Work</th> 
-                <th>View</th> 
-                <th>Edit</th> 
               </tr>
             </thead>
             <tbody>
             {% for item in items.contracts %}
               <tr>
                 <td>{{ item.client|default:'' }}</td>
-                <td>{{ item.created }}</td>
-                <td>{{ item.statement_of_work|default:'' }}</td>
-                <td><a class="text-{{ icon_color }}" href="{% url 'contract_view' item.pk %}"><i class="fa fa-external-link-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> View</a></td>
-                <td><a class="text-{{ icon_color }}" href="{% url 'contract_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> Edit</a></td>
+                <td><a class="text-{{ icon_color }}" href="{% url 'contract_view' item.pk %}">{{ item.created }}</a> <a class="text-{{ icon_color }}" href="{% url 'contract_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> </a></td>
               </tr>
             {% endfor %}
             </tbody>

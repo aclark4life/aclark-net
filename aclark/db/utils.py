@@ -283,6 +283,9 @@ def get_page_items(**kwargs):
                 contact,
             ])  # table_items.html
             context['item'] = contact
+        elif model_name == 'contract':
+            item = get_object_or_404(model, pk=pk)
+            context['item'] = item
         elif model_name == 'estimate':  # handle obj or model
             if not obj:
                 estimate = get_object_or_404(model, pk=pk)
@@ -328,8 +331,8 @@ def get_page_items(**kwargs):
             if mail:
                 mail_proc(newsletter, request=request)  # XXX Use signal?
         elif model_name == 'note':
-            note = get_object_or_404(model, pk=pk)
-            context['item'] = note
+            item = get_object_or_404(model, pk=pk)
+            context['item'] = item
         elif model_name == 'project':
             project = get_object_or_404(model, pk=pk)
             contacts = contact_model.objects.all()
