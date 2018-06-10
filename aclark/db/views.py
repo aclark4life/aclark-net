@@ -204,7 +204,12 @@ def contract_view(request, pk=None):
 def contract_edit(request, pk=None):
     """
     """
-    return edit(request, form_model=ContractForm, model=Contract, pk=pk)
+    return edit(
+        request,
+        form_model=ContractForm,
+        model=Contract,
+        contract_settings_model=SettingsContract,
+        pk=pk)
 
 
 @staff_member_required

@@ -21,7 +21,7 @@
             <tbody>
             {% for item in items.contracts %}
               <tr>
-                <td>{{ item.client|default:'' }}</td>
+                <td>{% if item.client %}<a href="{% url 'client_view' item.client.pk %}">{{ item.client.name|default:'Client' }}</a>{% endif %}</td>
                 <td><a class="text-{{ icon_color }}" href="{% url 'contract_view' item.pk %}">{{ item.created }}</a> <a class="text-{{ icon_color }}" href="{% url 'contract_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> </a></td>
               </tr>
             {% endfor %}

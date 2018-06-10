@@ -26,6 +26,7 @@ def edit(request, **kwargs):
     context = {}
     obj = None
     app_settings_model = kwargs.get('app_settings_model')
+    contract_settings_model = kwargs.get('contract_settings_model')
     client_model = kwargs.get('client_model')
     company_model = kwargs.get('company_model')
     contact_model = kwargs.get('contact_model')
