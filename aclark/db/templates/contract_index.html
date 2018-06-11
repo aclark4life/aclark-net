@@ -11,22 +11,7 @@
 {% with items=items.contracts %}     
 {% include 'pagination.html' %}
 {% endwith %}
-          <table data-toggle="table" data-classes="table table-no-bordered table-hover table-striped">
-            <thead>
-              <tr>
-                <th>Client</th> 
-                <th>Created</th> 
-              </tr>
-            </thead>
-            <tbody>
-            {% for item in items.contracts %}
-              <tr>
-                <td>{% if item.client %}<a href="{% url 'client_view' item.client.pk %}">{{ item.client.name|default:'Client' }}</a>{% endif %}</td>
-                <td><a class="text-{{ icon_color }}" href="{% url 'contract_view' item.pk %}">{{ item.created }}</a> <a class="text-{{ icon_color }}" href="{% url 'contract_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i> </a></td>
-              </tr>
-            {% endfor %}
-            </tbody>
-          </table>
+{% include 'table_contracts.html' %}
 {% with items=items.contracts %}     
 {% include 'pagination.html' %}
 {% endwith %}

@@ -19,4 +19,18 @@
           </div>
 {% include 'copy_form.html' %}
 {% include 'delete_form.html' %}
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ item.client }}</td>
+                <td>{{ item.created }}</td>
+              </tr>
+            </tbody> 
+          </table>
 {% endblock %}
