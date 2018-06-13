@@ -28,7 +28,7 @@
             </thead>
             <tbody>
               <tr>
-                <td>{{ item.client }}</td>
+                <td>{{ item.client|default:'Client' }}</td>
                 <td>{{ item.created }}</td>
               </tr>
             </tbody> 
