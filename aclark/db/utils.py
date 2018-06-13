@@ -212,6 +212,7 @@ def get_page_items(**kwargs):
     contact_model = kwargs.get('contact_model')
     estimate_model = kwargs.get('estimate_model')
     invoice_model = kwargs.get('invoice_model')
+    note_model = kwargs.get('note_model')
     model = kwargs.get('model')
     obj = kwargs.get('obj')
     project_model = kwargs.get('project_model')
@@ -268,8 +269,8 @@ def get_page_items(**kwargs):
             client = get_object_or_404(model, pk=pk)
             contacts = contact_model.objects.filter(client=client)
             invoices = invoice_model.objects.filter(client=client)
-            notes = client.note.all()
             projects = project_model.objects.filter(client=client)
+            notes = note_model.objects.filter(client=client)
             if order_by:
                 invoices = invoices.order_by(*order_by['invoice'])
                 projects = projects.order_by(*order_by['project'])
