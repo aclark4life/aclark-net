@@ -127,6 +127,7 @@ def client_view(request, pk=None):
         contact_model=Contact,
         contract_model=Contract,
         invoice_model=Invoice,
+        estimate_model=Estimate,
         note_model=Note,
         model=Client,
         order_by=order_by,

@@ -263,11 +263,12 @@ def get_page_items(**kwargs):
             contract_settings = model.get_solo()
             context['items'] = get_fields(
                 [
-                    contract_settings,
+                   contract_settings,
                 ], exclude_fields=exclude_fields)  # table_items.html
         elif model_name == 'client':
             client = get_object_or_404(model, pk=pk)
             contacts = contact_model.objects.filter(client=client)
+            estimates = estimate_model.objects.filter(client=client)
             invoices = invoice_model.objects.filter(client=client)
             projects = project_model.objects.filter(client=client)
             notes = note_model.objects.filter(client=client)
@@ -278,6 +279,7 @@ def get_page_items(**kwargs):
             items = set_items('invoice', items=invoices, _items=items)
             items = set_items('note', items=notes, _items=items)
             items = set_items('project', items=projects, _items=items)
+            items = set_items('estimate', items=estimates, _items=items)
             context['item'] = client
             context['items'] = items
         elif model_name == 'contact':
@@ -366,10 +368,6 @@ def get_page_items(**kwargs):
             context['total_amount'] = total_amount
             if 'users' in total_hours:
                 context['users'] = total_hours['users']
-        elif model_name == 'proposal':
-            proposal = get_object_or_404(model, pk=pk)
-            context['doc_type'] = model_name
-            context['item'] = proposal
         elif model_name == 'report':
             report = get_object_or_404(model, pk=pk)
             reports = model.objects.filter(active=True)

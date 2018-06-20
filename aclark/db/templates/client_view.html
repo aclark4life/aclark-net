@@ -41,7 +41,7 @@
           <div class="row">
             <div class="col-md-12 my-1">
               <h2 class="my-1"><a href="{% url 'invoice_index' %}" class="text-dark">Invoices</a></h2>
-{% with items=items.invoices view_url='invoice_view' edit_url='invoice_edit' %}
+{% with items=items.invoices view_url='invoice_view' edit_url='invoice_edit' item_type='invoice' %}
 {% include 'table_invoices.html' %}
 {% endwith %}
             </div>
@@ -62,6 +62,14 @@
             <div class="col-md-12 my-1">
               <h2 class="my-1"><a href="{% url 'contract_index' %}" class="text-dark">Contracts</a></h2>
 {% include 'table_contracts.html' %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 my-1">
+              <h2 class="my-1"><a href="{% url 'estimate_index' %}" class="text-dark">Estimates</a></h2>
+{% with items=items.estimates view_url='estimate_view' edit_url='estimate_edit' item_type='estimate' %}
+{% include 'table_invoices.html' %}
+{% endwith %}
             </div>
           </div>
 {% endblock %}
