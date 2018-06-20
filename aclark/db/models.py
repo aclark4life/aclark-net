@@ -52,6 +52,12 @@ PAYMENT_CHOICES = (
     ('wire', 'Wire'),
 )
 
+ESTIMATE_TYPES = (
+    ('', '---'),
+    ('is_sow', 'Statement of Work'),
+    ('is_to', 'Task Order'),
+)
+
 # Create your models here.
 
 
@@ -222,8 +228,8 @@ class Estimate(BaseModel):
         on_delete=models.CASCADE,
         limit_choices_to={'active': True},
     )
-    is_sow = models.BooleanField('Use for Statement of Work?', default=False)
-    is_to = models.BooleanField('Use for Task Order?', default=False)
+    # is_sow = models.BooleanField('Use for Statement of Work?', default=False)
+    # is_to = models.BooleanField('Use for Task Order?', default=False)
     contacts = models.ManyToManyField('Contact', blank=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -231,6 +237,12 @@ class Estimate(BaseModel):
         null=True,
         on_delete=models.CASCADE,
         limit_choices_to={'profile__active': True})
+    estimate_types = models.CharField(
+        'Estimate types',
+        max_length=300,
+        choices=ESTIMATE_TYPES,
+        null=True,
+        blank=True)
 
     def __str__(self):
         return 'estimate-%s' % self.pk

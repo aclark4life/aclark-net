@@ -292,16 +292,17 @@ def get_page_items(**kwargs):
             item = get_object_or_404(model, pk=pk)
             context['item'] = item
         elif model_name == 'estimate':  # handle obj or model
+            doc_type = 'Estimate'
             if not obj:
                 estimate = get_object_or_404(model, pk=pk)
             else:
                 estimate = obj
-            if estimate.is_sow:
-                doc_type = 'statement of work'
-            elif estimate.is_to:
-                doc_type = 'task order'
-            else:
-                doc_type = model_name
+            if estimate.estimate_types:
+                estimate_type = estimate.estimate_types
+                if estimate_type == 'is_sow':
+                    doc_type = 'Statement of Work'
+                elif estimate_type == 'is_to':
+                    doc_type = 'Task Order'
             times = time_model.objects.filter(estimate=estimate)
             if order_by:
                 times = times.order_by(*order_by['time'])
