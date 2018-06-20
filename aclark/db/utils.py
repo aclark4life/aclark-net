@@ -236,6 +236,7 @@ def get_page_items(**kwargs):
         context['currency_symbol'] = currency_symbol
     if columns_visible:
         context['columns_visible'] = columns_visible
+    model_name = None
     if model or obj:
         if model:
             model_name = model._meta.verbose_name
@@ -358,8 +359,7 @@ def get_page_items(**kwargs):
         elif model_name == 'project':
             project = get_object_or_404(model, pk=pk)
             contacts = contact_model.objects.all()
-            estimates = estimate_model.objects.filter(
-                project=project)
+            estimates = estimate_model.objects.filter(project=project)
             invoices = invoice_model.objects.filter(project=project)
             times = time_model.objects.filter(
                 estimate=None, project=project, task__isnull=False)
@@ -496,6 +496,8 @@ def get_page_items(**kwargs):
         context['doc'] = doc
         context['pdf'] = pdf
         context['request'] = request  # Include request
+        if model_name:
+            context['model_name'] = model_name  # Include model_name
     return context
 
 
