@@ -89,7 +89,11 @@ class ContactForm(forms.ModelForm):
 class ContractForm(forms.ModelForm):
     class Meta:
         model = Contract
-        fields = '__all__'
+        exclude = (
+            'icon_name',
+            'icon_size',
+            'icon_color',
+        )
         widgets = {
             'body': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
