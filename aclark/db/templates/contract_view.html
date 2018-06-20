@@ -23,13 +23,11 @@
             <thead>
               <tr>
                 <th>Client</th>
-                <th>Created</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{{ item.client|default:'Client' }}</td>
-                <td>{{ item.created }}</td>
+                <td>{% if item.client %}<a href="{% url 'client_view' item.client.pk %}">{{ item.client|default:'Client' }}</a>{% else %}{{ item.client|default:'No client set' }}{% endif %}</td>
               </tr>
             </tbody> 
           </table>

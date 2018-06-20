@@ -211,6 +211,7 @@ def get_page_items(**kwargs):
     columns_visible = kwargs.get('columns_visible')
     contact_model = kwargs.get('contact_model')
     estimate_model = kwargs.get('estimate_model')
+    contract_model = kwargs.get('contract_model')
     invoice_model = kwargs.get('invoice_model')
     note_model = kwargs.get('note_model')
     model = kwargs.get('model')
@@ -268,6 +269,7 @@ def get_page_items(**kwargs):
         elif model_name == 'client':
             client = get_object_or_404(model, pk=pk)
             contacts = contact_model.objects.filter(client=client)
+            contracts = contract_model.objects.filter(client=client)
             estimates = estimate_model.objects.filter(client=client)
             invoices = invoice_model.objects.filter(client=client)
             projects = project_model.objects.filter(client=client)
@@ -280,6 +282,7 @@ def get_page_items(**kwargs):
             items = set_items('note', items=notes, _items=items)
             items = set_items('project', items=projects, _items=items)
             items = set_items('estimate', items=estimates, _items=items)
+            items = set_items('contract', items=contracts, _items=items)
             context['item'] = client
             context['items'] = items
         elif model_name == 'contact':
