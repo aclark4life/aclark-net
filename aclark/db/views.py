@@ -262,6 +262,7 @@ def estimate_edit(request, pk=None):
         model=Estimate,
         company_model=SettingsCompany,
         project_model=Project,
+        client_model=Client,
         pk=pk,
         user_model=User)
 

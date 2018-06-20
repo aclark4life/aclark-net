@@ -97,7 +97,7 @@ def edit(request, **kwargs):
                 if not obj.user:  # for new user
                     obj.user = new_user
                     obj.save()
-            set_refs(
+            set_ref(
                 obj,
                 request,
                 client_model=client_model,
@@ -523,7 +523,7 @@ def set_items(model_name, items=None, _items={}):
     return _items
 
 
-def set_refs(obj, request, **kwargs):
+def set_ref(obj, request, **kwargs):
     """
     Set object field references after create or edit
     """
@@ -540,11 +540,16 @@ def set_refs(obj, request, **kwargs):
             obj.client = client
             obj.save()
     elif model_name == 'estimate' or model_name == 'invoice':
+        query_client = get_query_string(request, 'client')
         query_project = get_query_string(request, 'project')
         if query_project:
             project = get_object_or_404(project_model, pk=query_project)
             obj.client = project.client
             obj.project = project
+            obj.save()
+        if query_client:
+            client = get_object_or_404(client_model, pk=query_client)
+            obj.client = client
             obj.save()
     elif model_name == 'note':
         query_client = get_query_string(request, 'client')
