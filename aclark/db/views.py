@@ -210,6 +210,7 @@ def contract_edit(request, pk=None):
         request,
         form_model=ContractForm,
         model=Contract,
+        client_model=Client,
         contract_settings_model=SettingsContract,
         pk=pk)
 

@@ -531,6 +531,7 @@ def set_ref(obj, request, **kwargs):
     estimate_model = kwargs.get('estimate_model')
     invoice_model = kwargs.get('invoice_model')
     project_model = kwargs.get('project_model')
+    contract_model = kwargs.get('contract_model')
     model_name = obj._meta.verbose_name
     if model_name == 'contact':
         query_client = get_query_string(request, 'client')
@@ -567,6 +568,12 @@ def set_ref(obj, request, **kwargs):
             invoice.note.add(obj)
             invoice.save()
     elif model_name == 'project':
+        query_client = get_query_string(request, 'client')
+        if query_client:
+            client = get_object_or_404(client_model, pk=query_client)
+            obj.client = client
+            obj.save()
+    elif model_name == 'contract':
         query_client = get_query_string(request, 'client')
         if query_client:
             client = get_object_or_404(client_model, pk=query_client)
