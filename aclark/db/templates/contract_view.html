@@ -2,7 +2,7 @@
 {% block content %}
           <div class="row">
             <div class="col-md-11">
-              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'contract_index' %}">Contracts</a> <i class="fa fa-arrow-right"></i> {% if item.title %}{{ item.title }}{% else %}Contract{% endif %}</h1>
+              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'contract_index' %}">Contracts</a> <i class="fa fa-arrow-right"></i> {% if item.title %}{{ item.title }}{% else %}Contract{% endif %} {% if item.client %}<a href="{% url 'client_view' item.client.pk %}"><i class="fa fa-building"></i></a>{% endif %}</h1>
             </div>
             <div class="col-md-1">
               <!-- http://getbootstrap.com/docs/4.0/components/dropdowns/#split-button-dropdowns -->
