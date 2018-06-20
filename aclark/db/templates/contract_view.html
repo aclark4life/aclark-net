@@ -19,16 +19,5 @@
           </div>
 {% include 'copy_form.html' %}
 {% include 'delete_form.html' %}
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Client</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{% if item.client %}<a href="{% url 'client_view' item.client.pk %}">{{ item.client|default:'Client' }}</a>{% else %}{{ item.client|default:'No client set' }}{% endif %}</td>
-              </tr>
-            </tbody> 
-          </table>
+{% include 'table_items.html' %}
 {% endblock %}

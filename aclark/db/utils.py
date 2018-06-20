@@ -264,7 +264,7 @@ def get_page_items(**kwargs):
             contract_settings = model.get_solo()
             context['items'] = get_fields(
                 [
-                   contract_settings,
+                    contract_settings,
                 ], exclude_fields=exclude_fields)  # table_items.html
         elif model_name == 'client':
             client = get_object_or_404(model, pk=pk)
@@ -292,8 +292,21 @@ def get_page_items(**kwargs):
             ])  # table_items.html
             context['item'] = contact
         elif model_name == 'contract':
-            item = get_object_or_404(model, pk=pk)
-            context['item'] = item
+            contract = get_object_or_404(model, pk=pk)
+            exclude_fields = (
+                'id',
+                'icon_name',
+                'icon_size',
+                'icon_color',
+                'hidden',
+                'created',
+                'updated',
+            )
+            context['items'] = get_fields(
+                [
+                    contract,
+                ], exclude_fields=exclude_fields)  # table_items.html
+            context['item'] = contract
         elif model_name == 'estimate':  # handle obj or model
             doc_type = 'Estimate'
             if not obj:
