@@ -359,7 +359,7 @@ def get_page_items(**kwargs):
             project = get_object_or_404(model, pk=pk)
             contacts = contact_model.objects.all()
             estimates = estimate_model.objects.filter(
-                project=project, is_to=False, is_sow=False)
+                project=project)
             invoices = invoice_model.objects.filter(project=project)
             times = time_model.objects.filter(
                 estimate=None, project=project, task__isnull=False)
