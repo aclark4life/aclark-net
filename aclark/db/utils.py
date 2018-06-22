@@ -296,6 +296,7 @@ def get_page_items(**kwargs):
                 'hidden',
                 'created',
                 'updated',
+                'uuid',
             )
             context['items'] = get_fields(
                 [
