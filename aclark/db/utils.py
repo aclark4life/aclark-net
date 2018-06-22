@@ -288,9 +288,19 @@ def get_page_items(**kwargs):
             context['items'] = items
         elif model_name == 'contact':
             contact = get_object_or_404(model, pk=pk)
-            context['items'] = get_fields([
-                contact,
-            ])  # table_items.html
+            exclude_fields = (
+                'id',
+                'icon_name',
+                'icon_size',
+                'icon_color',
+                'hidden',
+                'created',
+                'updated',
+            )
+            context['items'] = get_fields(
+                [
+                    contact,
+                ], exclude_fields=exclude_fields)  # table_items.html
             context['item'] = contact
         elif model_name == 'contract':
             contract = get_object_or_404(model, pk=pk)
