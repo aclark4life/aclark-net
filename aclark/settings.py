@@ -167,3 +167,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MANAGERS = [
     ('Alex Clark', 'aclark@aclark.net'),
 ]
+
+LOGIN_URL = '/db'
