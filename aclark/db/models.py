@@ -228,8 +228,6 @@ class Estimate(BaseModel):
         on_delete=models.CASCADE,
         limit_choices_to={'active': True},
     )
-    # is_sow = models.BooleanField('Use for Statement of Work?', default=False)
-    # is_to = models.BooleanField('Use for Task Order?', default=False)
     contacts = models.ManyToManyField('Contact', blank=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -237,8 +235,8 @@ class Estimate(BaseModel):
         null=True,
         on_delete=models.CASCADE,
         limit_choices_to={'profile__active': True})
-    estimate_types = models.CharField(
-        'Estimate types',
+    estimate_type = models.CharField(
+        'Estimate Type',
         max_length=300,
         choices=ESTIMATE_TYPES,
         null=True,
