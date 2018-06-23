@@ -27,7 +27,6 @@ from .forms import ReportForm
 from .forms import ServiceForm
 from .forms import SettingsAppForm
 from .forms import SettingsCompanyForm
-from .forms import SettingsContractForm
 from .forms import TaskForm
 from .forms import TimeForm
 from .models import Client
@@ -46,7 +45,6 @@ from .models import Report
 from .models import Service
 from .models import SettingsApp
 from .models import SettingsCompany
-from .models import SettingsContract
 from .models import Testimonial
 from .models import Task
 from .models import Time
@@ -211,7 +209,6 @@ def contract_edit(request, pk=None):
         form_model=ContractForm,
         model=Contract,
         client_model=Client,
-        contract_settings_model=SettingsContract,
         pk=pk)
 
 
@@ -671,23 +668,6 @@ def settings_company_edit(request, pk=None):
     """
     return edit(
         request, form_model=SettingsCompanyForm, model=SettingsCompany, pk=1)
-
-
-@staff_member_required
-def settings_contract(request):
-    context = get_page_items(
-        model=SettingsContract,
-        app_settings_model=SettingsApp,
-        request=request)
-    return render(request, 'settings_contract.html', context)
-
-
-@staff_member_required
-def settings_contract_edit(request, pk=None):
-    """
-    """
-    return edit(
-        request, form_model=SettingsContractForm, model=SettingsContract, pk=1)
 
 
 @staff_member_required

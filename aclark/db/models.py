@@ -630,34 +630,6 @@ class SettingsCompany(SingletonModel):
             return '-'.join([self._meta.verbose_name, str(self.pk)])
 
 
-class SettingsContract(SingletonModel):
-    """
-    """
-    parties = models.TextField('Parties', blank=True, null=True)
-    scope_of_work = models.TextField('Scope of Work', blank=True, null=True)
-    payment_terms = models.TextField('Payment Terms', blank=True, null=True)
-    timing_of_payment = models.TextField(
-        'Timing of Payment', blank=True, null=True)
-    contributor_assignment_agreement = models.TextField(
-        'Contributor Assignment Agreement', blank=True, null=True)
-    authority_to_act = models.TextField(
-        'Authority to Act', blank=True, null=True)
-    termination = models.TextField('Termination', blank=True, null=True)
-    governing_laws = models.TextField('Governing Laws', blank=True, null=True)
-    period_of_agreement = models.TextField(
-        'Period of Agreement', blank=True, null=True)
-    confidentiality = models.TextField(
-        'Confidentiality', blank=True, null=True)
-    taxes = models.TextField('Taxes', blank=True, null=True)
-    limited_warranty = models.TextField(
-        'Limited Warranty', blank=True, null=True)
-    complete_agreement = models.TextField(
-        'Complete Agreement', blank=True, null=True)
-
-    class Meta:
-        verbose_name = "Settings Contract"
-
-
 class Testimonial(BaseModel):
     """
     """

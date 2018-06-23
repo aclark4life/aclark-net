@@ -13,7 +13,6 @@ from .models import Report
 from .models import Service
 from .models import SettingsApp
 from .models import SettingsCompany
-from .models import SettingsContract
 from .models import Task
 from .models import Time
 from .models import DASHBOARD_ITEMS
@@ -341,40 +340,6 @@ class SettingsCompanyForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'notes': forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-        }
-
-
-class SettingsContractForm(forms.ModelForm):
-    class Meta:
-        model = SettingsContract
-        fields = '__all__'
-        widgets = {
-            'parties':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'scope_of_work':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'payment_terms':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'timing_of_payment':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'contributor_assignment_agreement':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'authority_to_act':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'termination':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'governing_laws':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'period_of_agreement':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'confidentiality':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'taxes':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'limited_warranty':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
-            'complete_agreement':
-            forms.widgets.TextInput(attrs={'class': 'tinymce'}),
         }
 
 

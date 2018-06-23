@@ -94,12 +94,6 @@ urlpatterns = [
         name='settings_company_edit'),
     url(r'^settings/company$', views.settings_company,
         name='settings_company'),
-    url(r'^settings/contract/edit$',
-        views.settings_contract_edit,
-        name='settings_contract_edit'),
-    url(r'^settings/contract$',
-        views.settings_contract,
-        name='settings_contract'),
     # Social
     url('', include('social_django.urls', namespace='social')),
     # Task

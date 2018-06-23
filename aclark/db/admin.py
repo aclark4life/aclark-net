@@ -22,7 +22,6 @@ from .models import Report
 from .models import Service
 from .models import SettingsApp
 from .models import SettingsCompany
-from .models import SettingsContract
 from .models import Task
 from .models import Testimonial
 from .models import Time
@@ -328,12 +327,6 @@ class SettingsAppAdmin(SingletonModelAdmin):
 
 @admin.register(SettingsCompany)
 class SettingsCompanyAdmin(SingletonModelAdmin):
-    """
-    """
-
-
-@admin.register(SettingsContract)
-class SettingsContractAdmin(SingletonModelAdmin):
     """
     """
 
