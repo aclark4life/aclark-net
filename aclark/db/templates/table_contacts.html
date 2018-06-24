@@ -17,7 +17,7 @@
                 <td>{{ item.last_name|default:'' }}</td>
                 <td>{{ item.first_name|default:'' }}</td>
                 <td>{% if item.email %}<a class="text-{{ icon_color }}" href="{% url 'contact_view' item.pk %}">{{ item.email|default:'Email@Address' }}</a> <a class="text-{{ icon_color }}" href="{% url 'contact_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a>{% endif %}</td>
-                <td>{% if item.client %}<a href="{% url 'client_view' item.client.pk %}">{{ item.client }}</a>{% else %} {{ item.client|default:'' }}<a class="text-{{ icon_color }}" href="{% url 'client_edit' item.client.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a>{% endif %}</td>
+                <td>{% if item.client %}<a href="{% url 'client_view' item.client.pk %}">{{ item.client }}</a> <a class="text-{{ icon_color }}" href="{% url 'client_edit' item.client.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a>{% endif %}</td>
               </tr>
             {% endfor %}
             </tbody>
