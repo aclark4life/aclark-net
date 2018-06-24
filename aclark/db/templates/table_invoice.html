@@ -120,6 +120,15 @@
                 {% if item.note.all %}
                 {% for note in item.note.all %}
                 <tr>
+                  <td colspan=6> 
+                    <div class="row">
+                      <div class="offset-11 col-1">
+                        <a class="float-right" href="{% url 'note_edit' note.pk %}"><i class="fas fa-pencil-alt"></i></a>
+                      </div> 
+                    </div> 
+                  </td>
+                </tr>
+                <tr>
                   <td colspan=5> 
                     {{ note.note|safe }}
                   </td>
