@@ -2,7 +2,7 @@
 {% block content %}
           <div class="row">
             <div class="col-md-4">
-              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'note_index' %}">Notes</a> <i class="fa fa-arrow-right"></i> {% if item.title %}{{ item.title }}{% else %}Note{% endif %}</h1>
+              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'note_index' %}">Notes</a> <i class="fa fa-arrow-right"></i> {% if item.title %}{{ item.title }}{% else %}Note{% endif %} {% if item.invoice_set %}<a href="{% url 'invoice_view' item.invoice_set.all.0.pk %}"><i class="far fa-file-pdf"></i></a>{% endif %}</h1>
             </div>
             <div class="col-md-4 mr-auto">
 {% include 'info.html' %}
