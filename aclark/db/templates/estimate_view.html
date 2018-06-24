@@ -1,8 +1,8 @@
 {% extends 'db/base.html' %}
 {% block content %}
           <div class="row">
-            <div class="col-md-4 mx-auto">
-{% include 'info.html' %}
+            <div class="col-10">
+              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'estimate_index' %}">Invoices</a> <i class="fa fa-arrow-right"></i> {{ item.name|default:'Estimate' }}</h1> 
             </div>
             <div class="col-md-2 mb-3">
               <!-- http://getbootstrap.com/docs/4.0/components/dropdowns/#split-button-dropdowns -->
