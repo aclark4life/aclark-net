@@ -3,7 +3,7 @@
 {% block content %}
           <div class="row">
             <div class="col-10">
-              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'invoice_index' %}">Invoices</a> <i class="fa fa-arrow-right"></i> {{ item.name|default:'Invoice' }}</h1>
+              <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'invoice_index' %}">Invoices</a> <i class="fa fa-arrow-right"></i> {{ item.name|default:'Invoice' }} {% if item.project %}<a href="{% url 'project_view' item.project.pk %}"><i class="fa fa-briefcase"></a>{% endif %}</h1>
             </div>
             <div class="col-md-12 mb-3 mr-auto">
               <!-- http://getbootstrap.com/docs/4.0/components/dropdowns/#split-button-dropdowns -->

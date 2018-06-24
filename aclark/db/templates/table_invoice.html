@@ -60,7 +60,7 @@
               <tr>
                 <!-- Left column -->
                 <td valign="top" align="left" style="width: 16%" class="field-name border-bottom border-right">Subject</td>
-                <td valign="top" align="left" style="width: 50%" class="field-value border-bottom">{{ item.subject|default:'' }} {% if item.project %}<a href="{% url 'project_view' item.project.pk %}"><i class="fa fa-arrow-right"></a>{% endif %}</td>
+                <td valign="top" align="left" style="width: 50%" class="field-value border-bottom">{{ item.subject|default:'' }}</td>
               </tr>
               {% if item.start_date and item.end_date %}
               <tr>
