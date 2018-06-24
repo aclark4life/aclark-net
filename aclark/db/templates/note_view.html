@@ -1,13 +1,10 @@
 {% extends 'db/base.html' %}
 {% block content %}
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
               <h1 style="border-bottom: none;"><a class="text-dark" href="{% url 'note_index' %}">Notes</a> <i class="fa fa-arrow-right"></i> {% if item.title %}{{ item.title }}{% else %}Note{% endif %} {% if item.invoice_set %}<a href="{% url 'invoice_view' item.invoice_set.all.0.pk %}"><i class="far fa-file-pdf"></i></a>{% endif %}</h1>
             </div>
-            <div class="col-md-4 mr-auto">
-{% include 'info.html' %}
-            </div>
-            <div class="col-md-2 mb-3">
+            <div class="col-md-4 mb-3">
               <!-- http://getbootstrap.com/docs/4.0/components/dropdowns/#split-button-dropdowns -->
               <div class="btn-group float-right">
                 <a class="btn btn-lg btn-success" href="{% url 'note_edit' pk=item.pk %}">Edit</a>
