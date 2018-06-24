@@ -246,7 +246,7 @@ def estimate_view(request, pk=None):
         request=request)
     if context['pdf']:
         company_name = get_company_name(SettingsCompany)
-        filename = '%s_%s_%s.pdf' % (company_name, 'invoice'.upper(), pk)
+        filename = '%s_%s_%s.pdf' % (company_name, 'estimate'.upper(), pk)
         return render_pdf(
             context, filename=filename, template='table_invoice.html')
     else:
