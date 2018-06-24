@@ -6,6 +6,7 @@
                 <th data-field="last-name" data-sort-name="last-name" data-sortable="true">Last Name</th>
                 <th data-field="first-name" data-sort-name="first-name" data-sortable="true">First Name</th>
                 <th data-sortable="true">Client</th>
+                <th data-sortable="true">Email</th>
               </tr>
             </thead>
             <tbody>
@@ -15,8 +16,8 @@
                 <td>{{ item.active }}</td>
                 <td>{{ item.last_name|default:'' }}</td>
                 <td>{{ item.first_name|default:'' }}</td>
-                
-                <td>{% if item.client %}<a href="{% url 'client_view' item.client.pk %}">{{ item.client }}</a>{% else %} {{ item.client|default:'' }}{% endif %} <a class="text-{{ icon_color }}" href="{% url 'contact_view' item.pk %}">{{ item.email|default:'Email@Address' }}</a> <a class="text-{{ icon_color }}" href="{% url 'contact_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a></td>
+                <td>{% if item.email %}<a class="text-{{ icon_color }}" href="{% url 'contact_view' item.pk %}">{{ item.email|default:'Email@Address' }}</a> <a class="text-{{ icon_color }}" href="{% url 'contact_edit' item.pk %}"><i class="fas fa-pencil-alt fa-{{ icon_size }}" style="vertical-align: middle"></i></a>{% endif %}</td>
+                <td>{% if item.client %}<a href="{% url 'client_view' item.client.pk %}">{{ item.client }}</a>{% else %} {{ item.client|default:'' }}{% endif %}</td>
               </tr>
             {% endfor %}
             </tbody>
