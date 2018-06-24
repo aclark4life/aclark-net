@@ -113,13 +113,6 @@ class EstimateForm(forms.ModelForm):
             'estimate_type',
         )
 
-    # contacts = forms.ModelMultipleChoiceField(
-    #     queryset=Contact.objects.filter(active=True).exclude(
-    #         email=None).order_by('first_name'),
-    #     required=False,
-    #     widget=forms.SelectMultiple(attrs={
-    #         'size': '5'
-    #     }))
     issue_date = forms.DateField(
         widget=forms.DateInput(attrs={
             'type': 'date',
@@ -346,7 +339,12 @@ class SettingsCompanyForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = '__all__'
+        exclude = (
+            'icon_name',
+            'icon_size',
+            'icon_color',
+            'color',
+        )
 
 
 class TimeForm(forms.ModelForm):
