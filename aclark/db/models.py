@@ -241,6 +241,13 @@ class Estimate(BaseModel):
         choices=ESTIMATE_TYPES,
         null=True,
         blank=True)
+    task = models.ForeignKey(
+        'Task',
+        blank=True,
+        null=True,
+        limit_choices_to={'active': True},
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
         return 'estimate-%s' % self.pk
