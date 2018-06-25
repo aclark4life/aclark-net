@@ -338,14 +338,18 @@ def get_page_items(**kwargs):
             context['item'] = estimate
             context['total_hours'] = total_hours
             task_rate = '0.00'  # Export
+            client_name = 'Client'
             if estimate.task:
                 task_rate = estimate.task.rate
-            message = '%s hours @ %s per hour from %s to %s = %s.\n\n' % (
-                total_hours, task_rate, estimate.start_date, estimate.end_date, estimate.amount)
+            if estimate.client:
+                client_name = estimate.client.name
+            message = '%s hours @ %s%s per hour from %s to %s = %s%s.\n\n' % (
+                total_hours, currency_symbol, task_rate, estimate.start_date,
+                estimate.end_date, currency_symbol, estimate.amount)
             for time in times:
                 message += '- %s, %s hour(s).\n' % (time.log, time.hours)
             context['email_message'] = message
-            context['email_subject'] = '%s for %s' % (doc_type, 'Client')
+            context['email_subject'] = '%s for %s' % (doc_type, client_name)
         if model_name == 'file':
             file_obj = get_object_or_404(model, pk=pk)
             context['doc_type'] = model_name
@@ -508,9 +512,9 @@ def get_page_items(**kwargs):
                                             'icon_color')  # Prefs
         context['icon_size'] = get_setting(request, app_settings_model,
                                            'icon_size')
-        doc = get_query_string(request, 'doc')  # Export doc
-        mail = get_query_string(request, 'mail')  # Export mail
-        pdf = get_query_string(request, 'pdf')  # Export pdf
+        doc = get_query_string(request, 'doc')  # Export
+        mail = get_query_string(request, 'mail')  # Export
+        pdf = get_query_string(request, 'pdf')  # Export
         context['doc'] = doc
         context['mail'] = mail
         context['pdf'] = pdf
