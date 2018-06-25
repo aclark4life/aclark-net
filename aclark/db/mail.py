@@ -64,10 +64,10 @@ def mail_proc(obj, **kwargs):
 
 def mail_send(**kwargs):
     """
-    Call send_mail finally.
+    Call Django send_mail
     """
-    mail_from = kwargs.get('mail_from')
-    mail_to = kwargs.get('mail_to')
-    message = kwargs.get('message')
-    subject = kwargs.get('subject')
+    mail_from = kwargs.get('mail_from', 'aclark@aclark.net')
+    mail_to = kwargs.get('mail_to', 'aclark@aclark.net')
+    message = kwargs.get('message', 'test')
+    subject = kwargs.get('subject', 'test')
     send_mail(subject, message, mail_from, (mail_to, ), fail_silently=False)

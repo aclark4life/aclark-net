@@ -50,6 +50,7 @@ from .models import Task
 from .models import Time
 from .export import render_doc
 from .export import render_pdf
+from .mail import mail_send
 from .misc import has_profile
 from .plot import get_plot
 from .serializers import ClientSerializer
@@ -249,6 +250,8 @@ def estimate_view(request, pk=None):
         filename = '%s_%s_%s.pdf' % (company_name, 'estimate'.upper(), pk)
         return render_pdf(
             context, filename=filename, template='table_invoice.html')
+    elif context['mail']:
+        mail_send()
     else:
         return render(request, 'estimate_view.html', context)
 
