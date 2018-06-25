@@ -5,13 +5,14 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from io import StringIO
 from lxml import etree
 
+DOC = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+
 
 def render_doc(context, **kwargs):
     """
     https://stackoverflow.com/a/24122313/185820
     """
     document = Document()
-    filename = 'test.doc'
     # Head
     task = ''
     contract = context['item']
@@ -33,10 +34,7 @@ def render_doc(context, **kwargs):
             document.add_heading(element.text, level=2)
         elif element.tag == 'p':
             document.add_paragraph(element.text)
-    response = HttpResponse(
-        content_type=
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    )
+    response = HttpResponse(content_type=DOC)
     response['Content-Disposition'] = 'attachment; filename=download.docx'
     document.save(response)
     return response
