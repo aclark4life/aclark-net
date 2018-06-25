@@ -50,7 +50,7 @@ from .models import Task
 from .models import Time
 from .export import render_doc
 from .export import render_pdf
-from .info import has_profile
+from .misc import has_profile
 from .plot import get_plot
 from .serializers import ClientSerializer
 from .serializers import ProfileSerializer
