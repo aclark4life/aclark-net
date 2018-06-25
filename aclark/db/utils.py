@@ -10,6 +10,7 @@ from .fields import get_fields
 from .form import get_form
 from .geo import get_geo_ip_data
 from .mail import mail_proc
+from .mail import mail_send
 from .misc import has_profile
 from .obj import obj_process
 from .page import paginate
@@ -38,6 +39,7 @@ def edit(request, **kwargs):
     project_model = kwargs.get('project_model')
     user_model = kwargs.get('user_model')
     model_name = None
+    new_time = False
     if model:
         model_name = model._meta.verbose_name
         context['active_nav'] = model_name
@@ -66,6 +68,8 @@ def edit(request, **kwargs):
                 username = fake.text()[:150]
                 new_user = model.objects.create_user(username=username)
             form = form_model(request.POST)
+            if model_name == 'time':  # Send mail
+                new_time = True
         else:
             copy = get_query_string(request, 'copy')  # Copy or delete
             delete = get_query_string(request, 'delete')
@@ -96,6 +100,11 @@ def edit(request, **kwargs):
                 if not obj.user:  # for new user
                     obj.user = new_user
                     obj.save()
+            if model_name == 'time' and new_time:  # Send mail
+                email_message = '%s/%s' % ('https://aclark.net/db/time',
+                                           obj.pk)
+                email_subject = 'New time entry by %s' % request.user
+                mail_send(message=email_message, subject=email_subject)
             set_ref(
                 obj,
                 request,
