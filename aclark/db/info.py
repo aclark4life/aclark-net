@@ -1,21 +1,6 @@
 from hashlib import md5
 
 
-def get_note_info(note_model):
-    note_info = {}
-    active = len(note_model.objects.filter(active=True))
-    inactive = len(note_model.objects.filter(active=False))
-    hidden = len(note_model.objects.filter(hidden=True))
-    not_hidden = inactive - hidden
-    total = len(note_model.objects.all())
-    note_info['active'] = active
-    note_info['inactive'] = inactive
-    note_info['hidden'] = hidden
-    note_info['not_hidden'] = not_hidden
-    note_info['total'] = total
-    return note_info
-
-
 def get_recipients(obj):
     """
     Returns first name and email address

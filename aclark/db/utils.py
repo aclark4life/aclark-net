@@ -9,7 +9,6 @@ from operator import or_ as OR
 from .fields import get_fields
 from .form import get_form
 from .geo import get_geo_ip_data
-from .info import get_note_info
 from .info import get_setting
 from .mail import mail_proc
 from .obj import obj_process
@@ -184,9 +183,7 @@ def get_index_items(**kwargs):
         items = items.order_by(*order_by)
     if not request.user.is_authenticated:  # Don't show items to anon
         items = []
-    if model_name == 'note':  # Per model extras
-        context['note_info'] = get_note_info(model)
-    elif model_name == 'time':
+    if model_name == 'time':  # Per model extra
         context['total_hours'] = get_total(field='hours', times=items)['hours']
     if paginated:  # Paginate if paginated
         page_size = get_setting(request, 'page_size')
