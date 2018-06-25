@@ -340,8 +340,8 @@ def get_page_items(**kwargs):
             task_rate = '0.00'  # Export
             if estimate.task:
                 task_rate = estimate.task.rate
-            message = '%s hours @ %s per hour from %s to %s.\n\n' % (
-                total_hours, task_rate, estimate.start_date, estimate.end_date)
+            message = '%s hours @ %s per hour from %s to %s = %s.\n\n' % (
+                total_hours, task_rate, estimate.start_date, estimate.end_date, estimate.amount)
             for time in times:
                 message += '- %s, %s hour(s).\n' % (time.log, time.hours)
             context['email_message'] = message
