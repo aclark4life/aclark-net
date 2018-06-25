@@ -9,8 +9,8 @@ from operator import or_ as OR
 from .fields import get_fields
 from .form import get_form
 from .geo import get_geo_ip_data
-from .info import get_setting
 from .mail import mail_proc
+from .misc import has_profile
 from .obj import obj_process
 from .page import paginate
 from .query import get_query_string
@@ -535,6 +535,38 @@ def get_search_results(context,
     items = set_items(model_name, items=items)
     context['items'] = items
     return context
+
+
+def get_setting(request, setting, settings_model=None, page_size=None):
+    """
+    Return appropriate setting from user profile model or singleton settings
+    model based on args
+    """
+    if not request.user.is_authenticated:
+        return
+    if setting == 'icon_size':
+        if has_profile(request.user):
+            user_pref = request.user.profile.icon_size
+        if user_pref:
+            return user_pref
+    elif setting == 'icon_color':
+        if has_profile(request.user):
+            user_pref = request.user.profile.icon_color
+        if user_pref:
+            return user_pref
+    elif setting == 'page_size':
+        if has_profile(request.user):
+            user_pref = request.user.profile.page_size
+        if user_pref:
+            return user_pref
+    elif setting == 'dashboard_choices':
+        if has_profile(request.user):
+            user_pref = request.user.profile.dashboard_choices
+        if user_pref:
+            return user_pref
+    elif setting == 'exclude_hidden':
+        app_settings = settings_model.get_solo()
+        return app_settings.exclude_hidden
 
 
 def set_items(model_name, items=None, _items={}):
