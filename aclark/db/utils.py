@@ -500,7 +500,7 @@ def get_page_items(**kwargs):
         context['icon_size'] = get_setting(request, app_settings_model,
                                            'icon_size')
         doc = get_query_string(request, 'doc')  # Export doc
-        doc = get_query_string(request, 'mail')  # Export mail
+        mail = get_query_string(request, 'mail')  # Export mail
         pdf = get_query_string(request, 'pdf')  # Export pdf
         context['doc'] = doc
         context['mail'] = mail
