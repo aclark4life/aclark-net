@@ -337,6 +337,9 @@ def get_page_items(**kwargs):
             context['entries'] = times
             context['item'] = estimate
             context['total_hours'] = total_hours
+            context['email_message'] = '%s hours @ %s per hour.' % (
+                total_hours, '$150 USD')
+            context['email_subject'] = '%s for %s' % (doc_type, 'Client')
         if model_name == 'file':
             file_obj = get_object_or_404(model, pk=pk)
             context['doc_type'] = model_name

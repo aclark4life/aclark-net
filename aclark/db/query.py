@@ -1,6 +1,3 @@
-from django.http import HttpResponseRedirect
-
-
 def get_query_string(request, key):
     """
     Return calculated values for some query string keys, else return value.
