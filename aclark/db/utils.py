@@ -340,8 +340,11 @@ def get_page_items(**kwargs):
             task_rate = '0.00'  # Export
             if estimate.task:
                 context['task_rate'] = estimate.task.rate
-            context['email_message'] = '%s hours @ %s per hour.' % (
-                total_hours, task_rate)
+            message = '%s hours @ %s per hour from %s to %s.\n\n' % (
+                total_hours, task_rate, estimate.start_date, estimate.end_date)
+            for time in times:
+                message += '- %s, %s hour(s).\n' % (time.log, time.hours)
+            context['email_message'] = message
             context['email_subject'] = '%s for %s' % (doc_type, 'Client')
         if model_name == 'file':
             file_obj = get_object_or_404(model, pk=pk)

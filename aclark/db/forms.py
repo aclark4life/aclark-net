@@ -106,10 +106,10 @@ class EstimateForm(forms.ModelForm):
             'client',
             'project',
             'task',
+            'start_date',
+            'end_date',
             'accepted_date',
             'issue_date',
-            # 'is_sow',
-            # 'is_to',
             'estimate_type',
         )
 
@@ -122,6 +122,22 @@ class EstimateForm(forms.ModelForm):
         initial=timezone.now())
 
     accepted_date = forms.DateField(
+        widget=forms.DateInput(attrs={
+            'type': 'date',
+            'class': 'col-2'
+        }),
+        required=False,
+        initial=timezone.now())
+
+    start_date = forms.DateField(
+        widget=forms.DateInput(attrs={
+            'type': 'date',
+            'class': 'col-2'
+        }),
+        required=False,
+        initial=timezone.now())
+
+    end_date = forms.DateField(
         widget=forms.DateInput(attrs={
             'type': 'date',
             'class': 'col-2'

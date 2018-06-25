@@ -221,6 +221,10 @@ class Estimate(BaseModel):
     )
     accepted_date = models.DateField(blank=True, null=True)
     declined_date = models.DateField(blank=True, null=True)
+    start_date = models.DateField(
+        "Start Date", blank=True, default=timezone.now, null=True)
+    end_date = models.DateField(
+        "End Date", blank=True, default=timezone.now, null=True)
     project = models.ForeignKey(
         "Project",
         blank=True,
