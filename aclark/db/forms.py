@@ -105,6 +105,7 @@ class EstimateForm(forms.ModelForm):
             'subject',
             'client',
             'project',
+            'task',
             'accepted_date',
             'issue_date',
             # 'is_sow',
