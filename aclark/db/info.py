@@ -1,27 +1,6 @@
 from hashlib import md5
 
 
-def get_recipients(obj):
-    """
-    Returns first name and email address
-    """
-    if not obj:
-        return []
-    model_name = obj._meta.verbose_name
-    if model_name == 'contact':
-        return [
-            (obj.first_name, obj.email),
-        ]
-    elif model_name == 'estimate':
-        return [(i.first_name, i.email) for i in obj.contacts.all()]
-    elif model_name == 'newsletter':
-        return [(i.first_name, i.email) for i in obj.contacts.all()]
-    elif model_name == 'note':
-        return [(i.first_name, i.email) for i in obj.contacts.all()]
-    elif model_name == 'time':
-        return [('Alex', 'aclark@aclark.net')]
-
-
 def get_setting(request, setting, settings_model=None, page_size=None):
     """
     Return appropriate setting from user profile model or singleton settings
