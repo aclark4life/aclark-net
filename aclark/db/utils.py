@@ -103,7 +103,7 @@ def edit(request, **kwargs):
             if model_name == 'time' and new_time:  # Send mail
                 email_message = '%s/%s' % ('https://aclark.net/db/time',
                                            obj.pk)
-                email_subject = 'New time entry by %s' % request.user
+                email_subject = 'New time entered by %s' % request.user
                 mail_send(message=email_message, subject=email_subject)
             set_ref(
                 obj,
