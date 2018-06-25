@@ -252,6 +252,8 @@ def estimate_view(request, pk=None):
             context, filename=filename, template='table_invoice.html')
     elif context['mail']:
         mail_send()
+        messages.add_message(request, messages.INFO, 'Estimate sent!')
+        return render(request, 'estimate_view.html', context)
     else:
         return render(request, 'estimate_view.html', context)
 
