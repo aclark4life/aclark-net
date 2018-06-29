@@ -25,7 +25,7 @@ function geoFindMe() {
     output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
 
     var img = new Image();
-    img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false&api_key=AIzaSyDUo3SgRVMQ6uFIjw8htstEp2nD_hvJ1F8";
+    img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false&key=AIzaSyDUo3SgRVMQ6uFIjw8htstEp2nD_hvJ1F8";
 
     output.appendChild(img);
   }
