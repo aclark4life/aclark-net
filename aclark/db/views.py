@@ -318,6 +318,11 @@ def file_index(request):
     return render(request, 'file_index.html', context)
 
 
+@staff_member_required
+def geo_view(request):
+    return render(request, 'geo_view.html', {})
+
+
 def home(request):
     context = get_page_items(
         app_settings_model=SettingsApp,

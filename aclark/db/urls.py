@@ -45,6 +45,8 @@ urlpatterns = [
     url(r'^file/(?P<pk>\d+)/edit$', views.file_edit, name='file_edit'),
     url(r'^file/add$', views.file_edit, name='file_edit'),
     url(r'^file$', views.file_index, name='file_index'),
+    # Geolocation
+    url(r'^geo-loc$', views.geo_view, name='geo-loc'),
     # Logs
     url(r'^log$', views.log_index, name='log_index'),
     # Newsletter
