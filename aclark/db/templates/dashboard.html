@@ -5,5 +5,5 @@
               {% endwith %}
             {% endfor %}
             {% else %}
-            <p>Please <a href="{% url 'user_edit' user.profile.pk %}">edit your profile</a> to add items to the dashboard.</p>
+            <p>Please <a href="{% url 'user_edit' user.pk %}">edit your profile</a> to add items to the dashboard.</p>
             {% endif %}
