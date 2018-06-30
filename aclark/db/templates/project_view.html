@@ -82,8 +82,18 @@
           </div>
           <!------------------------------------------------------------------------------------>
           <div class="row">
-            <div class="col-12 py-1">
+            <div class="col-10">
               <h2><a href="{% url 'user_index' %}" class="text-dark">Team</a></h2>
+            </div>
+            <div class="col-2">
+              <div class="dropdown float-right">
+                <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="{% url 'project_view' item.pk %}?mail=true"><i class="fas fa-clock"></i> Send reminder</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 py-1">
 {% include 'table_users.html' %}
             </div>
           </div>

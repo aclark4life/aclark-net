@@ -1,5 +1,4 @@
 from django.core.mail import send_mail
-from django.conf import settings as django_settings
 
 
 def get_recipients(obj):
@@ -17,25 +16,29 @@ def get_recipients(obj):
         return [(i.first_name, i.email) for i in obj.contacts.all()]
     elif model_name == 'note':
         return [(i.first_name, i.email) for i in obj.contacts.all()]
+    elif model_name == 'project':
+        return [(i.first_name, i.email) for i in obj.team.all()]
     elif model_name == 'time':
         return [('Alex', 'aclark@aclark.net')]
 
 
-def mail_compose(obj, **kwargs):
+def mail_create(obj, **kwargs):
     """
-    Compose message based on object type.
+    Create message and subject based on object type, else create test
     """
     hostname = kwargs.get('hostname')
+    message = kwargs.get('message', 'test')
+    subject = kwargs.get('subject', 'test')
     mail_from = kwargs.get('mail_from')
     mail_to = kwargs.get('mail_to')
-    # Conditionally create message
     model_name = obj._meta.verbose_name
-    if model_name == 'newsletter':
-        message = obj.text
-        subject = obj.subject
-    elif model_name == 'time':
+    if model_name == 'time':
         message = '%s' % obj.get_absolute_url(hostname)
         subject = 'Time entry'
+    elif model_name == 'project':
+        subject = 'Time entry reminder'
+        message = 'Please enter time for project: \n\n\t - %s.\n\nThank you!\n\n%s' % (
+            obj.name, '- https://aclark.net/db')
     context = {}
     context['mail_from'] = mail_from
     context['mail_to'] = mail_to
@@ -44,20 +47,18 @@ def mail_compose(obj, **kwargs):
     return context
 
 
-def mail_proc(obj, **kwargs):
+def mail_proc(obj, request, **kwargs):
     """
     Iterate over recipients, compose message, send message to each recipient.
     """
-    request = kwargs.get('request')
     hostname = request.META.get('HTTP_HOST')
-    mail_from = django_settings.EMAIL_FROM
     recipients = get_recipients(obj)
     for first_name, email_address in recipients:
-        mail_send(**mail_compose(
+        mail_send(**mail_create(
             obj,
             first_name=first_name,
             hostname=hostname,
-            mail_from=mail_from,
+            mail_from='aclark@aclark.net',
             mail_to=email_address,
             request=request))
 

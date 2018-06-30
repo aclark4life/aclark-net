@@ -50,6 +50,7 @@ from .models import Task
 from .models import Time
 from .export import render_doc
 from .export import render_pdf
+from .mail import mail_proc
 from .mail import mail_send
 from .misc import has_profile
 from .plot import get_plot
@@ -549,7 +550,12 @@ def project_view(request, pk=None):
         time_model=Time,
         pk=pk,
         request=request)
-    return render(request, 'project_view.html', context)
+    if context['mail']:
+        mail_proc(context['item'], request)
+        messages.add_message(request, messages.INFO, 'Reminder(s) sent!')
+        return render(request, 'project_view.html', context)
+    else:
+        return render(request, 'project_view.html', context)
 
 
 @staff_member_required
