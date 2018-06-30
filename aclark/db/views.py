@@ -63,7 +63,7 @@ from .utils import get_index_items
 from .utils import get_page_items
 
 fake = Faker()
-message = "Sorry, you are not allowed to see that."
+FOUR_O_3 = "Sorry, you are not allowed to see that."
 
 # Create your views here.
 
@@ -478,12 +478,12 @@ def newsletter_index(request, pk=None):
 def note_view(request, pk=None):
     note = get_object_or_404(Note, pk=pk)
     if not request.user.is_staff and not note.user:  # No user
-        messages.add_message(request, messages.WARNING, message)
+        messages.add_message(request, messages.WARNING, FOUR_O_3)
         return HttpResponseRedirect(reverse('home'))
     elif (not request.user.is_staff
           and not note.user.username == request.user.username
           ):  # Time entry user does not match user
-        messages.add_message(request, messages.WARNING, message)
+        messages.add_message(request, messages.WARNING, FOUR_O_3)
         return HttpResponseRedirect(reverse('home'))
     else:
         context = get_page_items(
@@ -723,12 +723,12 @@ def time_view(request, pk=None):
     """
     time_entry = get_object_or_404(Time, pk=pk)
     if not request.user.is_staff and not time_entry.user:  # No user
-        messages.add_message(request, messages.WARNING, message)
+        messages.add_message(request, messages.WARNING, FOUR_O_3)
         return HttpResponseRedirect(reverse('home'))
     elif (not request.user.is_staff
           and not time_entry.user.username == request.user.username
           ):  # Time entry user does not match user
-        messages.add_message(request, messages.WARNING, message)
+        messages.add_message(request, messages.WARNING, FOUR_O_3)
         return HttpResponseRedirect(reverse('home'))
     else:
         context = get_page_items(
@@ -745,12 +745,12 @@ def time_edit(request, pk=None):
     if pk is not None:
         time_entry = get_object_or_404(Time, pk=pk)
         if not request.user.is_staff and not time_entry.user:  # No user
-            messages.add_message(request, messages.WARNING, message)
+            messages.add_message(request, messages.WARNING, FOUR_O_3)
             return HttpResponseRedirect(reverse('home'))
         elif (not request.user.is_staff
               and not time_entry.user.username == request.user.username
               ):  # Time entry user does not match user
-            messages.add_message(request, messages.WARNING, message)
+            messages.add_message(request, messages.WARNING, FOUR_O_3)
             return HttpResponseRedirect(reverse('home'))
     if request.user.is_staff:
         time_form = AdminTimeForm
@@ -798,7 +798,7 @@ def time_index(request):
 @login_required
 def user_view(request, pk=None):
     if not request.user.pk == int(pk) and not request.user.is_staff:
-        messages.add_message(request, messages.WARNING, message)
+        messages.add_message(request, messages.WARNING, FOUR_O_3)
         return HttpResponseRedirect(reverse('home'))
     else:
         order_by = {
@@ -821,8 +821,8 @@ def user_view(request, pk=None):
 def user_edit(request, pk=None):
     if pk is not None:
         if has_profile(request.user):
-            if not request.user.pk == int(pk) and not request.user.is_staff:
-                messages.add_message(request, messages.WARNING, message)
+            if not request.user.pk == int(pk):
+                messages.add_message(request, messages.WARNING, FOUR_O_3)
                 return HttpResponseRedirect(reverse('home'))
     if request.user.is_staff:
         profile_form = AdminProfileForm
