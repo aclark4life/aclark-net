@@ -37,7 +37,7 @@ def mail_create(obj, **kwargs):
         subject = 'Time entry'
     elif model_name == 'project':
         subject = 'Time entry reminder'
-        message = 'Please enter time for project: \n\n\t - %s.\n\nThank you!\n\n%s' % (
+        message = 'Please enter your time for project: \n\n\t - %s.\n\nThank you!\n\n%s' % (
             obj.name, '- https://aclark.net/db')
     context = {}
     context['mail_from'] = mail_from
