@@ -26,19 +26,20 @@ def mail_create(obj, **kwargs):
     """
     Create message and subject based on object type, else create test
     """
+    first_name = kwargs.get('first_name')
     hostname = kwargs.get('hostname')
-    message = kwargs.get('message', 'test')
-    subject = kwargs.get('subject', 'test')
     mail_from = kwargs.get('mail_from')
     mail_to = kwargs.get('mail_to')
+    message = kwargs.get('message', 'test')
+    subject = kwargs.get('subject', 'test')
     model_name = obj._meta.verbose_name
     if model_name == 'time':
         message = '%s' % obj.get_absolute_url(hostname)
         subject = 'Time entry'
     elif model_name == 'project':
         subject = 'Time entry reminder'
-        message = 'Please enter your time for project: \n\n\t - %s.\n\nThank you!\n\n%s' % (
-            obj.name, '- https://aclark.net/db')
+        message = '%s,\n\nPlease enter time for: \n\n\t - %s.\n\nThank you,\n\n%s' % (
+            first_name, obj.name, '- https://aclark.net/db')
     context = {}
     context['mail_from'] = mail_from
     context['mail_to'] = mail_to
@@ -49,7 +50,7 @@ def mail_create(obj, **kwargs):
 
 def mail_proc(obj, request, **kwargs):
     """
-    Iterate over recipients, compose message, send message to each recipient.
+    Iterate over recipients, create message, send to each. 
     """
     hostname = request.META.get('HTTP_HOST')
     recipients = get_recipients(obj)
