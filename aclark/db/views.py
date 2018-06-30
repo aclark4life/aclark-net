@@ -821,7 +821,7 @@ def user_view(request, pk=None):
 def user_edit(request, pk=None):
     if pk is not None:
         if has_profile(request.user):
-            if not request.user.pk == int(pk):
+            if not request.user.pk == int(pk) and not request.user.is_staff:
                 messages.add_message(request, messages.WARNING, FOUR_O_3)
                 return HttpResponseRedirect(reverse('home'))
     if request.user.is_staff:
