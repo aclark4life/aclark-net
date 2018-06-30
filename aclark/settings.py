@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'social_django',
     'captcha',
     'django_ses',
+    'import_export',
 ]
 
 MIDDLEWARE = [
