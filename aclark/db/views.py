@@ -624,7 +624,14 @@ def proposal_index(request, pk=None):
 def report_view(request, pk=None):
     context = get_page_items(
         model=Report, app_settings_model=SettingsApp, pk=pk, request=request)
-    return render(request, 'report_view.html', context)
+    if context['mail']:
+        message = context['email_message']
+        subject = context['email_subject']
+        mail_send(message=message, subject=subject)
+        messages.add_message(request, messages.INFO, 'Report sent!')
+        return render(request, 'report_view.html', context)
+    else:
+        return render(request, 'report_view.html', context)
 
 
 @staff_member_required

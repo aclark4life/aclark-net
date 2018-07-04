@@ -376,13 +376,6 @@ def get_page_items(**kwargs):
             context['invoice'] = True
             context['last_payment_date'] = last_payment_date
             context['total_hours'] = total_hours
-        elif model_name == 'newsletter':
-            newsletter = get_object_or_404(model, pk=pk)
-            context['doc_type'] = model_name
-            context['item'] = newsletter
-            mail = get_query_string(request, 'mail')  # Send mail
-            if mail:
-                mail_proc(newsletter, request=request)  # XXX Use signal?
         elif model_name == 'note':
             item = get_object_or_404(model, pk=pk)
             context['item'] = item
@@ -426,6 +419,8 @@ def get_page_items(**kwargs):
             context['item'] = report
             context['items'] = items
             context['reports'] = reports
+            context['email_message'] = 'test'
+            context['email_subject'] = 'test'
         elif model_name == 'task':
             task = get_object_or_404(model, pk=pk)
             context['item'] = task

@@ -2,4 +2,4 @@
                   <a class="dropdown-item" href="" data-toggle="modal" data-target=".bd-delete-modal-sm"><i class="fas fa-trash"></i> Delete</a>
                   {% if is_staff and model_name == 'contract' %}<a class="dropdown-item" href="{% url view_url item.pk %}?doc=true"><i class="far fa-file-word"></i> Export</a>{% endif %}
                   {% if is_staff and model_name != 'contract' %}<a class="dropdown-item" href="{% url view_url item.pk %}?pdf=true" target="_blank"><i class="far fa-file-pdf"></i> Export</a>{% endif %}
-                  {% if is_staff and model_name == 'estimate' %}<a class="dropdown-item" href="{% url view_url item.pk %}?mail=true"><i class="fas fa-at"></i> Export</a>{% endif %}
+                  {% if is_staff %}{% if model_name == 'estimate' or model_name == 'report' %}<a class="dropdown-item" href="{% url view_url item.pk %}?mail=true"><i class="fas fa-at"></i> Export</a>{% endif %}{% endif %}
