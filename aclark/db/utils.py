@@ -419,8 +419,9 @@ def get_page_items(**kwargs):
             context['item'] = report
             context['items'] = items
             context['reports'] = reports
-            context['email_message'] = 'test'
-            context['email_subject'] = 'test'
+            context['email_message'] = 'Cost: %s, Gross: %s, Net: %s' % (
+                report.cost, report.gross, report.net)
+            context['email_subject'] = report.name
         elif model_name == 'task':
             task = get_object_or_404(model, pk=pk)
             context['item'] = task
