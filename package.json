@@ -1,0 +1,24 @@
+{
+  "name": "aclark-net",
+  "version": "1.0.0",
+  "description": "aclark-net ================================================================================",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aclarknet/aclark-net.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aclarknet/aclark-net/issues"
+  },
+  "homepage": "https://github.com/aclarknet/aclark-net#readme",
+  "devDependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
+  }
+}
