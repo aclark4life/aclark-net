@@ -9,7 +9,6 @@ from operator import or_ as OR
 from .fields import get_fields
 from .form import get_form
 from .geo import get_geo_ip_data
-from .mail import mail_proc
 from .mail import mail_send
 from .misc import has_profile
 from .obj import obj_process
@@ -232,6 +231,19 @@ def get_page_items(**kwargs):
     page_size = kwargs.get('page_size')
     context = {}
     items = {}
+    if request:  # Applies to all page items
+        context['is_staff'] = request.user.is_staff  # Perms
+        context['icon_color'] = get_setting(request, app_settings_model,
+                                            'icon_color')  # Prefs
+        context['icon_size'] = get_setting(request, app_settings_model,
+                                           'icon_size')
+        doc = get_query_string(request, 'doc')  # Export
+        mail = get_query_string(request, 'mail')  # Export
+        pdf = get_query_string(request, 'pdf')  # Export
+        context['doc'] = doc
+        context['mail'] = mail
+        context['pdf'] = pdf
+        context['request'] = request  # Include request
     if company_model:
         company = company_model.get_solo()
         company_name = company.name
@@ -450,7 +462,7 @@ def get_page_items(**kwargs):
                 ], exclude_fields=exclude_fields)  # table_items.html
             context['projects'] = projects
             context['times'] = times
-    else:  # home
+    else:  # no model or obj (i.e. home)
         if request:
             if request.user.is_authenticated:
                 # Items
@@ -483,10 +495,10 @@ def get_page_items(**kwargs):
                 total_amount = get_total(
                     field='amount', invoices=invoices)['amount']
                 total_cost = get_total(field='cost', projects=projects)['cost']
-
-                # XXX Move to get_total
                 total_hours = get_total(
                     field='hours', times=times.filter(invoiced=False))['hours']
+
+                # XXX Move to get_total
                 total_hours_by_proj = {}
                 for project in request.user.project_set.values():
                     project_id = project['id']
@@ -501,8 +513,7 @@ def get_page_items(**kwargs):
                             times=times.filter(
                                 project=project_id, invoiced=False))['hours']
 
-                if total_amount and total_cost:
-                    context['net'] = total_amount - total_cost
+                context['net'] = total_amount - total_cost
                 context['cost'] = total_cost
                 context['gross'] = total_amount
                 context['total_hours'] = total_hours
@@ -511,21 +522,6 @@ def get_page_items(**kwargs):
                 ip_address = request.META.get('HTTP_X_REAL_IP')
                 context['geo_ip_data'] = get_geo_ip_data(request)
                 context['ip_address'] = ip_address
-    if request:  # Applies to all page items
-        context['is_staff'] = request.user.is_staff  # Perms
-        context['icon_color'] = get_setting(request, app_settings_model,
-                                            'icon_color')  # Prefs
-        context['icon_size'] = get_setting(request, app_settings_model,
-                                           'icon_size')
-        doc = get_query_string(request, 'doc')  # Export
-        mail = get_query_string(request, 'mail')  # Export
-        pdf = get_query_string(request, 'pdf')  # Export
-        context['doc'] = doc
-        context['mail'] = mail
-        context['pdf'] = pdf
-        context['request'] = request  # Include request
-        if model_name:
-            context['model_name'] = model_name  # Include model_name
     return context
 
 
