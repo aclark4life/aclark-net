@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'captcha',
     'django_ses',
     'import_export',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
