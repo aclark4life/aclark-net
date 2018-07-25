@@ -58,13 +58,13 @@ class AdminTimeForm(forms.ModelForm):
             'hours': forms.widgets.NumberInput(attrs={'class': 'col-2'}),
         }
 
-    date = forms.DateField(
-        widget=forms.DateInput(attrs={
-            'type': 'date',
-            'class': 'col-2'
-        }),
-        required=False,
-        initial=timezone.now())
+    # date = forms.DateField(
+    #     widget=forms.DateInput(attrs={
+    #         'type': 'date',
+    #         'class': 'col-2'
+    #     }),
+    #     required=False,
+    #     initial=timezone.now())
 
 
 class ClientForm(forms.ModelForm):
@@ -371,10 +371,10 @@ class TimeForm(forms.ModelForm):
             'hours': forms.widgets.NumberInput(attrs={'class': 'col-2'}),
         }
 
-    date = forms.DateField(
-        widget=forms.DateInput(attrs={
-            'type': 'date',
-            'class': 'col-2'
-        }),
-        required=True,
-        initial=timezone.now())
+    # date = forms.DateField(
+    #     widget=forms.DateInput(attrs={
+    #         'type': 'date',
+    #         'class': 'col-2'
+    #     }),
+    #     required=True,
+    #     initial=timezone.now())
