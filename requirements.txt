@@ -5,7 +5,7 @@ Faker==0.8.13
 Pillow==5.1.0
 PyJWT==1.6.1
 PyPDF2==1.26.0
-PyYAML==3.12
+PyYAML==5.4
 aws-xray-sdk==1.1
 boto==2.48.0
 certifi==2018.4.16
